@@ -49,15 +49,23 @@ try{
  report.deployment={strategy:'recreate local',validatedImage,imageId:image,productionConfigApplied:true,disabledFlagHttpStatus:rejected.status,configurationRollbackApplied:true,binaryVersionRollbackExecuted:false,orderPreserved:true};
  restoreNeeded=true;const results={};
  for(const phase of ['baseline','optimized']){
+  const configuration={CATALOG_CACHE_ENABLED:String(phase==='optimized'),APP_IMAGE:validatedImage};
   compose(`plano-${phase}`,['exec','-T','app','node','scripts/optimize.mjs',phase]);
-  compose(`config-${phase}`,['up','--no-build','--force-recreate','-d','--wait','app'],{CATALOG_CACHE_ENABLED:String(phase==='optimized'),APP_IMAGE:validatedImage});
-  for(let i=0;i<10;i++){assert((await fetch(`${base}/orders?status=PENDING&limit=20&page=1`)).ok,'Aquecimento pedidos falhou.');assert((await fetch(`${base}/catalog/products?category=category-01&limit=20`)).ok,'Aquecimento catalogo falhou.');}
-  compose(`k6-${phase}`,['--profile','tools','run','--rm','k6']);
+  compose(`config-${phase}`,['up','--no-build','--force-recreate','-d','--wait','app'],configuration);
+  for(let i=0;i<10;i++){
+   assert((await fetch(`${base}/orders?status=PENDING&limit=20&page=1`)).ok,'Aquecimento pedidos falhou.');
+   const response=await fetch(`${base}/catalog/products?category=category-01&limit=20`);assert(response.ok,'Aquecimento catalogo falhou.');
+   assert(phase==='baseline'?response.headers.get('x-cache')==='bypass':['hit','miss'].includes(response.headers.get('x-cache')),'Estado do cache difere do cenario declarado.');
+  }
+  // run tambem resolve depends_on: manter configuracao para nao recriar app com defaults.
+  compose(`k6-${phase}`,['--profile','tools','run','--rm','k6'],configuration);
   copyFileSync(new URL('k6-summary.json',output),new URL(`k6-${phase}.json`,output));
   const metrics=JSON.parse(readFileSync(new URL(`k6-${phase}.json`,output),'utf8')).metrics;
   const record={ordersP95ms:metrics.orders_list_duration['p(95)'],catalogP95ms:metrics.catalog_list_duration['p(95)'],requests:metrics.http_reqs.count,throughput:metrics.http_reqs.rate,errors:metrics.http_req_failed.value,checks:metrics.checks.value};
   assert(record.errors===0&&record.checks===1&&record.ordersP95ms<500&&record.catalogP95ms<500,'Criterio k6 nao atendido.');results[phase]=record;
-  writeFileSync(new URL(`metrics-${phase}.prom`,output),await(await fetch(`${base}/metrics`)).text());
+  const metric=await(await fetch(`${base}/metrics`)).text();
+  assert(phase==='baseline'?metric.includes('catalog_cache_requests_total{result="bypass"}')&&!metric.includes('catalog_cache_requests_total{result="hit"}'):metric.includes('catalog_cache_requests_total{result="hit"}'),'Metricas nao comprovam o estado do cache.');
+  writeFileSync(new URL(`metrics-${phase}.prom`,output),metric);
  }
  report.performance=results;restoreNeeded=false;
  compose('logs-json',['logs','--no-color','--no-log-prefix','app']);compose('compose-status',['ps','--format','json']);
