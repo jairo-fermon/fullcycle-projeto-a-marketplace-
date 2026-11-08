@@ -1,0 +1,641 @@
+openapi: 3.1.0
+info:
+  title: Marketplace modular - Projeto A Full Cycle
+  version: 1.0.0
+  description: Catálogo, Pedidos e Pagamento simulado; sem cobrança real. Moeda em
+    centavos inteiros. Fila PostgreSQL e processamento assíncrono.
+servers:
+  - url: http://localhost:{port}
+    variables:
+      port:
+        default: "3001"
+security: []
+tags:
+  - name: Catalogo
+    description: Catalogo
+  - name: Pedidos
+    description: Pedidos
+  - name: Pagamento
+    description: Pagamento
+  - name: Operacao
+    description: Operacao
+paths:
+  /catalog/products:
+    post:
+      operationId: createProduct
+      summary: Cadastrar produto
+      tags:
+        - Catalogo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - sku
+                - name
+                - category
+                - unitPriceCents
+              properties:
+                sku: &a3
+                  type: string
+                  pattern: ^[A-Za-z0-9._-]{1,64}$
+                name: &a4
+                  type: string
+                  minLength: 1
+                  maxLength: 120
+                category: &a5
+                  type: string
+                  pattern: ^[a-z0-9-]{1,32}$
+                unitPriceCents: &a6
+                  type: integer
+                  minimum: 1
+                  maximum: 1000000
+            example:
+              sku: CANETA-AZUL
+              name: Caneta azul
+              category: geral
+              unitPriceCents: 1500
+      responses:
+        "201":
+          description: Produto cadastrado.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "400":
+          description: Entrada inválida.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Conflito ou idempotência incompatível.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: Corpo acima de 64 KiB.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: Tipo de conteúdo não suportado.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Erro interno sem detalhes sensíveis.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      operationId: listProducts
+      summary: Listar catálogo por categoria
+      tags:
+        - Catalogo
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+            pattern: ^[a-z0-9-]{1,32}$
+            default: geral
+          description: Categoria; cache TTL configurável, padrão 5 segundos.
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 20
+          description: Quantidade máxima.
+      responses:
+        "200":
+          description: Produtos; x-cache informa hit, miss ou bypass.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductList"
+        "400":
+          description: Entrada inválida.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Erro interno sem detalhes sensíveis.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /orders:
+    post:
+      operationId: createOrder
+      summary: Criar pedido com preços atuais do catálogo
+      tags:
+        - Pedidos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - items
+              properties:
+                items:
+                  type: array
+                  minItems: 1
+                  maxItems: 100
+                  items:
+                    type: object
+                    additionalProperties: false
+                    required:
+                      - productId
+                      - quantity
+                    properties:
+                      productId: &a1
+                        type: string
+                        format: uuid
+                      quantity: &a11
+                        type: integer
+                        minimum: 1
+                        maximum: 1000
+            example:
+              items:
+                - productId: 00000001-0000-4000-8000-000000000001
+                  quantity: 2
+      responses:
+        "201":
+          description: Pedido persistido PENDING. Total calculado pelo servidor, sem cache
+            de preço.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "400":
+          description: Entrada inválida.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Recurso não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: Corpo acima de 64 KiB.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: Tipo de conteúdo não suportado.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Erro interno sem detalhes sensíveis.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      operationId: listOrders
+      summary: Listar pedidos por status, ordenados por data e ID decrescentes
+      tags:
+        - Pedidos
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - PENDING
+              - PAID
+            default: PENDING
+          description: Status.
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 20
+          description: Itens por página.
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5000
+            default: 1
+          description: Página; offset limitado.
+      responses:
+        "200":
+          description: Resumo de pedidos persistidos.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderList"
+        "400":
+          description: Entrada inválida.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Erro interno sem detalhes sensíveis.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /orders/{id}:
+    parameters:
+      - &a2
+        name: id
+        in: path
+        required: true
+        schema: *a1
+    get:
+      operationId: getOrder
+      summary: Consultar pedido e estado de pagamento
+      tags:
+        - Pedidos
+      responses:
+        "200":
+          description: Pedido persistido.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "400":
+          description: Entrada inválida.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Recurso não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Erro interno sem detalhes sensíveis.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /payments:
+    post:
+      operationId: submitPayment
+      summary: Enfileirar tentativa de pagamento simulado
+      tags:
+        - Pagamento
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema: *a1
+          description: Mesmo UUID e payload retornam a mesma tentativa; payload diferente
+            recebe 409.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - orderId
+                - outcome
+              properties:
+                orderId: *a1
+                outcome:
+                  type: string
+                  enum:
+                    - approve
+                    - decline
+            example:
+              orderId: 00000002-0000-4000-8000-000000000001
+              outcome: approve
+      responses:
+        "200":
+          description: Solicitação já existente, sem nova tentativa/fila.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Payment"
+        "202":
+          description: Tentativa registrada; consultar GET /payments/{id} para estado final.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Payment"
+        "400":
+          description: Entrada inválida.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Recurso não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Conflito ou idempotência incompatível.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: Corpo acima de 64 KiB.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: Tipo de conteúdo não suportado.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Erro interno sem detalhes sensíveis.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: Processamento suspenso pela feature flag.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /payments/{id}:
+    parameters:
+      - *a2
+    get:
+      operationId: getPayment
+      summary: Consultar resultado auditável da simulação
+      tags:
+        - Pagamento
+      responses:
+        "200":
+          description: Estado QUEUED, SUCCEEDED, DECLINED ou FAILED e número de entregas.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Payment"
+        "400":
+          description: Entrada inválida.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Recurso não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Erro interno sem detalhes sensíveis.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /health:
+    get:
+      operationId: health
+      summary: Verificar conexão real com PostgreSQL
+      tags:
+        - Operacao
+      responses:
+        "200":
+          description: Aplicação e banco disponíveis.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - status
+                additionalProperties: false
+                properties:
+                  status:
+                    const: ok
+        "503":
+          description: Banco indisponível.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - status
+                additionalProperties: false
+                properties:
+                  status:
+                    const: unavailable
+  /metrics:
+    get:
+      operationId: metrics
+      summary: Consultar métricas RED e fila/cache
+      tags:
+        - Operacao
+      responses:
+        "200":
+          description: Formato Prometheus; labels de rota normalizada.
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    Product:
+      type: object
+      additionalProperties: false
+      required:
+        - sku
+        - name
+        - category
+        - unitPriceCents
+        - id
+        - createdAt
+      properties:
+        sku: *a3
+        name: *a4
+        category: *a5
+        unitPriceCents: *a6
+        id: *a1
+        createdAt:
+          type: string
+          format: date-time
+    OrderSummary:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - status
+        - totalCents
+        - createdAt
+        - paymentReference
+      properties:
+        id: *a1
+        status: &a7
+          type: string
+          enum:
+            - PENDING
+            - PAID
+        totalCents: &a8
+          type: integer
+          minimum: 1
+          maximum: 100000000000
+        createdAt: &a9
+          type: string
+          format: date-time
+        paymentReference: &a10
+          type:
+            - string
+            - "null"
+          format: uuid
+    Order:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - status
+        - totalCents
+        - createdAt
+        - paymentReference
+        - items
+      properties:
+        id: *a1
+        status: *a7
+        totalCents: *a8
+        createdAt: *a9
+        paymentReference: *a10
+        items:
+          type: array
+          minItems: 1
+          maxItems: 100
+          items:
+            type: object
+            additionalProperties: false
+            required:
+              - productId
+              - quantity
+              - sku
+              - unitPriceCents
+            properties:
+              productId: *a1
+              quantity: *a11
+              sku: *a3
+              unitPriceCents: *a6
+    Payment:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - orderId
+        - idempotencyKey
+        - amountCents
+        - outcome
+        - status
+        - createdAt
+        - processedAt
+        - deliveries
+      properties:
+        id: *a1
+        orderId: *a1
+        idempotencyKey: *a1
+        amountCents:
+          type: integer
+          minimum: 1
+          maximum: 100000000000
+        outcome:
+          type: string
+          enum:
+            - approve
+            - decline
+        status:
+          type: string
+          enum:
+            - QUEUED
+            - SUCCEEDED
+            - DECLINED
+            - FAILED
+        createdAt:
+          type: string
+          format: date-time
+        processedAt:
+          type:
+            - string
+            - "null"
+          format: date-time
+        deliveries:
+          type: integer
+          minimum: 0
+    Error:
+      type: object
+      additionalProperties: false
+      required:
+        - error
+      properties:
+        error:
+          type: object
+          additionalProperties: false
+          required:
+            - code
+            - message
+            - requestId
+          properties:
+            code:
+              type: string
+              enum:
+                - INVALID_INPUT
+                - NOT_FOUND
+                - CONFLICT
+                - UNAVAILABLE
+                - INTERNAL_ERROR
+            message:
+              type: string
+            requestId: *a1
+    ProductList:
+      type: object
+      additionalProperties: false
+      required:
+        - items
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+    OrderList:
+      type: object
+      additionalProperties: false
+      required:
+        - items
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderSummary"
