@@ -1,0 +1,25 @@
+startedAt=2026-11-08T15:45:27.779Z
+command=["docker","compose","--profile","test","--profile","tools","down","--volumes","--remove-orphans"]
+configuration={}
+ Container fullcycle-a-marketplace-app-1  Stopping
+ Container fullcycle-a-marketplace-test-db-1  Stopping
+ Container fullcycle-a-marketplace-test-db-1  Stopped
+ Container fullcycle-a-marketplace-test-db-1  Removing
+ Container fullcycle-a-marketplace-test-db-1  Removed
+ Container fullcycle-a-marketplace-app-1  Stopped
+ Container fullcycle-a-marketplace-app-1  Removing
+ Container fullcycle-a-marketplace-app-1  Removed
+ Container fullcycle-a-marketplace-jaeger-1  Stopping
+ Container fullcycle-a-marketplace-db-1  Stopping
+ Container fullcycle-a-marketplace-jaeger-1  Stopped
+ Container fullcycle-a-marketplace-jaeger-1  Removing
+ Container fullcycle-a-marketplace-db-1  Stopped
+ Container fullcycle-a-marketplace-db-1  Removing
+ Container fullcycle-a-marketplace-jaeger-1  Removed
+ Container fullcycle-a-marketplace-db-1  Removed
+ Network fullcycle-a-marketplace_default  Removing
+ Volume fullcycle-a-marketplace_marketplace-data  Removing
+ Volume fullcycle-a-marketplace_marketplace-data  Removed
+ Network fullcycle-a-marketplace_default  Removed
+
+exitCode=0

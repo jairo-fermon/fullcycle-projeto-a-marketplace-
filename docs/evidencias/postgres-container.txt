@@ -1,0 +1,6 @@
+startedAt=2026-11-08T15:49:06.205Z
+command=["docker","compose","exec","-T","db","postgres","--version"]
+configuration={}
+postgres (PostgreSQL) 17.11
+
+exitCode=0

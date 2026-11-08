@@ -1,0 +1,6 @@
+{
+  "theme": "base",
+  "fontFamily": "Arial",
+  "themeVariables": { "fontFamily": "Arial", "fontSize": "18px" },
+  "flowchart": { "wrappingWidth": 360, "htmlLabels": true, "nodeSpacing": 35, "rankSpacing": 70 }
+}

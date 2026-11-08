@@ -1,0 +1,11 @@
+---
+title: C4 - Contexto do Marketplace
+---
+flowchart LR
+  operator(["Operador ou avaliador<br/>Pessoa<br/>Cadastra produtos, cria pedidos<br/>e consulta pagamentos simulados"])
+  marketplace["Marketplace<br/>Sistema de software<br/>Catálogo, Pedidos e Pagamento<br/>em um monólito modular"]
+  operator -->|API REST - HTTP e JSON| marketplace
+  classDef person fill:#123C69,color:#fff,stroke:#123C69
+  classDef system fill:#1769AA,color:#fff,stroke:#0F4C81
+  class operator person
+  class marketplace system

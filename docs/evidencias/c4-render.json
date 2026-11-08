@@ -1,0 +1,62 @@
+{
+  "collectedAt": "2026-11-08T15:46:57.050309+00:00",
+  "tool": "Mermaid CLI 12.2.0",
+  "visualInspection": "Dois PNGs abertos com view_image; layout final sem cortes ou sobreposicao. Fontes MD/MMD conferidas.",
+  "files": [
+    {
+      "path": "docs\\c4\\contexto.png",
+      "width": 2400,
+      "height": 506,
+      "sha256": "426f8444b3860f2bcbc95e7378f2fa8f0e2db19310f72be79ea258795b1d50ce",
+      "lastWriteTime": "2026-11-08T15:41:01.362359+00:00",
+      "command": [
+        "npm",
+        "exec",
+        "--yes",
+        "--package=@mermaid-js/mermaid-cli@12.2.0",
+        "--",
+        "mmdc",
+        "-i",
+        "docs/c4/contexto.mmd",
+        "-o",
+        "docs\\c4\\contexto.png",
+        "-p",
+        "tmp/puppeteer.json",
+        "-c",
+        "docs/c4/render-config.json",
+        "--size",
+        "1600",
+        "-s",
+        "1.5"
+      ]
+    },
+    {
+      "path": "docs\\c4\\conteiner.png",
+      "width": 2700,
+      "height": 888,
+      "sha256": "3d748e7008430f9e0b8faea6c72d1e94649d105e4d68e5dc102590a278f5b179",
+      "lastWriteTime": "2026-11-08T15:41:06.459606+00:00",
+      "command": [
+        "npm",
+        "exec",
+        "--yes",
+        "--package=@mermaid-js/mermaid-cli@12.2.0",
+        "--",
+        "mmdc",
+        "-i",
+        "docs/c4/conteiner.mmd",
+        "-o",
+        "docs\\c4\\conteiner.png",
+        "-p",
+        "tmp/puppeteer.json",
+        "-c",
+        "docs/c4/render-config.json",
+        "--size",
+        "1800",
+        "-s",
+        "1.5"
+      ]
+    }
+  ],
+  "status": "PASSOU"
+}

@@ -1,0 +1,6 @@
+startedAt=2026-11-08T15:45:22.025Z
+command=["docker","version","--format","{{.Client.Version}} / {{.Server.Version}}"]
+configuration={}
+29.1.3 / 29.1.3
+
+exitCode=0

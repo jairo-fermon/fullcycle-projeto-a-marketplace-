@@ -1,0 +1,6 @@
+startedAt=2026-11-08T15:47:18.609Z
+command=["docker","image","inspect","--format","{{.Id}}","fullcycle-a-marketplace-app:local"]
+configuration={}
+sha256:319af0b59c6605ba21176729e29f709faa55c952046f78d6eaf1389c2eb69831
+
+exitCode=0

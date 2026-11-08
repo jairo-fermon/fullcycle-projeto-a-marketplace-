@@ -1,0 +1,19 @@
+startedAt=2026-11-08T15:47:25.222Z
+command=["docker","compose","up","--no-build","-d","--wait","app"]
+configuration={"APP_IMAGE":"fullcycle-a-marketplace-app:validated-319af0b59c66","PAYMENT_PROCESSING_ENABLED":"true","APP_ENV":"development"}
+ Container fullcycle-a-marketplace-jaeger-1  Running
+ Container fullcycle-a-marketplace-db-1  Running
+ Container fullcycle-a-marketplace-app-1  Recreate
+ Container fullcycle-a-marketplace-app-1  Recreated
+ Container fullcycle-a-marketplace-db-1  Waiting
+ Container fullcycle-a-marketplace-db-1  Healthy
+ Container fullcycle-a-marketplace-app-1  Starting
+ Container fullcycle-a-marketplace-app-1  Started
+ Container fullcycle-a-marketplace-db-1  Waiting
+ Container fullcycle-a-marketplace-jaeger-1  Waiting
+ Container fullcycle-a-marketplace-app-1  Waiting
+ Container fullcycle-a-marketplace-jaeger-1  Healthy
+ Container fullcycle-a-marketplace-db-1  Healthy
+ Container fullcycle-a-marketplace-app-1  Healthy
+
+exitCode=0

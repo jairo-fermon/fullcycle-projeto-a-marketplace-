@@ -68,7 +68,10 @@ try{
   writeFileSync(new URL(`metrics-${phase}.prom`,output),metric);
  }
  report.performance=results;restoreNeeded=false;
- compose('logs-json',['logs','--no-color','--no-log-prefix','app']);compose('compose-status',['ps','--format','json']);
+ const log=compose('logs-json',['logs','--no-color','--no-log-prefix','app']);
+ const records=log.split('\n').filter(line=>line.startsWith('{'));
+ writeFileSync(new URL('logs-json-amostra.txt',output),`source=logs-json.txt\nsampling=primeiros 5 e ultimos 25 registros JSON, sem alterar valores\ntotalJsonRecords=${records.length}\n`+[...records.slice(0,5),...records.slice(-25)].join('\n')+'\n');
+ compose('compose-status',['ps','--format','json']);
  compose('node-container',['exec','-T','app','node','--version']);compose('postgres-container',['exec','-T','db','postgres','--version']);compose('k6-version',['--profile','tools','run','--rm','--no-deps','k6','version']);
  report.status='PASSOU';
 }catch(error){report.status='FALHOU';report.failure=error.message;process.exitCode=1;}

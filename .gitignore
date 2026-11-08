@@ -7,3 +7,4 @@ coverage/
 .vitest/
 *.log
 tmp/
+docs/evidencias/logs-json.txt

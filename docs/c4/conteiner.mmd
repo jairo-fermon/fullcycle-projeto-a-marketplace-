@@ -1,0 +1,18 @@
+---
+title: C4 - Contêineres do Marketplace
+---
+flowchart LR
+  operator(["Operador ou avaliador<br/>Pessoa"])
+  subgraph marketplace["Fronteira do sistema: Marketplace"]
+    app["Aplicação e worker<br/>Contêiner: Node.js / Fastify<br/>Catálogo, Pedidos e Pagamento<br/>Cache TTL no mesmo processo"]
+    db[("Banco de dados<br/>Contêiner: PostgreSQL<br/>Schemas catalog, orders e payments<br/>Fila e recibos duráveis")]
+    jaeger["Observabilidade<br/>Contêiner: Jaeger<br/>Recebe e consulta traces reais"]
+    app -->|SQL parametrizado| db
+    app -->|Exportação OTLP HTTP| jaeger
+  end
+  operator -->|API REST - HTTP e JSON| app
+  classDef person fill:#123C69,color:#fff,stroke:#123C69
+  classDef container fill:#1769AA,color:#fff,stroke:#0F4C81
+  class operator person
+  class app,db,jaeger container
+  style marketplace fill:#F5F8FC,stroke:#70869A,stroke-dasharray:5 5

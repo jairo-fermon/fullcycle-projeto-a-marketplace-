@@ -1,0 +1,5 @@
+startedAt=2026-11-08T15:45:26.400Z
+command=["docker","compose","config","--quiet"]
+configuration={}
+
+exitCode=0
