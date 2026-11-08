@@ -1,0 +1,110 @@
+{
+  "createdAt": "2026-11-08T19:43:01.044409+00:00",
+  "normalization": "UTF8 sem BOM/LF/whitespace final. XML bruto/nome computador/serial e logs integrais privados nao publicados; resumo explica selecao.",
+  "files": [
+    {
+      "file": "resumo.json",
+      "source": "fullcycle-hardening/A/investigacao-pico/novas-repeticoes-resumo.json",
+      "originalSha256": "91d7eeacd6a8de5aaf090976206b10036fd1ec45fa7ca06f16a77d1b3662f47b",
+      "publishedSha256": "712c6040396bb8be31bbe2e20907a76717248684073d288385c09ae4435bac25"
+    },
+    {
+      "file": "repeticoes/pg-samples.ndjson",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes/pg-samples.ndjson",
+      "originalSha256": "ba11b39f5fe8850be66c41ebaa67199bf0eb153888861cab4c61c47c738f8b88",
+      "publishedSha256": "2a980e125bce259098a98aaec1ae9ba8d0c456c0431f9ac999272c4135acedb9"
+    },
+    {
+      "file": "repeticoes/r1-summary.json",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes/r1-summary.json",
+      "originalSha256": "3801bc1ea3af2e752529002c5f7918a047f1e681d5fd2d741e9f7b3909eb4d41",
+      "publishedSha256": "f5281e99b0bc79fdd4f7b2d25cef43021fe836e9a0d1b201b3cf1ea5cdd66c0d"
+    },
+    {
+      "file": "repeticoes/r2-summary.json",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes/r2-summary.json",
+      "originalSha256": "75c40d66d323474131f18178179030b1057b96152689630c07d8c08f97dcf106",
+      "publishedSha256": "ad06867d2271f085e756d3c9f1bfa10554299c44f2df6a8ebd4a30f6c5c1e1a3"
+    },
+    {
+      "file": "repeticoes/r3-summary.json",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes/r3-summary.json",
+      "originalSha256": "1382a8318feb90f5302e595d835d142fbe298cbf294ccce0ad164f2be75a8373",
+      "publishedSha256": "61e92c5ec0760f2043b351356f7b1031d4aaeee15647f90df4e9426082878412"
+    },
+    {
+      "file": "repeticoes/runtime.ndjson",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes/app-logs.txt",
+      "originalSha256": "92c1615154aed0aec8d7330d2b9673c736d438a0c885493048598b42eb4ffd29",
+      "sampling": "Todos os probe_ready/runtime_sample/gc, preservados; HTTP integral fica local.",
+      "publishedSha256": "3a20036e47d0182c629b4cb8a15946712e9aba145472fe7f2b54d6fae2b1f693"
+    },
+    {
+      "file": "repeticoes/probe.mjs",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes/probe.mjs",
+      "originalSha256": "14f843d5057b563b4d565cb695549560ed1a231f1a5f5dabf85c761e4b0dddf2",
+      "publishedSha256": "14f843d5057b563b4d565cb695549560ed1a231f1a5f5dabf85c761e4b0dddf2"
+    },
+    {
+      "file": "repeticoes/k6-diagnostico.js.txt",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes/k6-diagnostico.js",
+      "originalSha256": "6d6bf159d1c6da50c9f3aa73c7bcd191e9e9a0c29f1b5a4212c4abcf0e335cf4",
+      "publishedSha256": "6d6bf159d1c6da50c9f3aa73c7bcd191e9e9a0c29f1b5a4212c4abcf0e335cf4"
+    },
+    {
+      "file": "repeticoes/repetir-diagnostico.py",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes/repetir-diagnostico.py",
+      "originalSha256": "94bf6c1bf3697bbea4612e5c656f14e686f58cacaedf40bbb04ba619fc16eb3c",
+      "publishedSha256": "94bf6c1bf3697bbea4612e5c656f14e686f58cacaedf40bbb04ba619fc16eb3c"
+    },
+    {
+      "file": "resumo-v2.json",
+      "source": "fullcycle-hardening/A/investigacao-pico/novas-repeticoes-v2-resumo.json",
+      "originalSha256": "999734d889f04cf50a3ed3fe4690be86548918149694b53edfc78ab9bfe81ad2",
+      "publishedSha256": "1e69f29723e6b739dffa206d8300b2b979084dbf67072876efd194acd914b128"
+    },
+    {
+      "file": "repeticoes-v2/pg-samples.ndjson",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes-v2/pg-samples.ndjson",
+      "originalSha256": "a36bc1bc35d4358b68456abbda7af4c0689054f5645a2eaf98db10b2104fed2f",
+      "publishedSha256": "05a752d51cf0759b3a01c5e6bd218f5bc8fe1a135ae58054b550828c70627111"
+    },
+    {
+      "file": "repeticoes-v2/r1-summary.json",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes-v2/r1-summary.json",
+      "originalSha256": "475353e82841b5902ba3862c08c59cfa1c710f6e4c500d4dea034df47976f537",
+      "publishedSha256": "4d4cdc63c4c84689e9899e045a7e7c12ba1d90ccda830c93732a9cf63bec2581"
+    },
+    {
+      "file": "repeticoes-v2/r2-summary.json",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes-v2/r2-summary.json",
+      "originalSha256": "fe4c5416603aedfaf477a2d6c6ed30633877a912c41a4e25a759a465ccbb9314",
+      "publishedSha256": "809547308c5c253bd2c84a5731b12f09b3c565a595cd18f1d233934f8e950866"
+    },
+    {
+      "file": "repeticoes-v2/runtime.ndjson",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes-v2/app-logs.txt",
+      "originalSha256": "b76d8acd15e2214a55827a0f4d6903dbfb97ac09a1ca65b0682aa6e2374a82f5",
+      "sampling": "Todos os probe_ready/runtime_sample/gc, preservados; HTTP integral fica local.",
+      "publishedSha256": "c522e1e40161f8f1b6788436b6057a77efb00bddb6e10b04927faee4c8f9cce0"
+    },
+    {
+      "file": "repeticoes-v2/probe.mjs",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes-v2/probe.mjs",
+      "originalSha256": "f2424c5b0b8d2c1dfb75f422657808d5dac4d8bec84147259ca83c1af22aa609",
+      "publishedSha256": "f2424c5b0b8d2c1dfb75f422657808d5dac4d8bec84147259ca83c1af22aa609"
+    },
+    {
+      "file": "repeticoes-v2/k6-diagnostico.js.txt",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes-v2/k6-diagnostico.js",
+      "originalSha256": "06d9981f2f1964d199836b8bbd72f6356a8bda3f3741cc50ee914defee1e81f7",
+      "publishedSha256": "06d9981f2f1964d199836b8bbd72f6356a8bda3f3741cc50ee914defee1e81f7"
+    },
+    {
+      "file": "repeticoes-v2/repetir-diagnostico.py",
+      "source": "fullcycle-hardening/A/investigacao-pico/repeticoes-v2/repetir-diagnostico.py",
+      "originalSha256": "2570be9f3e8795650e79ee649579aa73896087946ba656720f806efaea65f19d",
+      "publishedSha256": "2570be9f3e8795650e79ee649579aa73896087946ba656720f806efaea65f19d"
+    }
+  ]
+}

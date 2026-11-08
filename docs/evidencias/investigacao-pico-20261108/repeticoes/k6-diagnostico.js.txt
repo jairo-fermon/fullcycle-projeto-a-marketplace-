@@ -1,0 +1,14 @@
+import http from 'k6/http';
+import { check,sleep } from 'k6';
+import { Trend } from 'k6/metrics';
+const orders=new Trend('orders_list_duration',true),catalog=new Trend('catalog_list_duration',true);
+export const options={summaryTrendStats:['avg','min','med','max','p(90)','p(95)','p(99)','count'],stages:[{duration:'10s',target:5},{duration:'15s',target:15},{duration:'10s',target:0}],thresholds:{orders_list_duration:['p(95)<500'],catalog_list_duration:['p(95)<500'],http_req_failed:['rate==0'],checks:['rate==1']}};
+if(!__ENV.BASE_URL)throw new Error('BASE_URL obrigatoria');
+function call(path,route,trend){
+ const sentAt=Date.now(),response=http.get(__ENV.BASE_URL+path,{tags:{name:route}});
+ trend.add(response.timings.duration);
+ const header=name=>{const value=response.headers[name];return Array.isArray(value)?value[0]:value??'';};
+ console.log(JSON.stringify({event:'client_request',round:__ENV.DIAGNOSTIC_ROUND,vu:__VU,iteration:__ITER,route,sentAt,completedAt:Date.now(),status:response.status,requestId:header('X-Request-Id'),traceId:header('X-Trace-Id'),cache:header('X-Cache'),timings:response.timings}));
+ check(response,{[route+' 20 itens']:r=>r.status===200&&Array.isArray(r.json('items'))&&r.json('items').length===20});
+}
+export default function(){call('/orders?status=PENDING&limit=20&page=1','GET /orders',orders);call('/catalog/products?category=category-01&limit=20','GET /catalog/products',catalog);sleep(0.1);}

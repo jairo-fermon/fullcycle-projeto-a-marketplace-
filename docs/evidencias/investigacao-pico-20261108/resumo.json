@@ -1,0 +1,285 @@
+{
+  "createdAt": "2026-11-08T19:40:31.694098+00:00",
+  "startedAt": "2026-11-08T19:34:52.542065+00:00",
+  "finishedAt": "2026-11-08T19:37:01.645190+00:00",
+  "diagnosticOnly": true,
+  "nativeHttpRecords": 14165,
+  "stages": [
+    {
+      "duration": "10s",
+      "target": 5
+    },
+    {
+      "duration": "15s",
+      "target": 15
+    },
+    {
+      "duration": "10s",
+      "target": 0
+    }
+  ],
+  "instrumentationOverhead": "Per-request client/native logs plus GC/event loop/PG monitoring; not directly interchangeable with earlier uninstrumented benchmark.",
+  "scriptsSha256": {
+    "probe.mjs": "14f843d5057b563b4d565cb695549560ed1a231f1a5f5dabf85c761e4b0dddf2",
+    "k6-diagnostico.js": "6d6bf159d1c6da50c9f3aa73c7bcd191e9e9a0c29f1b5a4212c4abcf0e335cf4"
+  },
+  "applicationImageId": "sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b",
+  "datasetUnchanged": true,
+  "rounds": [
+    {
+      "round": 1,
+      "requests": 4714,
+      "clientRecords": 4714,
+      "allPairedByRequestId": true,
+      "missingPairs": 0,
+      "orders": {
+        "min": 0.989913,
+        "med": 2.008179,
+        "max": 36.913262,
+        "p(90)": 3.806993,
+        "p(95)": 5.4376143999999975,
+        "p(99)": 11.11101212000001,
+        "count": 2357,
+        "avg": 2.4992668366567647,
+        "thresholds": {
+          "p(95)<500": false
+        }
+      },
+      "catalog": {
+        "p(99)": 5.458245040000001,
+        "count": 2357,
+        "avg": 1.2377396406448882,
+        "min": 0.434389,
+        "med": 0.918047,
+        "max": 20.043012,
+        "p(90)": 2.0518238,
+        "p(95)": 2.9876121999999943,
+        "thresholds": {
+          "p(95)<500": false
+        }
+      },
+      "throughput": 134.52242085135538,
+      "httpErrorRate": 0,
+      "checksRate": 1,
+      "above500ms": 0,
+      "worstPairedRequest": {
+        "client": {
+          "event": "client_request",
+          "round": "1",
+          "vu": 2,
+          "iteration": 16,
+          "route": "GET /orders",
+          "sentAt": 1794166522730,
+          "completedAt": 1794166522767,
+          "status": 200,
+          "requestId": "48117c55-d6f8-4b79-90c7-b783d482a0f5",
+          "traceId": "ce31a31a14e64dcaf1394e570f8895d4",
+          "cache": "",
+          "timings": {
+            "duration": 36.913262,
+            "blocked": 0.008589,
+            "looking_up": 0,
+            "connecting": 0,
+            "tls_handshaking": 0,
+            "sending": 0.02615,
+            "waiting": 36.831714,
+            "receiving": 0.055398
+          }
+        },
+        "native": null,
+        "application": {
+          "level": 30,
+          "time": 1794166522767,
+          "pid": 7,
+          "hostname": "7a8f22adbf58",
+          "reqId": "48117c55-d6f8-4b79-90c7-b783d482a0f5",
+          "method": "GET",
+          "route": "/orders",
+          "status": 200,
+          "durationMs": 35.149318,
+          "traceId": "ce31a31a14e64dcaf1394e570f8895d4",
+          "msg": "request_completed"
+        }
+      },
+      "clientLogSha256": "4f2a29cef7ae3256cd84fa2972207d7e4e4b4e231a820885385ad5c26394a2f3",
+      "nativeCorrelationStatus": "BLOQUEADO: primeira coleta nativa sem ID; headers de resposta enviados por writeHead nao aparecem em getHeader; corrigido no preload temporario v2 com X-Diagnostic-Id; aplicacao de negocio nao alterada.",
+      "nativePairs": 0
+    },
+    {
+      "round": 2,
+      "requests": 4666,
+      "clientRecords": 4666,
+      "allPairedByRequestId": true,
+      "missingPairs": 0,
+      "orders": {
+        "p(95)": 8.078330800000002,
+        "p(99)": 15.583767839999954,
+        "count": 2333,
+        "avg": 3.100370433347622,
+        "min": 1.190694,
+        "med": 2.273352,
+        "max": 59.556548,
+        "p(90)": 4.999874400000001,
+        "thresholds": {
+          "p(95)<500": false
+        }
+      },
+      "catalog": {
+        "med": 0.995104,
+        "max": 20.440439,
+        "p(90)": 2.5081434000000034,
+        "p(95)": 4.055178400000001,
+        "p(99)": 8.138143759999988,
+        "count": 2333,
+        "avg": 1.4548291581654553,
+        "min": 0.46583,
+        "thresholds": {
+          "p(95)<500": false
+        }
+      },
+      "throughput": 133.13969469885043,
+      "httpErrorRate": 0,
+      "checksRate": 1,
+      "above500ms": 0,
+      "worstPairedRequest": {
+        "client": {
+          "event": "client_request",
+          "round": "2",
+          "vu": 7,
+          "iteration": 122,
+          "route": "GET /orders",
+          "sentAt": 1794166562365,
+          "completedAt": 1794166562425,
+          "status": 200,
+          "requestId": "dbbc9443-3c19-423d-b763-c562fa650761",
+          "traceId": "848940f378124e1ebd4e7e832a1571de",
+          "cache": "",
+          "timings": {
+            "duration": 59.556548,
+            "blocked": 0.003565,
+            "looking_up": 0,
+            "connecting": 0,
+            "tls_handshaking": 0,
+            "sending": 0.007511,
+            "waiting": 59.426986,
+            "receiving": 0.122051
+          }
+        },
+        "native": null,
+        "application": {
+          "level": 30,
+          "time": 1794166562426,
+          "pid": 7,
+          "hostname": "7a8f22adbf58",
+          "reqId": "dbbc9443-3c19-423d-b763-c562fa650761",
+          "method": "GET",
+          "route": "/orders",
+          "status": 200,
+          "durationMs": 53.830401,
+          "traceId": "848940f378124e1ebd4e7e832a1571de",
+          "msg": "request_completed"
+        }
+      },
+      "clientLogSha256": "85edce55cf4057d8dbd13daba968ff1d96b94b7d2d601d3c092c00f3a8b895bf",
+      "nativeCorrelationStatus": "BLOQUEADO: primeira coleta nativa sem ID; headers de resposta enviados por writeHead nao aparecem em getHeader; corrigido no preload temporario v2 com X-Diagnostic-Id; aplicacao de negocio nao alterada.",
+      "nativePairs": 0
+    },
+    {
+      "round": 3,
+      "requests": 4688,
+      "clientRecords": 4688,
+      "allPairedByRequestId": true,
+      "missingPairs": 0,
+      "orders": {
+        "med": 2.253191,
+        "max": 52.160865,
+        "p(90)": 3.982054300000001,
+        "p(95)": 6.083301599999999,
+        "p(99)": 12.451759400000054,
+        "count": 2344,
+        "avg": 2.752118049061431,
+        "min": 0.146344,
+        "thresholds": {
+          "p(95)<500": false
+        }
+      },
+      "catalog": {
+        "min": 0.470382,
+        "med": 0.9606125000000001,
+        "max": 18.727809,
+        "p(90)": 1.9770535000000002,
+        "p(95)": 3.0152872,
+        "p(99)": 6.292025660000012,
+        "count": 2344,
+        "avg": 1.2790906544368574,
+        "thresholds": {
+          "p(95)<500": false
+        }
+      },
+      "throughput": 133.54917792663602,
+      "httpErrorRate": 0,
+      "checksRate": 1,
+      "above500ms": 0,
+      "worstPairedRequest": {
+        "client": {
+          "event": "client_request",
+          "round": "3",
+          "vu": 3,
+          "iteration": 106,
+          "route": "GET /orders",
+          "sentAt": 1794166597254,
+          "completedAt": 1794166597306,
+          "status": 200,
+          "requestId": "64744ece-2733-4813-93c0-655a24edae5b",
+          "traceId": "9ee2baec7365dffe497f8149162b6e58",
+          "cache": "",
+          "timings": {
+            "duration": 52.160865,
+            "blocked": 0.005404,
+            "looking_up": 0,
+            "connecting": 0,
+            "tls_handshaking": 0,
+            "sending": 0.027322,
+            "waiting": 51.895399,
+            "receiving": 0.238144
+          }
+        },
+        "native": null,
+        "application": {
+          "level": 30,
+          "time": 1794166597308,
+          "pid": 7,
+          "hostname": "7a8f22adbf58",
+          "reqId": "64744ece-2733-4813-93c0-655a24edae5b",
+          "method": "GET",
+          "route": "/orders",
+          "status": 200,
+          "durationMs": 51.257158999999994,
+          "traceId": "9ee2baec7365dffe497f8149162b6e58",
+          "msg": "request_completed"
+        }
+      },
+      "clientLogSha256": "d88e75f8134eee03fea67f83b259443ed86bcfbc48dc00664b688372eb186dc4",
+      "nativeCorrelationStatus": "BLOQUEADO: primeira coleta nativa sem ID; headers de resposta enviados por writeHead nao aparecem em getHeader; corrigido no preload temporario v2 com X-Diagnostic-Id; aplicacao de negocio nao alterada.",
+      "nativePairs": 0
+    }
+  ],
+  "runtime": {
+    "samples": 243,
+    "maxEventLoopMs": 129.957887,
+    "maxEventLoopIntervalMs": 596.1424579999999,
+    "maxWallMonotonicDriftMs": 3.1019579999992857,
+    "gcEvents": 61,
+    "maxGcMs": 10.453230001032352,
+    "pgSamples": 110,
+    "pgErrors": 0,
+    "maxBlockedObserved": 0,
+    "maxWaitingLocksObserved": 0,
+    "maxSessionsObserved": 7,
+    "maxReadyJobsObserved": 0
+  },
+  "stornvme129DuringNewRuns": [],
+  "originalApplicationLogSha256": "92c1615154aed0aec8d7330d2b9673c736d438a0c885493048598b42eb4ffd29",
+  "status": "PASSOU",
+  "stoppedPreservingVolume": true
+}

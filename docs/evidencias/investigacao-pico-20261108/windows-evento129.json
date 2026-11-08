@@ -1,0 +1,11 @@
+{
+  "TimeUtc": "2026-11-08T16:11:54.2519820Z",
+  "Provider": "stornvme",
+  "Id": 129,
+  "RecordId": 31143,
+  "Message": "Redefinir para dispositivo, \\Device\\RaidPort1, emitido.",
+  "Channel": "System",
+  "Device": "\\Device\\RaidPort1",
+  "OriginalEvidenceSha256": "3e5101cff3e052fcb46a74b3451bb5019e338b58eb332b753a449c9936cd9675",
+  "Scope": "Registro Windows local, nao medicao k6; nome do computador/XML bruto omitidos."
+}

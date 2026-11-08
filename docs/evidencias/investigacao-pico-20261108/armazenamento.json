@@ -1,0 +1,38 @@
+{
+  "CollectedAt": "2026-11-08T19:37:23.3014162Z",
+  "Disks": [
+    {
+      "Index": 0,
+      "Model": "KINGBANK KP230",
+      "InterfaceType": "SCSI",
+      "SCSIPort": 1,
+      "Size": 512105932800
+    }
+  ],
+  "SystemDisk": {
+    "Number": 0,
+    "FriendlyName": "KINGBANK KP230",
+    "BusType": "NVMe",
+    "OperationalStatus": "Online",
+    "HealthStatus": "Healthy"
+  },
+  "DockerDataFiles": [
+    {
+      "Path": "%LOCALAPPDATA%/Docker/wsl/disk/docker_data.vhdx",
+      "Length": 101503205376
+    },
+    {
+      "Path": "%LOCALAPPDATA%/Docker/wsl/main/ext4.vhdx",
+      "Length": 100663296
+    }
+  ],
+  "ControllerDrivers": [
+    {
+      "DeviceName": "Standard NVM Express Controller",
+      "DriverVersion": "10.0.26100.9278",
+      "DriverProviderName": "Microsoft",
+      "DriverDate": "2006-06-20T21:00:00-03:00"
+    }
+  ],
+  "Scope": "Metadados lidos, sem serial/identificadores unicos. Disco do C: e arquivo VHDX Docker no mesmo disco. HealthStatus Healthy nao exclui evento de reset anterior. SCSIPort1 e RaidPort1 sao correlacao de adaptador, sem ETW de cada I/O."
+}

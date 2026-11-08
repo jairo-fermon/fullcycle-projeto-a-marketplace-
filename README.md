@@ -10,6 +10,8 @@ Hardening publicado no [repositório do A](https://github.com/jairo-fermon/fullc
 
 As [evidências anteriores](docs/ACEITE_A.md) e o [desempenho histórico](docs/desempenho.md) permanecem identificados. O máximo de 6.165,86 ms observado em uma repetição não é seu p95 e deve ser considerado junto dos demais indicadores. Não extrapolar medições locais curtas para produção. Ensaio e Moodle ainda não têm comprovante.
 
+[Investigação complementar do pico](docs/INVESTIGACAO_PICO.md): evento Windows de reset NVMe confirmado dentro de uma pausa de 5,67 s nas conclusões HTTP; incidente de I/O do ambiente é a causa provável, sem vínculo individual comprovado com a amostra antiga. Cinco repetições diagnósticas adicionais somaram 23.474 requisições sem erros e sem novo reset. Este complemento documental ainda é candidato local, aguardando publicação/CI próprias.
+
 ## Preparação e subida
 
 Pré-requisitos: Node 24 LTS, npm 11, Docker Desktop Linux e Compose v2; internet na primeira instalação. Verificar `node --version`, `npm --version`, `docker info` e `docker compose version`. Portas locais padrão: API 3001 e Jaeger 16687; configuráveis no `.env`. PostgreSQL não expõe porta ao host. Não depende de instalar PostgreSQL, Redis ou k6 no Windows.

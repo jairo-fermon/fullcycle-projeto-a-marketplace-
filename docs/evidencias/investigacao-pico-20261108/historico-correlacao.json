@@ -1,0 +1,70 @@
+{
+  "analyzedAt": "2026-11-08T19:30:08.883178+00:00",
+  "oldValidationCommit": "8e9b5d4bca10da0c314825e9510746405deea354",
+  "loadCheck": {
+    "name": "k6-optimized",
+    "command": [
+      "docker",
+      "compose",
+      "--profile",
+      "tools",
+      "run",
+      "--rm",
+      "k6"
+    ],
+    "configuration": {
+      "CATALOG_CACHE_ENABLED": "true",
+      "APP_IMAGE": "fullcycle-a-marketplace-app:validated-9ff30b05c72d"
+    },
+    "startedAt": "2026-11-08T16:11:32.535Z",
+    "finishedAt": "2026-11-08T16:12:10.391Z",
+    "exitCode": 0,
+    "status": "PASSOU"
+  },
+  "rawLogSha256": "87b3311bf78760c1042e748b61a4b207a46c1e6b38ee0561effdbb57e63d4e46",
+  "clientRequests": 3570,
+  "serverRequestsInLoadWindow": 3570,
+  "routes": {
+    "/orders": 1785,
+    "/catalog/products": 1785
+  },
+  "largestCompletionGap": {
+    "gapMs": 5669,
+    "previous": {
+      "level": 30,
+      "time": 1794154310351,
+      "pid": 7,
+      "hostname": "b0614c9563d7",
+      "reqId": "03f6394e-90f5-4116-b051-c0506e0fdb7d",
+      "method": "GET",
+      "route": "/orders",
+      "status": 200,
+      "durationMs": 0.865243,
+      "traceId": "88713501de9f81b1706fec4df45996b5",
+      "msg": "request_completed"
+    },
+    "next": {
+      "level": 30,
+      "time": 1794154316020,
+      "pid": 7,
+      "hostname": "b0614c9563d7",
+      "reqId": "8737e5d9-0dc0-4a52-b765-1a3189e32392",
+      "method": "GET",
+      "route": "/orders",
+      "status": 200,
+      "durationMs": 244.067654,
+      "traceId": "e8c794b9ff031f21c676afa3f619b19e",
+      "msg": "request_completed"
+    }
+  },
+  "maxServerMs": 369.143125,
+  "windowUtc": [
+    "2026-11-08T16:11:50.351000+00:00",
+    "2026-11-08T16:11:56.020000+00:00"
+  ],
+  "storageEventUtc": "2026-11-08T16:11:54.2519820Z",
+  "storageEventWithinCompletionGap": true,
+  "oldOrdersMaxMs": 6165.863163,
+  "oldOrdersP95ms": 6.019788599999999,
+  "interpretation": "Incidente de armazenamento confirmado no mesmo intervalo; causa ambiental provavel, nao nexo individual comprovado nem defeito fisico confirmado."
+}

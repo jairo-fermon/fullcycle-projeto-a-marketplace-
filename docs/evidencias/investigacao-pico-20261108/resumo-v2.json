@@ -1,0 +1,226 @@
+{
+  "createdAt": "2026-11-08T19:41:40.287218+00:00",
+  "startedAt": "2026-11-08T19:39:50.541982+00:00",
+  "finishedAt": "2026-11-08T19:41:19.556119+00:00",
+  "diagnosticOnly": true,
+  "nativeHttpRecords": 9471,
+  "stages": [
+    {
+      "duration": "10s",
+      "target": 5
+    },
+    {
+      "duration": "15s",
+      "target": 15
+    },
+    {
+      "duration": "10s",
+      "target": 0
+    }
+  ],
+  "instrumentationOverhead": "Per-request client/native logs plus GC/event loop/PG monitoring; not directly interchangeable with earlier uninstrumented benchmark.",
+  "scriptsSha256": {
+    "probe.mjs": "f2424c5b0b8d2c1dfb75f422657808d5dac4d8bec84147259ca83c1af22aa609",
+    "k6-diagnostico.js": "06d9981f2f1964d199836b8bbd72f6356a8bda3f3741cc50ee914defee1e81f7"
+  },
+  "applicationImageId": "sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b",
+  "datasetUnchanged": true,
+  "rounds": [
+    {
+      "round": 1,
+      "requests": 4726,
+      "clientRecords": 4726,
+      "allPairedByRequestId": true,
+      "missingPairs": 0,
+      "orders": {
+        "p(90)": 3.4943366000000005,
+        "p(95)": 4.2644184,
+        "p(99)": 7.4862142000000205,
+        "count": 2363,
+        "avg": 2.3225820964875123,
+        "min": 0.171212,
+        "med": 1.944751,
+        "max": 35.005589,
+        "thresholds": {
+          "p(95)<500": false
+        }
+      },
+      "catalog": {
+        "p(90)": 1.7861554000000004,
+        "p(95)": 2.3719477000000007,
+        "p(99)": 4.844671140000001,
+        "count": 2363,
+        "avg": 1.115924118070252,
+        "min": 0.406126,
+        "med": 0.891815,
+        "max": 10.161232,
+        "thresholds": {
+          "p(95)<500": false
+        }
+      },
+      "throughput": 134.9500316745628,
+      "httpErrorRate": 0,
+      "checksRate": 1,
+      "above500ms": 0,
+      "worstPairedRequest": {
+        "client": {
+          "event": "client_request",
+          "diagnosticId": "1-4-57-/orders",
+          "round": "1",
+          "vu": 4,
+          "iteration": 57,
+          "route": "GET /orders",
+          "sentAt": 1794166809523,
+          "completedAt": 1794166809558,
+          "status": 200,
+          "requestId": "869f2ddb-9e19-457d-a353-b94d4721f69c",
+          "traceId": "f583df6573398cc38884a41cae212eab",
+          "cache": "",
+          "timings": {
+            "duration": 35.005589,
+            "blocked": 0.007255,
+            "looking_up": 0,
+            "connecting": 0,
+            "tls_handshaking": 0,
+            "sending": 0.025279,
+            "waiting": 34.753408,
+            "receiving": 0.226902
+          }
+        },
+        "native": {
+          "diagnostic": true,
+          "at": "2026-11-08T19:40:09.557Z",
+          "event": "native_http",
+          "diagnosticId": "1-4-57-/orders",
+          "route": "/orders",
+          "status": 200,
+          "startWallMs": 1794166809524,
+          "durationMs": 32.98212700000113
+        },
+        "application": {
+          "level": 30,
+          "time": 1794166809558,
+          "pid": 7,
+          "hostname": "94f31f31d4cf",
+          "reqId": "869f2ddb-9e19-457d-a353-b94d4721f69c",
+          "method": "GET",
+          "route": "/orders",
+          "status": 200,
+          "durationMs": 32.927849,
+          "traceId": "f583df6573398cc38884a41cae212eab",
+          "msg": "request_completed"
+        }
+      },
+      "clientLogSha256": "c2f60ea484bf7ab5f0cc50d3c426856d7b9f0351eab2135685e785d362808dce",
+      "nativeCorrelationStatus": "PASSOU",
+      "nativePairs": 4726
+    },
+    {
+      "round": 2,
+      "requests": 4680,
+      "clientRecords": 4680,
+      "allPairedByRequestId": true,
+      "missingPairs": 0,
+      "orders": {
+        "avg": 2.792127615384612,
+        "min": 0.910313,
+        "med": 2.0809984999999998,
+        "max": 93.975276,
+        "p(90)": 4.033422099999998,
+        "p(95)": 6.058605749999992,
+        "p(99)": 14.467382380000014,
+        "count": 2340,
+        "thresholds": {
+          "p(95)<500": false
+        }
+      },
+      "catalog": {
+        "p(99)": 6.5974798100000145,
+        "count": 2340,
+        "avg": 1.3290399235042756,
+        "min": 0.411102,
+        "med": 0.936392,
+        "max": 46.195151,
+        "p(90)": 2.0608614999999992,
+        "p(95)": 3.031345149999998,
+        "thresholds": {
+          "p(95)<500": false
+        }
+      },
+      "throughput": 133.42255532241944,
+      "httpErrorRate": 0,
+      "checksRate": 1,
+      "above500ms": 0,
+      "worstPairedRequest": {
+        "client": {
+          "event": "client_request",
+          "diagnosticId": "2-11-132-/orders",
+          "round": "2",
+          "vu": 11,
+          "iteration": 132,
+          "route": "GET /orders",
+          "sentAt": 1794166863533,
+          "completedAt": 1794166863627,
+          "status": 200,
+          "requestId": "72a9b1a9-dcd7-499d-a74f-61233becef2f",
+          "traceId": "2fb106790981684ec4af65b901e53641",
+          "cache": "",
+          "timings": {
+            "duration": 93.975276,
+            "blocked": 0.00693,
+            "looking_up": 0,
+            "connecting": 0,
+            "tls_handshaking": 0,
+            "sending": 0.021765,
+            "waiting": 93.834291,
+            "receiving": 0.11922
+          }
+        },
+        "native": {
+          "diagnostic": true,
+          "at": "2026-11-08T19:41:03.627Z",
+          "event": "native_http",
+          "diagnosticId": "2-11-132-/orders",
+          "route": "/orders",
+          "status": 200,
+          "startWallMs": 1794166863554,
+          "durationMs": 72.45573699999659
+        },
+        "application": {
+          "level": 30,
+          "time": 1794166863627,
+          "pid": 7,
+          "hostname": "94f31f31d4cf",
+          "reqId": "72a9b1a9-dcd7-499d-a74f-61233becef2f",
+          "method": "GET",
+          "route": "/orders",
+          "status": 200,
+          "durationMs": 72.481915,
+          "traceId": "2fb106790981684ec4af65b901e53641",
+          "msg": "request_completed"
+        }
+      },
+      "clientLogSha256": "47f2b7c1309b6627913b1e9fc21bb0dc0eba1d19d7aa0fd5fd134f02ec1af1d1",
+      "nativeCorrelationStatus": "PASSOU",
+      "nativePairs": 4680
+    }
+  ],
+  "runtime": {
+    "samples": 164,
+    "maxEventLoopMs": 148.373503,
+    "maxEventLoopIntervalMs": 504.8823759999941,
+    "maxWallMonotonicDriftMs": 2.5358130000095116,
+    "gcEvents": 107,
+    "maxGcMs": 11.333829998970032,
+    "pgSamples": 77,
+    "pgErrors": 0,
+    "maxBlockedObserved": 0,
+    "maxWaitingLocksObserved": 0,
+    "maxSessionsObserved": 6,
+    "maxReadyJobsObserved": 0
+  },
+  "stornvme129DuringNewRuns": [],
+  "originalApplicationLogSha256": "b76d8acd15e2214a55827a0f4d6903dbfb97ac09a1ca65b0682aa6e2374a82f5",
+  "status": "PASSOU",
+  "stoppedPreservingVolume": true
+}

@@ -1,0 +1,82 @@
+{
+  "createdAt": "2026-11-08T19:43:01.042179+00:00",
+  "confirmedIncident": "Windows System/stornvme129/Record31143: reset de armazenamento em16:11:54.251982Z",
+  "causalAssessment": "CAUSA PROVAVEL: interrupcao de I/O no ambiente local, fortemente correlacionada ao pico historico.",
+  "individualOldSampleCorrelation": "NAO DISPONIVEL; k6 antigo sem ID/timestamp individual.",
+  "hardwareRootCause": "NAO DETERMINADA; nao afirmar SSD defeituoso, nem excluir driver/firmware/carga.",
+  "newRuns": [
+    {
+      "batch": "repeticoes",
+      "round": 1,
+      "requests": 4714,
+      "ordersP95ms": 5.4376143999999975,
+      "ordersMaxMs": 36.913262,
+      "catalogP95ms": 2.9876121999999943,
+      "catalogMaxMs": 20.043012,
+      "errors": 0,
+      "checks": 1,
+      "clientAppPaired": true,
+      "nativePairs": 0
+    },
+    {
+      "batch": "repeticoes",
+      "round": 2,
+      "requests": 4666,
+      "ordersP95ms": 8.078330800000002,
+      "ordersMaxMs": 59.556548,
+      "catalogP95ms": 4.055178400000001,
+      "catalogMaxMs": 20.440439,
+      "errors": 0,
+      "checks": 1,
+      "clientAppPaired": true,
+      "nativePairs": 0
+    },
+    {
+      "batch": "repeticoes",
+      "round": 3,
+      "requests": 4688,
+      "ordersP95ms": 6.083301599999999,
+      "ordersMaxMs": 52.160865,
+      "catalogP95ms": 3.0152872,
+      "catalogMaxMs": 18.727809,
+      "errors": 0,
+      "checks": 1,
+      "clientAppPaired": true,
+      "nativePairs": 0
+    },
+    {
+      "batch": "repeticoes-v2",
+      "round": 1,
+      "requests": 4726,
+      "ordersP95ms": 4.2644184,
+      "ordersMaxMs": 35.005589,
+      "catalogP95ms": 2.3719477000000007,
+      "catalogMaxMs": 10.161232,
+      "errors": 0,
+      "checks": 1,
+      "clientAppPaired": true,
+      "nativePairs": 4726
+    },
+    {
+      "batch": "repeticoes-v2",
+      "round": 2,
+      "requests": 4680,
+      "ordersP95ms": 6.058605749999992,
+      "ordersMaxMs": 93.975276,
+      "catalogP95ms": 3.031345149999998,
+      "catalogMaxMs": 46.195151,
+      "errors": 0,
+      "checks": 1,
+      "clientAppPaired": true,
+      "nativePairs": 4680
+    }
+  ],
+  "newHttpRequests": 23474,
+  "newStorageResetsDuringRuns": 0,
+  "oldEvidencePreserved": true,
+  "noBusinessCodeChanges": true,
+  "noHardwareSettingsChanged": true,
+  "noIntentionalFaultOrDiskStress": true,
+  "BPreserved": "6d6f58f664918e69c7c5964331f358d87d230708",
+  "publicationStatus": "Candidata local; novo complemento documental aguarda autorizacao/publicacao/CI propria."
+}

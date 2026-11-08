@@ -1,0 +1,6 @@
+{
+  "DockerMonitor": "Comparacao inicial textual de16:11 encontrou registros com offset-03:00, equivalentes a19:11Z; apos normalizar UTC, zero registros nesse recorte historico. Excluidos da inferencia causal; nao alegar pausa Docker comprovada por eles.",
+  "DockerBackend": "Recorte host possui eventos GET/events e/time; nao prova mecanismo do pico nem substitui trace. Nao publicado conteudo livre de logs do host.",
+  "OriginalNativeProbe": "Primeiras3 cargas cliente/application correlacionados; header getHeader no evento nativo nao disponivel. Preload temporario corrigido com ID no header da requisicao;2 cargas seguintes com todas as9406 requisicoes correlacionadas entre cliente/nativo/aplicacao. Nao houve mudanca no negocio.",
+  "NoFabrication": "Novas cargas nao tiveram amostra>500ms; nao foi criado trace de lentidao inexistente."
+}
