@@ -2,17 +2,29 @@
 
 Marketplace como **monólito modular** com exatamente três módulos de negócio: **Catálogo, Pedidos e Pagamento**. Fluxo real: cadastrar/listar produto -> criar pedido com preço consultado no catálogo -> enfileirar pagamento simulado -> processar resultado -> consultar pedido pago. A simulação é determinística e auditável; não existe cobrança, gateway ou conta de pagamento.
 
-Trabalho individual de Jairo Fermon. Projeto independente do B, com banco, volumes, portas, configuração, Git e testes próprios. O B aprovado permanece na revisão `7a617593545cbcfdeb18778eefaffabb1b8bc430`.
+Trabalho individual de Jairo Fermon. Projeto independente do B, com banco, volumes, portas, configuração, Git e testes próprios. O B aprovado após hardening permanece na revisão `6d6f58f664918e69c7c5964331f358d87d230708`.
 
 ## Estado e leitura inicial
 
-Validação técnica local executada em 08/11/2026: [matriz de aceite](docs/ACEITE_A.md), [desempenho](docs/desempenho.md) e [demonstração](docs/DEMONSTRACAO.md). O aluno criou o [repositório público do A](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-), com hífen final no nome. Publicação autorizada pelo aluno e executada. **[CI remoto PASSOU](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42497720872)**, revisão `b6ca03b`, com árvore igual à candidata local `32fa2a1`. Os 58 testes, lint/fronteiras, tipos, build, OpenAPI e SCA passaram no GitHub; seed/carga/trace/deploy têm evidências locais próprias. [Metadados e comandos de conferência](docs/evidencias/ci-github.json).
+Baseline pública conferida: [repositório do A](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-), com hífen final, commit `ca2ade99c6c9c6b6be541fad59ad5aee7b77b831` e [CI dessa revisão: success](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42499111933). Essa execução aprovou 58 testes, 98,06% linhas/95,47% branches, fronteiras, contrato, OpenAPI e SCA. O [relatório de hardening](RELATORIO_HARDENING_A.md) distingue a nova candidata local, as medições e a publicação/CI que ainda dependem de autorização específica.
+
+As [evidências anteriores](docs/ACEITE_A.md) e o [desempenho histórico](docs/desempenho.md) permanecem identificados. O máximo de 6.165,86 ms observado em uma repetição não é seu p95 e deve ser considerado junto dos demais indicadores. Não extrapolar medições locais curtas para produção. Ensaio e Moodle ainda não têm comprovante.
 
 ## Preparação e subida
 
 Pré-requisitos: Node 24 LTS, npm 11, Docker Desktop Linux e Compose v2; internet na primeira instalação. Verificar `node --version`, `npm --version`, `docker info` e `docker compose version`. Portas locais padrão: API 3001 e Jaeger 16687; configuráveis no `.env`. PostgreSQL não expõe porta ao host. Não depende de instalar PostgreSQL, Redis ou k6 no Windows.
 
 Na raiz deste projeto, uma vez: `npm run env:init`. Usa somente Node para criar `.env` com senha aleatória; preserva arquivo existente e não mostra segredo. `.env.example` explica as variáveis e `.gitignore` exclui o arquivo real.
+
+Para obter o projeto no PowerShell, a partir da pasta escolhida:
+
+```powershell
+git clone https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-.git
+Set-Location .\fullcycle-projeto-a-marketplace-
+npm run env:init
+```
+
+Git é necessário para o clone. O nome padrão dessa pasta termina em hífen. `env:init` usa somente recursos nativos de Node, sem exigir npm install no host. Depois do preparo explícito, executar o Compose abaixo.
 
 Depois dessa preparação explícita, subir em **um comando**:
 
@@ -29,6 +41,43 @@ npm run demo
 ```
 
 O demo cria produto de 1.500 centavos, pedido com duas unidades (3.000 centavos), tentativa de pagamento, repete a mesma chave sem duplicar, aguarda o worker e verifica pedido PAID. Usa IDs novos, imprime respostas reais e falha se o fluxo estiver incorreto. Outra porta no `.env` é lida automaticamente; `BASE_URL` externo permite outro endereço.
+
+### Demonstração manual no PowerShell
+
+Com a aplicação saudável, executar na mesma sessão (ajustar a URL se PORT for diferente):
+
+```powershell
+$baseUrl = 'http://127.0.0.1:3001'
+$productBody = @{ sku="DEMO-$([guid]::NewGuid())"; name='Produto de demonstracao'; category='geral'; unitPriceCents=1500 } | ConvertTo-Json
+$product = Invoke-RestMethod -Method Post "$baseUrl/catalog/products" -ContentType 'application/json' -Body $productBody
+$orderBody = @{ items=@(@{productId=$product.id; quantity=2}) } | ConvertTo-Json -Depth 4
+$order = Invoke-RestMethod -Method Post "$baseUrl/orders" -ContentType 'application/json' -Body $orderBody
+$paymentHeaders = @{ 'Idempotency-Key'=[guid]::NewGuid().ToString() }
+$paymentBody = @{orderId=$order.id; outcome='approve'} | ConvertTo-Json
+$attempt = Invoke-RestMethod -Method Post "$baseUrl/payments" -Headers $paymentHeaders -ContentType 'application/json' -Body $paymentBody
+$replayed = Invoke-RestMethod -Method Post "$baseUrl/payments" -Headers $paymentHeaders -ContentType 'application/json' -Body $paymentBody
+if ($attempt.id -ne $replayed.id) { throw 'A repeticao criou outra tentativa.' }
+for ($i=0; $i -lt 100; $i++) {
+    $payment = Invoke-RestMethod "$baseUrl/payments/$($attempt.id)"
+    if ($payment.status -ne 'QUEUED') { break }
+    Start-Sleep -Milliseconds 100
+}
+$paid = Invoke-RestMethod "$baseUrl/orders/$($order.id)"
+if ($payment.status -ne 'SUCCEEDED' -or $paid.status -ne 'PAID' -or $paid.totalCents -ne 3000) { throw 'Fluxo de pagamento nao foi concluido como esperado.' }
+$paid
+```
+
+O Content-Type JSON é explícito nos POSTs. O 202 indica aceitação na fila; a consulta posterior verifica a conclusão real. Para comprovar persistência do mesmo pedido, ainda nessa sessão:
+
+```powershell
+docker compose restart app
+docker compose up -d --wait app
+$persisted = Invoke-RestMethod "$baseUrl/orders/$($order.id)"
+if ($persisted.id -ne $paid.id -or $persisted.status -ne 'PAID' -or $persisted.totalCents -ne 3000) { throw 'Pedido esperado ausente apos restart.' }
+$persisted
+```
+
+Reiniciar o app mantém o contêiner; recriar somente app troca esse contêiner e preserva o PostgreSQL. Dados de negócio ficam no volume do banco. Para encerrar preservando dados: `docker compose down`. Remover o volume do banco apaga seus arquivos e não faz parte da demonstração.
 
 ## Rotas e regras
 
@@ -94,7 +143,7 @@ Mínimos declarados: **80% linhas e 75% branches** em todo `src/`, fiscalizados 
 
 Alternativa local: `npm ci`, `npm run lint`, `npm run typecheck`, `npm run build`, `npm run test:unit`, `npm run openapi:lint`, `npm run sca`. Integração requer PGHOST/PGPORT/PGDATABASE/PGUSER/PGPASSWORD e APP_ENV=test externos. `npm start` também permite execução local configurada por essas variáveis; não imprimir credenciais em comandos/histórico.
 
-SCA usa `npm audit --audit-level=moderate` e falha em alerta moderado ou superior, incluindo desenvolvimento. O override minimatch 11.0.5 corrige vulnerabilidade transitiva das ferramentas de lint, revalidada com testes; não suprime alerta. CI instala, faz lint/fronteiras, tipos, build, OpenAPI, SCA e testes com banco real. [Execução GitHub verificada: success](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42497720872), com 58 testes e cobertura 98,06% linhas / 95,47% branches. Os quatro avisos de estilo OpenAPI permanecem documentados.
+SCA usa `npm audit --audit-level=moderate` e falha em alerta moderado ou superior, incluindo desenvolvimento. O override minimatch 11.0.5 corrige vulnerabilidade transitiva das ferramentas de lint, revalidada com testes; não suprime alerta. CI instala, faz lint/fronteiras, tipos, build, OpenAPI, SCA e testes com banco real. A execução da baseline identificada no início é histórica; a nova candidata precisa de publicação autorizada e CI do próprio SHA. Os quatro avisos de estilo OpenAPI permanecem documentados.
 
 ## Ambientes, feature flag e estratégia de deploy
 
@@ -129,6 +178,22 @@ docker compose --profile tools run --rm k6
 
 Precisa do seed para retornar 20 itens por rota. Os três estágios estão em scripts/k6-load.js. O comando substitui o resumo k6-summary.json; preservar resultados comparativos quando necessário.
 
+O script exporta também p50 (mediana), p99, máximo e quantidade de amostras, quando fornecida pelo k6. Amostras acima de 500 ms geram somente um log diagnóstico com rota, status, requestId, traceId e tempos do cliente, sem corpo ou headers sensíveis. IDs não viram labels de métricas. Essas informações ajudam a correlacionar casos futuros; não identificam retroativamente a causa do pico antigo.
+
+### Matriz de índice e cache em cópia isolada
+
+`scripts/benchmark-matrix.mjs` repete o mesmo k6 de três estágios em quatro configurações: sem ambos, só índice, só cache e ambos. Por padrão são duas rodadas, com ordem invertida na segunda, 10 aquecimentos por rota e captura de CPU/memória Docker e bloqueios/conexões PostgreSQL com pausa de 5 s entre coletas; o intervalo efetivo inclui a duração dos comandos. O overhead dessa coleta existe em todos os cenários. A mesma imagem e o fingerprint dos dados são verificados, e a configuração/índice originais são restaurados ao terminar, inclusive em falha.
+
+Requer outro clone com `.env` próprio, portas diferentes de 3001/16687 e `COMPOSE_PROJECT_NAME` começando por `fullcycle-a-benchmark` ou `fullcycle-a-hardening`. Subir esse ambiente e executar o seed separado antes da matriz. O runner recusa a instalação padrão e exige declaração explícita de isolamento:
+
+```powershell
+$env:BENCHMARK_ISOLATED = 'true'
+node scripts/benchmark-matrix.mjs
+$env:BENCHMARK_ISOLATED = 'false'
+```
+
+Por padrão, resultados novos ficam em `tmp/benchmark-matrix`, fora do Git. O diretório precisa não existir; para repetir preservando o anterior, definir `BENCHMARK_OUTPUT` com outro caminho. O runner cria/remove somente o índice de leitura do banco de teste indicado e recria app para alternar cache; não remove dados/volumes nem executa seed automaticamente. Não usar contra dados importantes. Duas rodadas locais não estabelecem capacidade máxima ou intervalo estatístico de confiança.
+
 ## Repetir o gate local completo
 
 ```powershell
@@ -149,4 +214,4 @@ O benchmark remove e restaura temporariamente o índice de leitura e recria o ap
 - Cache não é global entre réplicas; desenho usa uma instância. SLO de 35 s é evidência controlada, não contrato mensal ou capacidade máxima.
 - Linter OpenAPI pode emitir avisos de estilo por localhost, licença não definida e rotas técnicas sem 4xx. Regras recomendadas permanecem ativas; não inventar licença/deploy/resposta para silenciar aviso.
 
-[CONTRIBUTORS](CONTRIBUTORS.md), [uso de IA](docs/ia.md) e [roteiro técnico](docs/DEMONSTRACAO.md). O aluno aprovou o A e autorizou auditoria/apresentações. [Fechamento da pré-auditoria e repetição limpa](docs/FECHAMENTO_AUDITORIA.md). O pacote final separado reúne os materiais de apoio. Ensaio e envio ao Moodle permanecem sem comprovante.
+[CONTRIBUTORS](CONTRIBUTORS.md), [uso de IA](docs/ia.md) e [roteiro técnico](docs/DEMONSTRACAO.md). O aluno aprovou a implementação original e autorizou a pré-auditoria. [Fechamento histórico e repetição limpa](docs/FECHAMENTO_AUDITORIA.md). O novo hardening tem gates próprios: aprovação/publicação do A e fechamento/apresentações ainda pendentes. Pacote e PDFs anteriores são históricos até atualização autorizada. Ensaio e envio ao Moodle permanecem sem comprovante.

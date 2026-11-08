@@ -2,6 +2,8 @@
 
 Este roteiro técnico apoia o gate A. Não é PDF definitivo, ensaio com o aluno ou apresentação cronometrada.
 
+Hardening de 08/11: sequência manual PowerShell/persistência verificadas no [README](../README.md#demonstração-manual-no-powershell); registros no [relatório](../RELATORIO_HARDENING_A.md). Números históricos abaixo devem ser lidos com novas medições/limites em desempenho.md. PDFs e treinamento aguardam o gate próprio.
+
 ## Fluxo para o aluno repetir
 
 Na raiz do A, executar:

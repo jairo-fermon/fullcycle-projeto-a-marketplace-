@@ -1,0 +1,19 @@
+startedAt=2026-11-08T18:51:03.084Z
+command=["docker","compose","up","--no-build","--force-recreate","-d","--wait","app"]
+configuration={"CATALOG_CACHE_ENABLED":"false","APP_IMAGE":"fullcycle-a-marketplace-app:validated-76894841c87d"}
+ Container fullcycle-a-hardening-20261108-jaeger-1  Running
+ Container fullcycle-a-hardening-20261108-db-1  Running
+ Container fullcycle-a-hardening-20261108-app-1  Recreate
+ Container fullcycle-a-hardening-20261108-app-1  Recreated
+ Container fullcycle-a-hardening-20261108-db-1  Waiting
+ Container fullcycle-a-hardening-20261108-db-1  Healthy
+ Container fullcycle-a-hardening-20261108-app-1  Starting
+ Container fullcycle-a-hardening-20261108-app-1  Started
+ Container fullcycle-a-hardening-20261108-jaeger-1  Waiting
+ Container fullcycle-a-hardening-20261108-app-1  Waiting
+ Container fullcycle-a-hardening-20261108-db-1  Waiting
+ Container fullcycle-a-hardening-20261108-db-1  Healthy
+ Container fullcycle-a-hardening-20261108-jaeger-1  Healthy
+ Container fullcycle-a-hardening-20261108-app-1  Healthy
+
+exitCode=0

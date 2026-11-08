@@ -1,0 +1,172 @@
+{
+  "startedAt": "2026-11-08T19:07:24.877482+00:00",
+  "timezone": "America/Sao_Paulo",
+  "checkout": "C:\\Users\\ELIELETRO\\Desktop\\ChatGPT\\fullcycle-projeto-a-marketplace\\tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-",
+  "checks": [
+    {
+      "name": "id app antes",
+      "command": [
+        "docker",
+        "compose",
+        "ps",
+        "-q",
+        "app"
+      ],
+      "exitCode": 0,
+      "stdout": "667b104a308fffb082a525632d999add4e989902315aa4be82f9c58d3db1569a\n",
+      "stderr": "",
+      "status": "PASSOU"
+    },
+    {
+      "name": "recriar somente app",
+      "command": [
+        "docker",
+        "compose",
+        "up",
+        "--no-build",
+        "--force-recreate",
+        "-d",
+        "--wait",
+        "app"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": " Container fullcycle-a-hardening-20261108-jaeger-1  Running\n Container fullcycle-a-hardening-20261108-db-1  Running\n Container fullcycle-a-hardening-20261108-app-1  Recreate\n Container fullcycle-a-hardening-20261108-app-1  Recreated\n Container fullcycle-a-hardening-20261108-db-1  Waiting\n Container fullcycle-a-hardening-20261108-db-1  Healthy\n Container fullcycle-a-hardening-20261108-app-1  Starting\n Container fullcycle-a-hardening-20261108-app-1  Started\n Container fullcycle-a-hardening-20261108-app-1  Waiting\n Container fullcycle-a-hardening-20261108-db-1  Waiting\n Container fullcycle-a-hardening-20261108-jaeger-1  Waiting\n Container fullcycle-a-hardening-20261108-db-1  Healthy\n Container fullcycle-a-hardening-20261108-jaeger-1  Healthy\n Container fullcycle-a-hardening-20261108-app-1  Healthy\n",
+      "status": "PASSOU"
+    },
+    {
+      "name": "id app depois",
+      "command": [
+        "docker",
+        "compose",
+        "ps",
+        "-q",
+        "app"
+      ],
+      "exitCode": 0,
+      "stdout": "9d90a38c8cc0d07c1a8b3355a7e6d871efd5fa051d3d238ebca094ea5f3d8855\n",
+      "stderr": "",
+      "status": "PASSOU"
+    },
+    {
+      "name": "SQL dados e recibo",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "sh",
+        "-c",
+        "psql -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c \"SELECT id,status,total_cents,payment_reference FROM orders.orders WHERE id='a0148911-67c9-4745-8ae0-f3fc2b595012'; SELECT count(*) AS synthetic_orders FROM orders.orders WHERE origin='synthetic_seed'; SELECT count(*) AS products FROM catalog.products; SELECT count(*) AS receipts_for_payment FROM payments.receipts WHERE payment_id='1e5b6d64-f1b3-4b80-a48b-d6dd3a5e977e'; SELECT state,deliveries,count(*) FROM payments.jobs GROUP BY state,deliveries; SELECT count(*) AS migrations FROM schema_migrations;\""
+      ],
+      "exitCode": 0,
+      "stdout": "                  id                  | status | total_cents |          payment_reference           \n--------------------------------------+--------+-------------+--------------------------------------\n a0148911-67c9-4745-8ae0-f3fc2b595012 | PAID   |        3000 | 1e5b6d64-f1b3-4b80-a48b-d6dd3a5e977e\n(1 row)\n\n synthetic_orders \n------------------\n           100000\n(1 row)\n\n products \n----------\n     5002\n(1 row)\n\n receipts_for_payment \n----------------------\n                    1\n(1 row)\n\n state | deliveries | count \n-------+------------+-------\n DONE  |          1 |     2\n(1 row)\n\n migrations \n------------\n          2\n(1 row)\n\n",
+      "stderr": "",
+      "status": "PASSOU"
+    },
+    {
+      "name": "volume antes",
+      "command": [
+        "docker",
+        "volume",
+        "inspect",
+        "--format",
+        "{{.Name}}",
+        "fullcycle-a-hardening-20261108_marketplace-data"
+      ],
+      "exitCode": 0,
+      "stdout": "fullcycle-a-hardening-20261108_marketplace-data\n",
+      "stderr": "",
+      "status": "PASSOU"
+    },
+    {
+      "name": "encerrar clone preservando volume",
+      "command": [
+        "docker",
+        "compose",
+        "--profile",
+        "test",
+        "--profile",
+        "tools",
+        "down"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": " Container fullcycle-a-hardening-20261108-app-1  Stopping\n Container fullcycle-a-hardening-20261108-test-db-1  Stopping\n Container fullcycle-a-hardening-20261108-test-db-1  Stopped\n Container fullcycle-a-hardening-20261108-test-db-1  Removing\n Container fullcycle-a-hardening-20261108-test-db-1  Removed\n Container fullcycle-a-hardening-20261108-app-1  Stopped\n Container fullcycle-a-hardening-20261108-app-1  Removing\n Container fullcycle-a-hardening-20261108-app-1  Removed\n Container fullcycle-a-hardening-20261108-jaeger-1  Stopping\n Container fullcycle-a-hardening-20261108-db-1  Stopping\n Container fullcycle-a-hardening-20261108-jaeger-1  Stopped\n Container fullcycle-a-hardening-20261108-jaeger-1  Removing\n Container fullcycle-a-hardening-20261108-db-1  Stopped\n Container fullcycle-a-hardening-20261108-db-1  Removing\n Container fullcycle-a-hardening-20261108-jaeger-1  Removed\n Container fullcycle-a-hardening-20261108-db-1  Removed\n Network fullcycle-a-hardening-20261108_default  Removing\n Network fullcycle-a-hardening-20261108_default  Removed\n",
+      "status": "PASSOU"
+    },
+    {
+      "name": "encerrar projeto de teste fresh",
+      "command": [
+        "docker",
+        "compose",
+        "-p",
+        "fullcycle-a-hardening-candidate-20261108",
+        "--profile",
+        "test",
+        "down"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": " Container fullcycle-a-hardening-candidate-20261108-test-db-1  Stopping\n Container fullcycle-a-hardening-candidate-20261108-test-db-1  Stopped\n Container fullcycle-a-hardening-candidate-20261108-test-db-1  Removing\n Container fullcycle-a-hardening-candidate-20261108-test-db-1  Removed\n Network fullcycle-a-hardening-candidate-20261108_default  Removing\n Network fullcycle-a-hardening-candidate-20261108_default  Removed\n",
+      "status": "PASSOU"
+    },
+    {
+      "name": "volume depois",
+      "command": [
+        "docker",
+        "volume",
+        "inspect",
+        "--format",
+        "{{.Name}}",
+        "fullcycle-a-hardening-20261108_marketplace-data"
+      ],
+      "exitCode": 0,
+      "stdout": "fullcycle-a-hardening-20261108_marketplace-data\n",
+      "stderr": "",
+      "status": "PASSOU"
+    },
+    {
+      "name": "containers restantes fullcycle-a-hardening-20261108",
+      "command": [
+        "docker",
+        "ps",
+        "-aq",
+        "--filter",
+        "label=com.docker.compose.project=fullcycle-a-hardening-20261108"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "status": "PASSOU"
+    },
+    {
+      "name": "containers restantes fullcycle-a-hardening-candidate-20261108",
+      "command": [
+        "docker",
+        "ps",
+        "-aq",
+        "--filter",
+        "label=com.docker.compose.project=fullcycle-a-hardening-candidate-20261108"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "status": "PASSOU"
+    }
+  ],
+  "recreation": {
+    "oldContainer": "667b104a308fffb082a525632d999add4e989902315aa4be82f9c58d3db1569a",
+    "newContainer": "9d90a38c8cc0d07c1a8b3355a7e6d871efd5fa051d3d238ebca094ea5f3d8855",
+    "sameOrder": true,
+    "orderId": "a0148911-67c9-4745-8ae0-f3fc2b595012",
+    "paymentId": "1e5b6d64-f1b3-4b80-a48b-d6dd3a5e977e",
+    "status": "PAID",
+    "totalCents": 3000
+  },
+  "volumePreserved": true,
+  "volumeDeletionRequested": false,
+  "status": "PASSOU",
+  "finishedAt": "2026-11-08T19:07:38.288218+00:00"
+}

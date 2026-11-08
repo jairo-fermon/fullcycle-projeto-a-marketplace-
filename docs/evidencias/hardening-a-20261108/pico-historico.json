@@ -1,0 +1,66 @@
+{
+  "collectedAt": "2026-11-08T18:54:22.340486+00:00",
+  "status": "PASSOU: analise dos artefatos, nao diagnostico causal",
+  "peakMs": 6165.863163,
+  "ordersP95ms": 6.019788599999999,
+  "catalogP95ms": 3.1640189999999997,
+  "httpErrors": 0,
+  "historicalK6File": "C:\\Users\\ELIELETRO\\Desktop\\ChatGPT\\fullcycle-entrega-final\\auditoria\\evidencias\\a\\k6-optimized.json",
+  "httpTimingAggregates": {
+    "http_req_waiting": {
+      "med": 1.490053,
+      "max": 6165.803541,
+      "p(90)": 3.4296341,
+      "p(95)": 4.851511799999997,
+      "avg": 7.825845786274518,
+      "min": 0.197133
+    },
+    "http_req_connecting": {
+      "med": 0,
+      "max": 1.857619,
+      "p(90)": 0,
+      "p(95)": 0,
+      "avg": 0.0017617081232493,
+      "min": 0
+    },
+    "http_req_blocked": {
+      "p(90)": 0.009861499999999997,
+      "p(95)": 0.011668099999999994,
+      "avg": 0.008507046218487377,
+      "min": 0.001029,
+      "med": 0.0054325,
+      "max": 1.925245
+    },
+    "http_req_sending": {
+      "med": 0.015915,
+      "max": 9.055679,
+      "p(90)": 0.03540899999999999,
+      "p(95)": 0.049174199999999973,
+      "avg": 0.023931416806722738,
+      "min": 0.00341
+    },
+    "http_req_receiving": {
+      "avg": 0.10240884509803881,
+      "min": 0.011527,
+      "med": 0.0826245,
+      "max": 12.582247,
+      "p(90)": 0.1547354,
+      "p(95)": 0.18510745
+    }
+  },
+  "applicationLogFile": "C:\\Users\\ELIELETRO\\Desktop\\ChatGPT\\fullcycle-entrega-final\\tmp\\checkouts\\fullcycle-projeto-a-marketplace\\docs\\evidencias\\logs-json.txt",
+  "requestRecords": 3601,
+  "maxApplicationDurationMs": 369.143125,
+  "applicationRecordsAbove500ms": 0,
+  "correlationLimitation": "k6 antigo nao registrou requestId/traceId das amostras lentas, nem timestamp de cada amostra; duracao do cliente e janela medida pelo hook no servidor nao sao identicas. Nao vincular maximos agregados automaticamente.",
+  "historicalResourceTelemetry": {
+    "cpuTimeSeries": false,
+    "dbLocksAtPeak": false,
+    "dbPoolWaitAtPeak": false,
+    "gcEvents": false,
+    "slowRequestTrace": false
+  },
+  "queueAndCache": "Mecanismos exercitados por testes, mas ausencia de correlacao no pico antigo impede atribui-lo ao worker/cache.",
+  "conclusion": "CAUSA INDETERMINADA COM OS DADOS DISPONIVEIS.",
+  "nextEvidence": "Novos cenarios registram p99/max, logs lentos com IDs e timings, amostras Docker/PG e tentam consultar traces reais. Nao inferir retroativamente a causa do pico antigo."
+}

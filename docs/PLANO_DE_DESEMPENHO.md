@@ -26,3 +26,11 @@ PostgreSQL guarda tentativa e job na mesma transação. Claim usa FOR UPDATE SKI
 Até três entregas, com backoff de 1 s e 2 s entre as tentativas; a terceira falha encerra em DEAD/FAILED. Erros permanentes de negócio encerram imediatamente. A fila mantém código de erro seguro, não stack/SQL/payload. Retry não promete sucesso e não substitui investigação de jobs DEAD. Não há endpoint extra de administração/reprocessamento no escopo.
 
 Não há transação distribuída entre módulos: atualização do pedido e recibo são transações locais distintas. A recuperação usa entrega pelo menos uma vez e idempotência, comprovada por teste de falha após efeito. Não chamar isso de execução exatamente uma vez.
+
+## Ampliação do hardening A
+
+O plano anterior continua histórico. O runner benchmark-matrix.mjs fixa, antes das medições, quatro configurações de índice/cache, duas rodadas por padrão e ordem inversa na segunda. Mantém os três estágios, pausas, rotas, 10 aquecimentos por rota, imagem e dataset. Não escolher a menor medição para representar todas: registrar cada rodada, p50/p95/p99/máximo/amostras/erros/throughput e recursos amostrados. Informações p99 que não existiam nos summaries antigos não serão inventadas.
+
+Matriz somente em clone isolado, com portas e nome Compose próprios e declaração BENCHMARK_ISOLATED=true. Migrations/seed fora das janelas de carga; nenhum dado é removido pelo runner. Fingerprints antes/depois e restauração de índice/cache são verificações obrigatórias. Coleta de recursos gera overhead comum às fases e não garante captura de toda pausa curta. GC e escalonamento não são inferidos de um único agregado.
+
+O pico antigo fica classificado como causa indeterminada enquanto não houver correlação suficiente. Novas amostras lentas terão IDs e tempos do cliente para tentativa de consulta de trace real; resultados novos não provam retroativamente a causa do evento antigo. Referências primárias das opções de coleta: [estatísticas de Trend](https://grafana.com/docs/k6/latest/using-k6/k6-options/reference/#summary-trend-stats) e [tempos por requisição](https://grafana.com/docs/k6/latest/examples/get-timings-for-an-http-metric/). A compatibilidade é verificada na imagem k6 1.3.0 usada no projeto.

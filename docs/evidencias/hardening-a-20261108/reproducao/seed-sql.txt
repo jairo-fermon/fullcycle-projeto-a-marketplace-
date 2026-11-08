@@ -1,0 +1,16 @@
+startedAt=2026-11-08T18:50:47.848Z
+command=["docker","compose","exec","-T","db","sh","-c","psql -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c \"SELECT origin,count(*) FROM orders.orders GROUP BY origin; SELECT count(*) AS inconsistencias FROM orders.orders o JOIN orders.items i ON i.order_id=o.id LEFT JOIN catalog.products p ON p.id=i.product_id LEFT JOIN payments.attempts a ON a.id=o.payment_reference WHERE o.origin='synthetic_seed' AND (p.id IS NULL OR o.total_cents<>i.quantity*i.unit_price_cents OR (o.status='PAID' AND (a.id IS NULL OR a.status<>'SUCCEEDED' OR a.amount_cents<>o.total_cents)));\""]
+configuration={}
+     origin     | count
+----------------+--------
+ api            |      1
+ synthetic_seed | 100000
+(2 rows)
+
+ inconsistencias
+-----------------
+               0
+(1 row)
+
+
+exitCode=0

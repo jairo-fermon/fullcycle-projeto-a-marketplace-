@@ -1,0 +1,562 @@
+{
+  "startedAt": "2026-11-08T18:49:35.774Z",
+  "timeZone": "America/Sao_Paulo",
+  "sourceCommit": "ca2ade99c6c9c6b6be541fad59ad5aee7b77b831",
+  "host": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "cpu": "11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz",
+    "logicalCpus": 8,
+    "memoryBytes": 16893386752,
+    "node": "v24.19.0"
+  },
+  "clean": false,
+  "checks": [
+    {
+      "name": "env-init",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "scripts/init-env.mjs"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:49:35.831Z",
+      "finishedAt": "2026-11-08T18:49:35.916Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "compose-version",
+      "command": [
+        "docker",
+        "compose",
+        "version"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:49:35.916Z",
+      "finishedAt": "2026-11-08T18:49:36.169Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "docker-version",
+      "command": [
+        "docker",
+        "version",
+        "--format",
+        "{{.Client.Version}} / {{.Server.Version}}"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:49:36.169Z",
+      "finishedAt": "2026-11-08T18:49:36.365Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "docker-resources",
+      "command": [
+        "docker",
+        "info",
+        "--format",
+        "CPUs={{.NCPU}} MemoryBytes={{.MemTotal}} OS={{.OperatingSystem}}"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:49:36.365Z",
+      "finishedAt": "2026-11-08T18:49:44.271Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "compose-config",
+      "command": [
+        "docker",
+        "compose",
+        "config",
+        "--quiet"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:49:44.272Z",
+      "finishedAt": "2026-11-08T18:49:44.745Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "subida",
+      "command": [
+        "docker",
+        "compose",
+        "up",
+        "--build",
+        "-d",
+        "--wait"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:49:44.745Z",
+      "finishedAt": "2026-11-08T18:49:58.304Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "qualidade",
+      "command": [
+        "docker",
+        "compose",
+        "--profile",
+        "test",
+        "run",
+        "--build",
+        "--rm",
+        "tests",
+        "sh",
+        "-c",
+        "npm run lint && npm run typecheck && npm run build && npm run openapi:lint && npm run sca && npm test"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:49:58.304Z",
+      "finishedAt": "2026-11-08T18:50:26.116Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "demonstracao",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--env-file=.env",
+        "scripts/demo.mjs"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:50:26.129Z",
+      "finishedAt": "2026-11-08T18:50:26.594Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "seed-primeira",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "scripts/seed.mjs"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:50:27.495Z",
+      "finishedAt": "2026-11-08T18:50:39.775Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "seed-repetida",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "scripts/seed.mjs"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:50:39.775Z",
+      "finishedAt": "2026-11-08T18:50:47.848Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "seed-sql",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "sh",
+        "-c",
+        "psql -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c \"SELECT origin,count(*) FROM orders.orders GROUP BY origin; SELECT count(*) AS inconsistencias FROM orders.orders o JOIN orders.items i ON i.order_id=o.id LEFT JOIN catalog.products p ON p.id=i.product_id LEFT JOIN payments.attempts a ON a.id=o.payment_reference WHERE o.origin='synthetic_seed' AND (p.id IS NULL OR o.total_cents<>i.quantity*i.unit_price_cents OR (o.status='PAID' AND (a.id IS NULL OR a.status<>'SUCCEEDED' OR a.amount_cents<>o.total_cents)));\""
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:50:47.848Z",
+      "finishedAt": "2026-11-08T18:50:48.593Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "imagem-id",
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "fullcycle-a-marketplace-app:local"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:50:48.593Z",
+      "finishedAt": "2026-11-08T18:50:48.799Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "imagem-preservada",
+      "command": [
+        "docker",
+        "image",
+        "tag",
+        "fullcycle-a-marketplace-app:local",
+        "fullcycle-a-marketplace-app:validated-76894841c87d"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:50:48.799Z",
+      "finishedAt": "2026-11-08T18:50:49.012Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "promocao-production",
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "docker-compose.yml",
+        "-f",
+        "compose.production.yml",
+        "up",
+        "--no-build",
+        "-d",
+        "--wait",
+        "app"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "PAYMENT_PROCESSING_ENABLED": "false"
+      },
+      "startedAt": "2026-11-08T18:50:49.012Z",
+      "finishedAt": "2026-11-08T18:50:54.882Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "config-production",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "-e",
+        "console.log(JSON.stringify({APP_ENV:process.env.APP_ENV,LOG_LEVEL:process.env.LOG_LEVEL,PAYMENT_PROCESSING_ENABLED:process.env.PAYMENT_PROCESSING_ENABLED}))"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:50:54.882Z",
+      "finishedAt": "2026-11-08T18:50:55.473Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "rollback-development",
+      "command": [
+        "docker",
+        "compose",
+        "up",
+        "--no-build",
+        "-d",
+        "--wait",
+        "app"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development"
+      },
+      "startedAt": "2026-11-08T18:50:55.496Z",
+      "finishedAt": "2026-11-08T18:51:01.496Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "config-development",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "-e",
+        "console.log(JSON.stringify({APP_ENV:process.env.APP_ENV,LOG_LEVEL:process.env.LOG_LEVEL,PAYMENT_PROCESSING_ENABLED:process.env.PAYMENT_PROCESSING_ENABLED}))"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:51:01.496Z",
+      "finishedAt": "2026-11-08T18:51:02.040Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "plano-baseline",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "scripts/optimize.mjs",
+        "baseline"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:51:02.052Z",
+      "finishedAt": "2026-11-08T18:51:03.084Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "config-baseline",
+      "command": [
+        "docker",
+        "compose",
+        "up",
+        "--no-build",
+        "--force-recreate",
+        "-d",
+        "--wait",
+        "app"
+      ],
+      "configuration": {
+        "CATALOG_CACHE_ENABLED": "false",
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d"
+      },
+      "startedAt": "2026-11-08T18:51:03.084Z",
+      "finishedAt": "2026-11-08T18:51:08.723Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "k6-baseline",
+      "command": [
+        "docker",
+        "compose",
+        "--profile",
+        "tools",
+        "run",
+        "--rm",
+        "k6"
+      ],
+      "configuration": {
+        "CATALOG_CACHE_ENABLED": "false",
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d"
+      },
+      "startedAt": "2026-11-08T18:51:09.109Z",
+      "finishedAt": "2026-11-08T18:51:47.283Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "plano-optimized",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "scripts/optimize.mjs",
+        "optimized"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:51:47.306Z",
+      "finishedAt": "2026-11-08T18:51:48.821Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "config-optimized",
+      "command": [
+        "docker",
+        "compose",
+        "up",
+        "--no-build",
+        "--force-recreate",
+        "-d",
+        "--wait",
+        "app"
+      ],
+      "configuration": {
+        "CATALOG_CACHE_ENABLED": "true",
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d"
+      },
+      "startedAt": "2026-11-08T18:51:48.821Z",
+      "finishedAt": "2026-11-08T18:51:54.875Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "k6-optimized",
+      "command": [
+        "docker",
+        "compose",
+        "--profile",
+        "tools",
+        "run",
+        "--rm",
+        "k6"
+      ],
+      "configuration": {
+        "CATALOG_CACHE_ENABLED": "true",
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d"
+      },
+      "startedAt": "2026-11-08T18:51:55.029Z",
+      "finishedAt": "2026-11-08T18:52:33.518Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "logs-json",
+      "command": [
+        "docker",
+        "compose",
+        "logs",
+        "--no-color",
+        "--no-log-prefix",
+        "app"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:52:33.529Z",
+      "finishedAt": "2026-11-08T18:52:34.313Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "compose-status",
+      "command": [
+        "docker",
+        "compose",
+        "ps",
+        "--format",
+        "json"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:52:34.317Z",
+      "finishedAt": "2026-11-08T18:52:35.008Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "node-container",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "--version"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:52:35.009Z",
+      "finishedAt": "2026-11-08T18:52:35.732Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "postgres-container",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "postgres",
+        "--version"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:52:35.732Z",
+      "finishedAt": "2026-11-08T18:52:36.346Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "k6-version",
+      "command": [
+        "docker",
+        "compose",
+        "--profile",
+        "tools",
+        "run",
+        "--rm",
+        "--no-deps",
+        "k6",
+        "version"
+      ],
+      "configuration": {},
+      "startedAt": "2026-11-08T18:52:36.347Z",
+      "finishedAt": "2026-11-08T18:52:38.189Z",
+      "exitCode": 0,
+      "status": "PASSOU"
+    }
+  ],
+  "coverage": {
+    "lines": 98.06,
+    "branches": 95.47,
+    "functions": 100
+  },
+  "demo": {
+    "result": "PASSOU",
+    "orderId": "52a43774-51f4-4aa1-91a2-405e098e8a8a",
+    "paymentId": "78eff6a9-de04-432a-99ec-6c3ef0617c75",
+    "paymentTraceId": "a2624434ffaa10e55fb75a045ab0fff5"
+  },
+  "trace": {
+    "id": "a2624434ffaa10e55fb75a045ab0fff5",
+    "spans": 15,
+    "operations": [
+      "postgres.payments.get",
+      "postgres.orders.get",
+      "postgres.orders.get_items",
+      "postgres.payments.enqueue",
+      "postgres.payments.enqueue_job",
+      "payments.submit",
+      "HTTP POST /payments",
+      "postgres.payments.receipt_lookup",
+      "postgres.orders.mark_paid",
+      "orders.mark_paid",
+      "postgres.payments.receipt",
+      "postgres.payments.complete",
+      "postgres.payments.complete_job",
+      "payments.process_job"
+    ],
+    "url": "http://127.0.0.1:16689/trace/a2624434ffaa10e55fb75a045ab0fff5"
+  },
+  "syntheticOrders": 100000,
+  "deployment": {
+    "strategy": "recreate local",
+    "validatedImage": "fullcycle-a-marketplace-app:validated-76894841c87d",
+    "imageId": "sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b",
+    "productionConfigApplied": true,
+    "disabledFlagHttpStatus": 503,
+    "configurationRollbackApplied": true,
+    "binaryVersionRollbackExecuted": false,
+    "orderPreserved": true
+  },
+  "performance": {
+    "baseline": {
+      "ordersP95ms": 94.48177175000001,
+      "catalogP95ms": 8.51010875,
+      "requests": 3172,
+      "throughput": 90.41439336002551,
+      "errors": 0,
+      "checks": 1
+    },
+    "optimized": {
+      "ordersP95ms": 6.076432049999998,
+      "catalogP95ms": 3.472181499999997,
+      "requests": 4660,
+      "throughput": 132.86175021431154,
+      "errors": 0,
+      "checks": 1
+    }
+  },
+  "status": "PASSOU",
+  "finishedAt": "2026-11-08T18:52:38.189Z"
+}

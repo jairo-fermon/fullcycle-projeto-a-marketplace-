@@ -1,0 +1,22 @@
+{
+  "startedAt": "2026-11-08T18:48:30.058805+00:00",
+  "timezone": "America/Sao_Paulo",
+  "cloneCommand": [
+    "git",
+    "-c",
+    "credential.helper=",
+    "clone",
+    "https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-.git",
+    "C:\\Users\\ELIELETRO\\Desktop\\ChatGPT\\fullcycle-projeto-a-marketplace\\tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-"
+  ],
+  "cloneExitCode": 0,
+  "source": "GitHub publico, nao clone local",
+  "checkout": "C:\\Users\\ELIELETRO\\Desktop\\ChatGPT\\fullcycle-projeto-a-marketplace\\tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-",
+  "cleanAtStart": true,
+  "HEAD": "ca2ade99c6c9c6b6be541fad59ad5aee7b77b831",
+  "projectName": "fullcycle-a-hardening-20261108",
+  "port": 3003,
+  "jaegerPort": 16689,
+  "existingVolumesDeleted": false,
+  "dataset": "Novo volume proprio para dados sinteticos desta reproducao; nao e producao."
+}

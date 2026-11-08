@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-11-08T19:19:43.229993+00:00",
+  "sourceBaseline": "ca2ade99c6c9c6b6be541fad59ad5aee7b77b831",
+  "candidateFilesScanned": 220,
+  "scope": "Todos os arquivos versionados e novos nao ignorados; busca por senhas reais dos dois .env locais, formatos de tokens GitHub e chaves privadas. Nao e garantia universal de deteccao. Valores secretos nunca emitidos.",
+  "secretHits": [],
+  "envTracked": false,
+  "markdownLocalLinksBroken": [],
+  "protectedSourceAndConfigurationUnchanged": true,
+  "measuredScriptsSha256Match": {
+    "scripts/k6-load.js": true,
+    "scripts/benchmark-matrix.mjs": true
+  },
+  "B": {
+    "HEAD": "6d6f58f664918e69c7c5964331f358d87d230708",
+    "clean": true,
+    "expectedRevision": true
+  },
+  "C4VisualReview": "Dois PNGs reabertos nesta etapa, legiveis e coerentes; sem alteracao.",
+  "CI": "BLOQUEADO: nova candidata ainda nao publicada; baseline ca2ade9 remota conferida em main.",
+  "status": "PASSOU"
+}

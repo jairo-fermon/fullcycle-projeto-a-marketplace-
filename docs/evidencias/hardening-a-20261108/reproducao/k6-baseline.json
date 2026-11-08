@@ -1,0 +1,162 @@
+{
+    "metrics": {
+        "orders_list_duration": {
+            "med": 47.090168500000004,
+            "max": 231.072697,
+            "p(90)": 76.120952,
+            "p(95)": 94.48177175000001,
+            "avg": 51.498612096469145,
+            "min": 18.246728,
+            "thresholds": {
+                "p(95)<500": false
+            }
+        },
+        "catalog_list_duration": {
+            "min": 1.340327,
+            "med": 2.6520795,
+            "max": 25.909079,
+            "p(90)": 6.3297825,
+            "p(95)": 8.51010875,
+            "avg": 3.5069521513240907,
+            "thresholds": {
+                "p(95)<500": false
+            }
+        },
+        "checks": {
+            "passes": 3172,
+            "fails": 0,
+            "thresholds": {
+                "rate==1": false
+            },
+            "value": 1
+        },
+        "http_req_tls_handshaking": {
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0,
+            "min": 0
+        },
+        "http_req_connecting": {
+            "avg": 0.0015556434426229504,
+            "min": 0,
+            "med": 0,
+            "max": 0.842104,
+            "p(90)": 0,
+            "p(95)": 0
+        },
+        "http_reqs": {
+            "count": 3172,
+            "rate": 90.41439336002551
+        },
+        "http_req_blocked": {
+            "med": 0.0066505,
+            "max": 2.123661,
+            "p(90)": 0.0102544,
+            "p(95)": 0.012748849999999997,
+            "avg": 0.011298307377049187,
+            "min": 0.001886
+        },
+        "http_req_receiving": {
+            "avg": 0.12282238272383407,
+            "min": 0.019188,
+            "med": 0.0998635,
+            "max": 3.670541,
+            "p(90)": 0.1617589,
+            "p(95)": 0.22124069999999987
+        },
+        "iteration_duration": {
+            "min": 121.542452,
+            "med": 151.84085900000002,
+            "max": 335.053483,
+            "p(90)": 182.6551475,
+            "p(95)": 202.1017085,
+            "avg": 156.70791371185356
+        },
+        "iterations": {
+            "count": 1586,
+            "rate": 45.20719668001276
+        },
+        "http_req_duration": {
+            "med": 19.8587375,
+            "max": 231.072697,
+            "p(90)": 65.2931535,
+            "p(95)": 76.11348909999998,
+            "avg": 27.502782123896665,
+            "min": 1.340327
+        },
+        "http_req_sending": {
+            "min": 0.005092,
+            "med": 0.0192205,
+            "max": 11.060321,
+            "p(90)": 0.0490178,
+            "p(95)": 0.06567044999999996,
+            "avg": 0.03436131967213124
+        },
+        "vus": {
+            "max": 14,
+            "value": 1,
+            "min": 1
+        },
+        "http_req_waiting": {
+            "max": 230.914643,
+            "p(90)": 65.16839910000002,
+            "p(95)": 75.94973694999999,
+            "avg": 27.345598421500625,
+            "min": 1.268674,
+            "med": 19.734514
+        },
+        "http_req_duration{expected_response:true}": {
+            "avg": 27.502782123896665,
+            "min": 1.340327,
+            "med": 19.8587375,
+            "max": 231.072697,
+            "p(90)": 65.2931535,
+            "p(95)": 76.11348909999998
+        },
+        "data_received": {
+            "count": 11094070,
+            "rate": 316224.34077668923
+        },
+        "http_req_failed": {
+            "passes": 0,
+            "fails": 3172,
+            "thresholds": {
+                "rate==0": false
+            },
+            "value": 0
+        },
+        "vus_max": {
+            "min": 15,
+            "max": 15,
+            "value": 15
+        },
+        "data_sent": {
+            "count": 334646,
+            "rate": 9538.718499482693
+        }
+    },
+    "root_group": {
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {},
+        "checks": {
+                "lista de pedidos válida": {
+                    "id": "533c3fe7107a3178dd8db96e22fa67a9",
+                    "passes": 1586,
+                    "fails": 0,
+                    "name": "lista de pedidos válida",
+                    "path": "::lista de pedidos válida"
+                },
+                "catálogo válido": {
+                    "id": "215520e170f12005e221757e5918d698",
+                    "passes": 1586,
+                    "fails": 0,
+                    "name": "catálogo válido",
+                    "path": "::catálogo válido"
+                }
+            },
+        "name": ""
+    }
+}

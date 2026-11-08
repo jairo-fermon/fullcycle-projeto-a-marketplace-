@@ -61,3 +61,54 @@ npm run validate:local -- --clean
 **--clean apaga dados somente do A**; não usar em dados importantes. O ciclo prepara base, verifica duas execuções do seed, testa contratos/coverage/SCA, comprova trace/flag/ambientes/rollback e executa os dois cenários. Registra comandos, configurações não secretas, horários e exit codes. Alterações futuras podem modificar resultados; preservar evidências anteriores antes de substituir arquivos.
 
 Para inspecionar plano atual: `docker compose exec -T app node scripts/optimize.mjs explain`. O sistema termina com índice e cache habilitados. Para comparar manualmente, seguir as etapas/configurações do validador, incluindo a mesma configuração no comando Compose que inicia k6; apenas mudar um comando de subida não é suficiente.
+
+## Hardening de 08/11/2026: investigação e medições adicionais
+
+As seções anteriores descrevem o ciclo canônico original e sua CI histórica. Esta seção registra execuções novas e não substitui os números anteriores. Baseline de código pública: `ca2ade99c6c9c6b6be541fad59ad5aee7b77b831`; scripts adicionais identificados por SHA-256 em [matrix.json](evidencias/hardening-a-20261108/matriz/matrix.json). Estado da candidata e da publicação em [RELATORIO_HARDENING_A.md](../RELATORIO_HARDENING_A.md).
+
+### Pico histórico: conclusão limitada pelos dados
+
+A repetição da pré-auditoria registrou máximo de pedidos **6.165,863163 ms**, p95 de pedidos **6,0197886 ms**, p95 do catálogo **3,164019 ms** e zero erros HTTP. O máximo agregado de waiting do cliente foi 6.165,803541 ms. Isso não identifica a origem da espera. Os 3.601 logs request_completed disponíveis tiveram máximo de duração no servidor 369,143125 ms. São janelas de medição diferentes e não há requestId/traceId/timestamp da amostra k6 que permita correlacioná-las.
+
+Não existem séries históricas de CPU, locks, espera do pool, eventos de GC ou trace daquela requisição. Fila/cache têm testes, mas isso não demonstra sua participação no pico. **CAUSA INDETERMINADA COM OS DADOS DISPONÍVEIS.** Não atribuir ao Docker, GC, worker, cache ou banco sem correlação. [Extração dos dados históricos e limitações](evidencias/hardening-a-20261108/pico-historico.json). Os arquivos históricos integrais ficam no pacote de pré-auditoria e em tmp local; não foram alterados.
+
+### Reprodução completa obtida do GitHub
+
+Clone direto limpo de ca2ade9, volume novo próprio, Compose `fullcycle-a-hardening-20261108`, API 3003/Jaeger 16689; nenhuma remoção de volume. `node scripts/validate-local.mjs`, **sem --clean**, passou de 18:49:35.774Z a 18:52:38.189Z (15:49–15:52 local). Mesmo roteiro original de três estágios, 100 mil pedidos sintéticos, imagem e aquecimento equivalentes: p95 pedidos **94,48 → 6,08 ms**, catálogo **8,51 → 3,47 ms**; 3.172 → 4.660 requests, 90,41 → 132,86 req/s, zero erros. É outra comparação combinada de índice+cache, não contribuição isolada. [Registro completo](evidencias/hardening-a-20261108/reproducao/validacao-local.json), summaries baseline/optimized preservados nessa mesma pasta. O k6-summary genérico do clone foi posteriormente sobrescrito pela matriz e não foi usado para representar essa comparação.
+
+### Matriz de quatro configurações, duas rodadas
+
+Execução **18:55:15.537Z–19:02:03.616Z** (15:55–16:02 local). Mesmo host Windows/i5-1135G7, 8 CPUs lógicas, 16.893.386.752 bytes físicos; engine Docker com 8 CPUs/8.185.405.440 bytes. Versões: Node contêiner 24.22.2, PostgreSQL 17.11, k6 1.3.0+dirty, Jaeger 2.23.0. Imagem de aplicação em todas as fases: `sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b`.
+
+Dataset idêntico antes/depois: 100.000 pedidos sintéticos + 1 pedido da demonstração; 5.001 produtos. Fingerprint MD5 de pedidos `a9259c341d06a7260f624941d19f2bc7`, produtos `be85c5d93e9ee39b53903b8b3598a0b8`. São checks de igualdade das colunas declaradas na consulta, não hashes de segurança. Nenhuma escrita da carga; seed/build/qualidade/manual fora da janela. B e serviços originais compartilhavam o host; não havia reserva exclusiva de recursos.
+
+Em cada fase: recriação do app fora da janela, dez aquecimentos por rota, mesmos três estágios (10 s/5 VUs, 15 s/15 VUs, 10 s/0), pausa 100 ms, 35 s configurados. A segunda rodada inverte a ordem. Configurações são propagadas inclusive ao Compose que inicia k6; image ID/índice/headers/contadores verificam estado real. Os 8 summaries, terminais, planos, métricas e recursos estão na [pasta matriz](evidencias/hardening-a-20261108/matriz).
+
+Latências em ms. I=índice composto, C=cache. N é a quantidade de amostras **por rota** (uma chamada por iteração, confirmada pelo count exportado). HTTP é o total das duas rotas. p50=mediana.
+
+| Rodada | I/C | Pedidos p50 | p95 | p99 | Máx. | Catálogo p50 | p95 | p99 | Máx. | N/rota | HTTP | req/s |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 0/0 | 49,20 | 95,99 | 125,57 | 172,31 | 2,77 | 9,97 | 16,50 | 35,99 | 1554 | 3108 | 88,67 |
+| 1 | 1/0 | 2,91 | 6,55 | 9,77 | 47,36 | 3,64 | 7,74 | 10,40 | 20,11 | 2278 | 4556 | 130,08 |
+| 1 | 0/1 | 42,83 | 90,38 | 139,62 | 294,42 | 0,93 | 4,37 | 10,63 | 27,59 | 1627 | 3254 | 92,98 |
+| 1 | 1/1 | 2,79 | 5,33 | 8,82 | 35,49 | 1,26 | 3,02 | 5,87 | 9,14 | 2340 | 4680 | 133,69 |
+| 2 | 1/1 | 2,95 | 5,92 | 10,41 | 47,80 | 1,32 | 3,36 | 6,50 | 16,14 | 2332 | 4664 | 133,14 |
+| 2 | 0/1 | 46,57 | 98,30 | 142,62 | 274,14 | 0,98 | 5,12 | 9,63 | 23,09 | 1596 | 3192 | 90,98 |
+| 2 | 1/0 | 2,81 | 6,02 | 11,38 | 45,37 | 3,50 | 7,88 | 12,95 | 51,72 | 2282 | 4564 | 130,14 |
+| 2 | 0/0 | 46,24 | 95,64 | 142,30 | 305,33 | 2,69 | 10,37 | 23,63 | 101,36 | 1572 | 3144 | 89,82 |
+
+Todas as oito execuções: **PASSOU**, zero erros HTTP, 100% checks, p95 <500 ms em ambas as rotas e exit 0. Nenhum pedido/catálogo excedeu 500 ms; máximo da matriz de pedidos 305,33 ms. Não houve novo slow trace para capturar. O trace real de 15 spans do fluxo de pagamento foi obtido separadamente no ciclo completo, não de uma requisição lenta da matriz. O teste suplementar do log lento usa tempo **sintético** 600 ms em VM e não é benchmark/HTTP real.
+
+Resultados descritivos coerentes com os planos e contadores: pedidos sem índice p95 90,38–98,30 ms; com índice 5,33–6,55 ms. Catálogo sem cache p95 7,74–10,37 ms; com cache 3,02–5,12 ms. Esses intervalos são mínimo/máximo dos p95 observados, não percentis combinados. Não calcular média de p95 como percentil global. Cada mudança também altera o ritmo da carga fechada; não há estimativa percentual causal isolada ou capacidade máxima.
+
+### Recursos, restauração e limitações
+
+Foram coletadas cinco amostras Docker/PG por execução, 40 no total, incluindo k6 quando já ativo. Pausa nominal de 5 s entre coletas; duração dos comandos aumenta o intervalo efetivo. Os NDJSON preservam CPU, memória, sessões, sessões bloqueadas, locks aguardando e jobs READY. CPU Docker pode exceder 100% por processo multicore. Nenhuma sessão bloqueada foi observada nessas amostras; isso não exclui locks transitórios fora dos instantes coletados. GC, espera específica do pool e escalonamento do host não foram instrumentados. Nenhuma causa do pico antigo pode ser inferida dessas novas séries.
+
+O runner verificou a restauração do índice e de cache=true, payments=true, APP_ENV=development, logLevel=info. Fingerprints de dados ficaram iguais. Depois da matriz, a demonstração manual criou mais um produto/pedido/pagamento; a contagem posterior 5.002 produtos não é drift durante o benchmark. O ambiente auxiliar foi encerrado com `docker compose down`, preservando o volume. Serviços originais A/B continuaram separados.
+
+Duas repetições curtas no mesmo computador, sem randomização completa, host dedicado ou intervalo estatístico de confiança. Ordem inversa reduz dependência de ordem, não elimina ruído. Instrumentação tem overhead em todos os cenários. O ensaio não demonstrou o pico histórico novamente e não prova ausência de caudas longas em outras condições. Nenhuma nova otimização de negócio foi feita.
+
+### Reprodução segura da matriz
+
+Usar clone dedicado, `.env` com senha nova, portas próprias e COMPOSE_PROJECT_NAME=fullcycle-a-benchmark-<identificador>. Preparar `npm run env:init`, ajustar configuração, subir `docker compose up --build -d --wait` e executar separadamente `docker compose exec -T app node scripts/seed.mjs`. Conferir que é base descartável isolada. Então, `BENCHMARK_ISOLATED=true` no ambiente e `node scripts/benchmark-matrix.mjs` (sintaxe PowerShell no README). O runner recusa a instalação padrão e diretório de saída existente. Ele altera o índice do banco indicado e recria app; não usar com dados importantes. Não executa seed nem exclui dados/volumes. Rodadas e caminho podem ser definidos em BENCHMARK_ROUNDS/BENCHMARK_OUTPUT; preservar resultados anteriores.

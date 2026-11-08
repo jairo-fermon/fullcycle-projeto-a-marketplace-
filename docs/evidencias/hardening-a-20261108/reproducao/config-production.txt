@@ -1,0 +1,6 @@
+startedAt=2026-11-08T18:50:54.882Z
+command=["docker","compose","exec","-T","app","node","-e","console.log(JSON.stringify({APP_ENV:process.env.APP_ENV,LOG_LEVEL:process.env.LOG_LEVEL,PAYMENT_PROCESSING_ENABLED:process.env.PAYMENT_PROCESSING_ENABLED}))"]
+configuration={}
+{"APP_ENV":"production","LOG_LEVEL":"warn","PAYMENT_PROCESSING_ENABLED":"false"}
+
+exitCode=0

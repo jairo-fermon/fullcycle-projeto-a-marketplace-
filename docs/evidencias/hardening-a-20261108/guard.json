@@ -1,0 +1,12 @@
+{
+  "collectedAt": "2026-11-08T18:53:48.413648+00:00",
+  "command": [
+    "node",
+    "scripts/benchmark-matrix.mjs"
+  ],
+  "environment": "instalacao original, sem BENCHMARK_ISOLATED",
+  "exitCode": 1,
+  "expectedRefusal": true,
+  "noDockerCommandExecuted": true,
+  "status": "PASSOU"
+}

@@ -1,0 +1,159 @@
+{
+  "startedAt": "2026-11-08T19:02:10.9203050Z",
+  "timeZone": "America/Sao_Paulo",
+  "command": "pwsh -NoProfile -File verificar-readme.ps1",
+  "checkout": "C:\\Users\\ELIELETRO\\Desktop\\ChatGPT\\fullcycle-projeto-a-marketplace\\tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-",
+  "projectName": "fullcycle-a-hardening-20261108",
+  "addressAdaptation": "PORT=3003 e JAEGER_PORT=16689, isolados; README padrao usa 3001/16687",
+  "checks": [
+    {
+      "output": "\r\n> fullcycle-projeto-a-marketplace@1.0.0 env:init\r\n> node scripts/init-env.mjs\r\n\r\n.env existente preservado.\r\n",
+      "name": "env:init preserva configuracao",
+      "status": "PASSOU"
+    },
+    {
+      "productStatus": 201,
+      "name": "exemplo PowerShell do README",
+      "paid": {
+        "id": "a0148911-67c9-4745-8ae0-f3fc2b595012",
+        "status": "PAID",
+        "totalCents": 3000,
+        "createdAt": "2026-11-08T19:02:12.771Z",
+        "paymentReference": "1e5b6d64-f1b3-4b80-a48b-d6dd3a5e977e",
+        "items": [
+          {
+            "productId": "55e8fb60-5e2e-4fb8-8417-04b2e7c2e5df",
+            "sku": "DEMO-077a5f8b-6c09-474b-9520-22c4bcca3eb4",
+            "quantity": 2,
+            "unitPriceCents": 1500
+          }
+        ]
+      },
+      "orderStatus": 201,
+      "status": "PASSOU",
+      "payment": {
+        "id": "1e5b6d64-f1b3-4b80-a48b-d6dd3a5e977e",
+        "orderId": "a0148911-67c9-4745-8ae0-f3fc2b595012",
+        "idempotencyKey": "39d6a8dd-c32a-49b3-98c7-4ad45e78fa8c",
+        "amountCents": 3000,
+        "outcome": "approve",
+        "status": "SUCCEEDED",
+        "createdAt": "2026-11-08T19:02:12.801Z",
+        "processedAt": "2026-11-08T19:02:12.92Z",
+        "deliveries": 1
+      },
+      "attemptStatus": 202,
+      "replayStatus": 200,
+      "order": {
+        "id": "a0148911-67c9-4745-8ae0-f3fc2b595012",
+        "status": "PENDING",
+        "totalCents": 3000,
+        "createdAt": "2026-11-08T19:02:12.771Z",
+        "paymentReference": null,
+        "items": [
+          {
+            "quantity": 2,
+            "productId": "55e8fb60-5e2e-4fb8-8417-04b2e7c2e5df",
+            "sku": "DEMO-077a5f8b-6c09-474b-9520-22c4bcca3eb4",
+            "unitPriceCents": 1500
+          }
+        ]
+      },
+      "product": {
+        "sku": "DEMO-077a5f8b-6c09-474b-9520-22c4bcca3eb4",
+        "category": "geral",
+        "name": "Produto de demonstracao",
+        "unitPriceCents": 1500,
+        "id": "55e8fb60-5e2e-4fb8-8417-04b2e7c2e5df",
+        "createdAt": "2026-11-08T19:02:12.738Z"
+      }
+    },
+    {
+      "expected": 400,
+      "body": "{\"error\":{\"code\":\"INVALID_INPUT\",\"message\":\"Requisição inválida.\",\"requestId\":\"53e09cd0-1362-41b5-8894-750afb45b4f1\"}}",
+      "name": "/orders/invalido",
+      "status": "PASSOU",
+      "actual": 400
+    },
+    {
+      "expected": 404,
+      "body": "{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"Pedido não encontrado.\",\"requestId\":\"4444ab2a-3793-45c7-bb12-80b534e0bfbe\"}}",
+      "name": "/orders/00000000-0000-4000-8000-000000000000",
+      "status": "PASSOU",
+      "actual": 404
+    },
+    {
+      "body": "{\"error\":{\"code\":\"CONFLICT\",\"message\":\"Chave de idempotência usada com outra solicitação.\",\"requestId\":\"f644cc23-6928-4f2e-930d-f522d7e4b51e\"}}",
+      "name": "mesma chave com payload diferente",
+      "status": "PASSOU",
+      "actual": 409
+    },
+    {
+      "second": "hit",
+      "first": "miss",
+      "name": "cache apos invalidacao por cadastro",
+      "status": "PASSOU"
+    },
+    {
+      "status": "PASSOU",
+      "name": "metricas RED e rota normalizada"
+    },
+    {
+      "waitOutput": " Container fullcycle-a-hardening-20261108-jaeger-1  Running\r\n Container fullcycle-a-hardening-20261108-db-1  Running\r\n Container fullcycle-a-hardening-20261108-app-1  Recreate\r\n Container fullcycle-a-hardening-20261108-app-1  Recreated\r\n Container fullcycle-a-hardening-20261108-db-1  Waiting\r\n Container fullcycle-a-hardening-20261108-db-1  Healthy\r\n Container fullcycle-a-hardening-20261108-app-1  Starting\r\n Container fullcycle-a-hardening-20261108-app-1  Started\r\n Container fullcycle-a-hardening-20261108-jaeger-1  Waiting\r\n Container fullcycle-a-hardening-20261108-app-1  Waiting\r\n Container fullcycle-a-hardening-20261108-db-1  Waiting\r\n Container fullcycle-a-hardening-20261108-jaeger-1  Healthy\r\n Container fullcycle-a-hardening-20261108-db-1  Healthy\r\n Container fullcycle-a-hardening-20261108-app-1  Healthy\r\n",
+      "name": "persistencia apos reiniciar app",
+      "before": {
+        "id": "a0148911-67c9-4745-8ae0-f3fc2b595012",
+        "status": "PAID",
+        "totalCents": 3000,
+        "createdAt": "2026-11-08T19:02:12.771Z",
+        "paymentReference": "1e5b6d64-f1b3-4b80-a48b-d6dd3a5e977e",
+        "items": [
+          {
+            "productId": "55e8fb60-5e2e-4fb8-8417-04b2e7c2e5df",
+            "sku": "DEMO-077a5f8b-6c09-474b-9520-22c4bcca3eb4",
+            "quantity": 2,
+            "unitPriceCents": 1500
+          }
+        ]
+      },
+      "containerBefore": "d52b072bb5c6284e983859636b52994209a54936d1f82ed138274dbaa677a4d4",
+      "after": {
+        "id": "a0148911-67c9-4745-8ae0-f3fc2b595012",
+        "status": "PAID",
+        "totalCents": 3000,
+        "createdAt": "2026-11-08T19:02:12.771Z",
+        "paymentReference": "1e5b6d64-f1b3-4b80-a48b-d6dd3a5e977e",
+        "items": [
+          {
+            "productId": "55e8fb60-5e2e-4fb8-8417-04b2e7c2e5df",
+            "sku": "DEMO-077a5f8b-6c09-474b-9520-22c4bcca3eb4",
+            "quantity": 2,
+            "unitPriceCents": 1500
+          }
+        ]
+      },
+      "status": "PASSOU",
+      "containerAfterRestart": "d52b072bb5c6284e983859636b52994209a54936d1f82ed138274dbaa677a4d4",
+      "afterRestartBeforeUp": {
+        "id": "a0148911-67c9-4745-8ae0-f3fc2b595012",
+        "status": "PAID",
+        "totalCents": 3000,
+        "createdAt": "2026-11-08T19:02:12.771Z",
+        "paymentReference": "1e5b6d64-f1b3-4b80-a48b-d6dd3a5e977e",
+        "items": [
+          {
+            "productId": "55e8fb60-5e2e-4fb8-8417-04b2e7c2e5df",
+            "sku": "DEMO-077a5f8b-6c09-474b-9520-22c4bcca3eb4",
+            "quantity": 2,
+            "unitPriceCents": 1500
+          }
+        ]
+      },
+      "restartOutput": " Container fullcycle-a-hardening-20261108-app-1  Restarting\r\n Container fullcycle-a-hardening-20261108-app-1  Started\r\n"
+    }
+  ],
+  "orderId": "a0148911-67c9-4745-8ae0-f3fc2b595012",
+  "paymentId": "1e5b6d64-f1b3-4b80-a48b-d6dd3a5e977e",
+  "status": "PASSOU",
+  "finishedAt": "2026-11-08T19:02:22.4740126Z"
+}

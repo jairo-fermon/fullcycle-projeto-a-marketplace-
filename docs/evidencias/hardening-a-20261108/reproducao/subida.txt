@@ -1,0 +1,96 @@
+startedAt=2026-11-08T18:49:44.745Z
+command=["docker","compose","up","--build","-d","--wait"]
+configuration={}
+#1 [internal] load local bake definitions
+#1 reading from stdin 774B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 566B done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/node:24.22.2-bookworm-slim
+#3 DONE 0.9s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 94B done
+#4 DONE 0.1s
+
+#5 [dependencies 1/4] FROM docker.io/library/node:24.22.2-bookworm-slim@sha256:01d566e8d94d8c619591d78652babfccd3c6992a3dffa9ed5ab39e11cf6c70e9
+#5 resolve docker.io/library/node:24.22.2-bookworm-slim@sha256:01d566e8d94d8c619591d78652babfccd3c6992a3dffa9ed5ab39e11cf6c70e9 0.1s done
+#5 DONE 0.1s
+
+#6 [internal] load build context
+#6 transferring context: 226.60kB 0.0s done
+#6 DONE 0.2s
+
+#7 [runtime 5/7] COPY --from=build /app/dist ./dist
+#7 CACHED
+
+#8 [runtime 6/7] COPY migrations ./migrations
+#8 CACHED
+
+#9 [dependencies 2/4] WORKDIR /app
+#9 CACHED
+
+#10 [dependencies 3/4] COPY package*.json ./
+#10 CACHED
+
+#11 [dependencies 4/4] RUN npm ci
+#11 CACHED
+
+#12 [build 1/3] COPY tsconfig.json ./
+#12 CACHED
+
+#13 [runtime 4/7] RUN npm ci --omit=dev
+#13 CACHED
+
+#14 [build 2/3] COPY src ./src
+#14 CACHED
+
+#15 [build 3/3] RUN npm run build
+#15 CACHED
+
+#16 [runtime 7/7] COPY scripts ./scripts
+#16 CACHED
+
+#17 exporting to image
+#17 exporting layers done
+#17 exporting manifest sha256:8956bdccb65f3a95bd82e55c1321af207176180faad8282a7576f0539fbae5ee 0.1s done
+#17 exporting config sha256:e06d1a8a8e14b5ef10d748cf26fe407c8087ca80443631b1ae1b4a43f905191f 0.1s done
+#17 exporting attestation manifest sha256:fd38c6ec72dbcee4ae5f7e323062867368ed8586d89672920b7e0042175fb45f 0.1s done
+#17 exporting manifest list sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b
+#17 exporting manifest list sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b 0.1s done
+#17 naming to docker.io/library/fullcycle-a-marketplace-app:local 0.0s done
+#17 unpacking to docker.io/library/fullcycle-a-marketplace-app:local 0.0s done
+#17 DONE 0.5s
+
+#18 resolving provenance for metadata file
+#18 DONE 0.0s
+ fullcycle-a-marketplace-app:local  Built
+ Network fullcycle-a-hardening-20261108_default  Creating
+ Network fullcycle-a-hardening-20261108_default  Created
+ Volume fullcycle-a-hardening-20261108_marketplace-data  Creating
+ Volume fullcycle-a-hardening-20261108_marketplace-data  Created
+ Container fullcycle-a-hardening-20261108-jaeger-1  Creating
+ Container fullcycle-a-hardening-20261108-db-1  Creating
+ Container fullcycle-a-hardening-20261108-jaeger-1  Created
+ Container fullcycle-a-hardening-20261108-db-1  Created
+ Container fullcycle-a-hardening-20261108-app-1  Creating
+ Container fullcycle-a-hardening-20261108-app-1  Created
+ Container fullcycle-a-hardening-20261108-jaeger-1  Starting
+ Container fullcycle-a-hardening-20261108-db-1  Starting
+ Container fullcycle-a-hardening-20261108-db-1  Started
+ Container fullcycle-a-hardening-20261108-jaeger-1  Started
+ Container fullcycle-a-hardening-20261108-db-1  Waiting
+ Container fullcycle-a-hardening-20261108-db-1  Healthy
+ Container fullcycle-a-hardening-20261108-app-1  Starting
+ Container fullcycle-a-hardening-20261108-app-1  Started
+ Container fullcycle-a-hardening-20261108-app-1  Waiting
+ Container fullcycle-a-hardening-20261108-db-1  Waiting
+ Container fullcycle-a-hardening-20261108-jaeger-1  Waiting
+ Container fullcycle-a-hardening-20261108-db-1  Healthy
+ Container fullcycle-a-hardening-20261108-jaeger-1  Healthy
+ Container fullcycle-a-hardening-20261108-app-1  Healthy
+
+exitCode=0

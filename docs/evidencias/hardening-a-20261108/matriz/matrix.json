@@ -1,0 +1,1660 @@
+{
+  "startedAt": "2026-11-08T18:55:15.537Z",
+  "timeZone": "America/Sao_Paulo",
+  "sourceCommit": "ca2ade99c6c9c6b6be541fad59ad5aee7b77b831",
+  "project": "fullcycle-a-hardening-20261108",
+  "port": "3003",
+  "jaegerPort": "16689",
+  "rounds": 2,
+  "host": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "cpu": "11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz",
+    "logicalCpus": 8,
+    "memoryBytes": 16893386752
+  },
+  "scriptSha256": {
+    "scripts/k6-load.js": "eba72b2c54eb47260f7de55bcc23c05a420c33185a742c23fbbfc8ff1f3446e0",
+    "scripts/benchmark-matrix.mjs": "569bfda260889f3cf7d0c0c25cfcc59b774d940bbffe9f23de455df41995abd7"
+  },
+  "stages": [
+    {
+      "duration": "10s",
+      "target": 5
+    },
+    {
+      "duration": "15s",
+      "target": 15
+    },
+    {
+      "duration": "10s",
+      "target": 0
+    }
+  ],
+  "warmupRequestsPerRoute": 10,
+  "monitorIntervalMs": 5000,
+  "checks": [
+    {
+      "name": "docker-resources",
+      "startedAt": "2026-11-08T18:55:15.649Z",
+      "finishedAt": "2026-11-08T18:55:17.438Z",
+      "command": [
+        "docker",
+        "info",
+        "--format",
+        "CPUs={{.NCPU}} MemoryBytes={{.MemTotal}} OS={{.OperatingSystem}}"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "app-container",
+      "startedAt": "2026-11-08T18:55:17.439Z",
+      "finishedAt": "2026-11-08T18:55:18.083Z",
+      "command": [
+        "docker",
+        "compose",
+        "ps",
+        "-q",
+        "app"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "app-image-id",
+      "startedAt": "2026-11-08T18:55:18.090Z",
+      "finishedAt": "2026-11-08T18:55:18.352Z",
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{.Image}}",
+        "368597d40599bd14651459e90df89ba08e5861cfbd6c35809239b7ca51d391b6"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "app-image-reference",
+      "startedAt": "2026-11-08T18:55:18.354Z",
+      "finishedAt": "2026-11-08T18:55:18.624Z",
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{.Config.Image}}",
+        "368597d40599bd14651459e90df89ba08e5861cfbd6c35809239b7ca51d391b6"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "app-config",
+      "startedAt": "2026-11-08T18:55:18.626Z",
+      "finishedAt": "2026-11-08T18:55:19.501Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "-e",
+        "console.log(JSON.stringify({cache:process.env.CATALOG_CACHE_ENABLED,payments:process.env.PAYMENT_PROCESSING_ENABLED,appEnv:process.env.APP_ENV,logLevel:process.env.LOG_LEVEL}))"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "index-original",
+      "startedAt": "2026-11-08T18:55:19.503Z",
+      "finishedAt": "2026-11-08T18:55:20.212Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "sh",
+        "-c",
+        "psql -X -tA -v ON_ERROR_STOP=1 -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c 'SELECT to_regclass('\\''orders.orders_status_created_id_idx'\\'') IS NOT NULL;'"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "dataset-before",
+      "startedAt": "2026-11-08T18:55:20.214Z",
+      "finishedAt": "2026-11-08T18:55:21.183Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "sh",
+        "-c",
+        "psql -X -tA -v ON_ERROR_STOP=1 -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c 'SELECT json_build_object('\\''orders'\\'',count(*),'\\''syntheticOrders'\\'',count(*) FILTER(WHERE origin='\\''synthetic_seed'\\''),'\\''orderFingerprint'\\'',md5(string_agg(id::text||status||total_cents::text||created_at::text,'\\'','\\'' ORDER BY id)),'\\''products'\\'',(SELECT count(*) FROM catalog.products),'\\''productFingerprint'\\'',(SELECT md5(string_agg(id::text||sku||category||unit_price_cents::text,'\\'','\\'' ORDER BY id)) FROM catalog.products)) FROM orders.orders;'"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index0-cache0-plan",
+      "startedAt": "2026-11-08T18:55:21.191Z",
+      "finishedAt": "2026-11-08T18:55:22.519Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "scripts/optimize.mjs",
+        "baseline"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index0-cache0-configure",
+      "startedAt": "2026-11-08T18:55:22.522Z",
+      "finishedAt": "2026-11-08T18:55:28.651Z",
+      "command": [
+        "docker",
+        "compose",
+        "up",
+        "--no-build",
+        "--force-recreate",
+        "-d",
+        "--wait",
+        "app"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "false",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index0-cache0-container",
+      "startedAt": "2026-11-08T18:55:28.652Z",
+      "finishedAt": "2026-11-08T18:55:29.363Z",
+      "command": [
+        "docker",
+        "compose",
+        "ps",
+        "-q",
+        "app"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index0-cache0-image",
+      "startedAt": "2026-11-08T18:55:29.365Z",
+      "finishedAt": "2026-11-08T18:55:29.636Z",
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{.Image}}",
+        "a9fec7f25008a371cc015a216276ee18f78f45a7ff1962e7446b2b03e784bb02"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index0-cache0-index",
+      "startedAt": "2026-11-08T18:55:29.641Z",
+      "finishedAt": "2026-11-08T18:55:30.454Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "sh",
+        "-c",
+        "psql -X -tA -v ON_ERROR_STOP=1 -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c 'SELECT to_regclass('\\''orders.orders_status_created_id_idx'\\'') IS NOT NULL;'"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index0-cache0-k6",
+      "startedAt": "2026-11-08T18:55:31.165Z",
+      "finishedAt": "2026-11-08T18:56:09.472Z",
+      "command": [
+        "docker",
+        "compose",
+        "--profile",
+        "tools",
+        "run",
+        "--rm",
+        "-e",
+        "BENCHMARK_CASE=index0-cache0",
+        "-e",
+        "BENCHMARK_ROUND=1",
+        "k6",
+        "run",
+        "--log-format=json",
+        "--summary-export=/results/k6-summary.json",
+        "/scripts/load.js"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "false",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index1-cache0-plan",
+      "startedAt": "2026-11-08T18:56:10.664Z",
+      "finishedAt": "2026-11-08T18:56:12.076Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "scripts/optimize.mjs",
+        "optimized"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index1-cache0-configure",
+      "startedAt": "2026-11-08T18:56:12.078Z",
+      "finishedAt": "2026-11-08T18:56:18.250Z",
+      "command": [
+        "docker",
+        "compose",
+        "up",
+        "--no-build",
+        "--force-recreate",
+        "-d",
+        "--wait",
+        "app"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "false",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index1-cache0-container",
+      "startedAt": "2026-11-08T18:56:18.252Z",
+      "finishedAt": "2026-11-08T18:56:18.932Z",
+      "command": [
+        "docker",
+        "compose",
+        "ps",
+        "-q",
+        "app"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index1-cache0-image",
+      "startedAt": "2026-11-08T18:56:18.934Z",
+      "finishedAt": "2026-11-08T18:56:19.186Z",
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{.Image}}",
+        "3df34315ba070425c8e089855a1a292b6548fedf0905c844498fd157d1436407"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index1-cache0-index",
+      "startedAt": "2026-11-08T18:56:19.193Z",
+      "finishedAt": "2026-11-08T18:56:20.004Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "sh",
+        "-c",
+        "psql -X -tA -v ON_ERROR_STOP=1 -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c 'SELECT to_regclass('\\''orders.orders_status_created_id_idx'\\'') IS NOT NULL;'"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index1-cache0-k6",
+      "startedAt": "2026-11-08T18:56:20.340Z",
+      "finishedAt": "2026-11-08T18:56:58.692Z",
+      "command": [
+        "docker",
+        "compose",
+        "--profile",
+        "tools",
+        "run",
+        "--rm",
+        "-e",
+        "BENCHMARK_CASE=index1-cache0",
+        "-e",
+        "BENCHMARK_ROUND=1",
+        "k6",
+        "run",
+        "--log-format=json",
+        "--summary-export=/results/k6-summary.json",
+        "/scripts/load.js"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "false",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index0-cache1-plan",
+      "startedAt": "2026-11-08T18:56:59.643Z",
+      "finishedAt": "2026-11-08T18:57:00.841Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "scripts/optimize.mjs",
+        "baseline"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index0-cache1-configure",
+      "startedAt": "2026-11-08T18:57:00.848Z",
+      "finishedAt": "2026-11-08T18:57:07.090Z",
+      "command": [
+        "docker",
+        "compose",
+        "up",
+        "--no-build",
+        "--force-recreate",
+        "-d",
+        "--wait",
+        "app"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "true",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index0-cache1-container",
+      "startedAt": "2026-11-08T18:57:07.097Z",
+      "finishedAt": "2026-11-08T18:57:07.809Z",
+      "command": [
+        "docker",
+        "compose",
+        "ps",
+        "-q",
+        "app"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index0-cache1-image",
+      "startedAt": "2026-11-08T18:57:07.811Z",
+      "finishedAt": "2026-11-08T18:57:08.070Z",
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{.Image}}",
+        "1a815ec1ceb20fdb5849dbafd28143f92c316a5653a779d5c4a9ae47fea4714b"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index0-cache1-index",
+      "startedAt": "2026-11-08T18:57:08.077Z",
+      "finishedAt": "2026-11-08T18:57:08.838Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "sh",
+        "-c",
+        "psql -X -tA -v ON_ERROR_STOP=1 -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c 'SELECT to_regclass('\\''orders.orders_status_created_id_idx'\\'') IS NOT NULL;'"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index0-cache1-k6",
+      "startedAt": "2026-11-08T18:57:09.320Z",
+      "finishedAt": "2026-11-08T18:57:47.621Z",
+      "command": [
+        "docker",
+        "compose",
+        "--profile",
+        "tools",
+        "run",
+        "--rm",
+        "-e",
+        "BENCHMARK_CASE=index0-cache1",
+        "-e",
+        "BENCHMARK_ROUND=1",
+        "k6",
+        "run",
+        "--log-format=json",
+        "--summary-export=/results/k6-summary.json",
+        "/scripts/load.js"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "true",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index1-cache1-plan",
+      "startedAt": "2026-11-08T18:57:48.533Z",
+      "finishedAt": "2026-11-08T18:57:50.042Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "scripts/optimize.mjs",
+        "optimized"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index1-cache1-configure",
+      "startedAt": "2026-11-08T18:57:50.044Z",
+      "finishedAt": "2026-11-08T18:57:56.284Z",
+      "command": [
+        "docker",
+        "compose",
+        "up",
+        "--no-build",
+        "--force-recreate",
+        "-d",
+        "--wait",
+        "app"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "true",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index1-cache1-container",
+      "startedAt": "2026-11-08T18:57:56.285Z",
+      "finishedAt": "2026-11-08T18:57:56.970Z",
+      "command": [
+        "docker",
+        "compose",
+        "ps",
+        "-q",
+        "app"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index1-cache1-image",
+      "startedAt": "2026-11-08T18:57:56.977Z",
+      "finishedAt": "2026-11-08T18:57:57.221Z",
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{.Image}}",
+        "515da847daefed8f3247cd70848338267985342412aacc6b0d60ab6c3426d25d"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index1-cache1-index",
+      "startedAt": "2026-11-08T18:57:57.228Z",
+      "finishedAt": "2026-11-08T18:57:58.020Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "sh",
+        "-c",
+        "psql -X -tA -v ON_ERROR_STOP=1 -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c 'SELECT to_regclass('\\''orders.orders_status_created_id_idx'\\'') IS NOT NULL;'"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r1-index1-cache1-k6",
+      "startedAt": "2026-11-08T18:57:58.286Z",
+      "finishedAt": "2026-11-08T18:58:36.682Z",
+      "command": [
+        "docker",
+        "compose",
+        "--profile",
+        "tools",
+        "run",
+        "--rm",
+        "-e",
+        "BENCHMARK_CASE=index1-cache1",
+        "-e",
+        "BENCHMARK_ROUND=1",
+        "k6",
+        "run",
+        "--log-format=json",
+        "--summary-export=/results/k6-summary.json",
+        "/scripts/load.js"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "true",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index1-cache1-plan",
+      "startedAt": "2026-11-08T18:58:37.678Z",
+      "finishedAt": "2026-11-08T18:58:38.962Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "scripts/optimize.mjs",
+        "optimized"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index1-cache1-configure",
+      "startedAt": "2026-11-08T18:58:38.964Z",
+      "finishedAt": "2026-11-08T18:58:44.861Z",
+      "command": [
+        "docker",
+        "compose",
+        "up",
+        "--no-build",
+        "--force-recreate",
+        "-d",
+        "--wait",
+        "app"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "true",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index1-cache1-container",
+      "startedAt": "2026-11-08T18:58:44.867Z",
+      "finishedAt": "2026-11-08T18:58:45.557Z",
+      "command": [
+        "docker",
+        "compose",
+        "ps",
+        "-q",
+        "app"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index1-cache1-image",
+      "startedAt": "2026-11-08T18:58:45.564Z",
+      "finishedAt": "2026-11-08T18:58:45.839Z",
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{.Image}}",
+        "32994c440028debb024eafef8f523f90b9605cc62cf33f5dfc3c310e4f8d7cb4"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index1-cache1-index",
+      "startedAt": "2026-11-08T18:58:45.845Z",
+      "finishedAt": "2026-11-08T18:58:46.622Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "sh",
+        "-c",
+        "psql -X -tA -v ON_ERROR_STOP=1 -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c 'SELECT to_regclass('\\''orders.orders_status_created_id_idx'\\'') IS NOT NULL;'"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index1-cache1-k6",
+      "startedAt": "2026-11-08T18:58:46.976Z",
+      "finishedAt": "2026-11-08T18:59:25.476Z",
+      "command": [
+        "docker",
+        "compose",
+        "--profile",
+        "tools",
+        "run",
+        "--rm",
+        "-e",
+        "BENCHMARK_CASE=index1-cache1",
+        "-e",
+        "BENCHMARK_ROUND=2",
+        "k6",
+        "run",
+        "--log-format=json",
+        "--summary-export=/results/k6-summary.json",
+        "/scripts/load.js"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "true",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index0-cache1-plan",
+      "startedAt": "2026-11-08T18:59:26.519Z",
+      "finishedAt": "2026-11-08T18:59:27.839Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "scripts/optimize.mjs",
+        "baseline"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index0-cache1-configure",
+      "startedAt": "2026-11-08T18:59:27.845Z",
+      "finishedAt": "2026-11-08T18:59:34.014Z",
+      "command": [
+        "docker",
+        "compose",
+        "up",
+        "--no-build",
+        "--force-recreate",
+        "-d",
+        "--wait",
+        "app"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "true",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index0-cache1-container",
+      "startedAt": "2026-11-08T18:59:34.027Z",
+      "finishedAt": "2026-11-08T18:59:34.718Z",
+      "command": [
+        "docker",
+        "compose",
+        "ps",
+        "-q",
+        "app"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index0-cache1-image",
+      "startedAt": "2026-11-08T18:59:34.720Z",
+      "finishedAt": "2026-11-08T18:59:34.984Z",
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{.Image}}",
+        "aee618648c3f526456c7dc73d12e43244fe61e09eedcab1edf982a900cf7fb8f"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index0-cache1-index",
+      "startedAt": "2026-11-08T18:59:34.987Z",
+      "finishedAt": "2026-11-08T18:59:35.739Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "sh",
+        "-c",
+        "psql -X -tA -v ON_ERROR_STOP=1 -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c 'SELECT to_regclass('\\''orders.orders_status_created_id_idx'\\'') IS NOT NULL;'"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index0-cache1-k6",
+      "startedAt": "2026-11-08T18:59:36.258Z",
+      "finishedAt": "2026-11-08T19:00:14.399Z",
+      "command": [
+        "docker",
+        "compose",
+        "--profile",
+        "tools",
+        "run",
+        "--rm",
+        "-e",
+        "BENCHMARK_CASE=index0-cache1",
+        "-e",
+        "BENCHMARK_ROUND=2",
+        "k6",
+        "run",
+        "--log-format=json",
+        "--summary-export=/results/k6-summary.json",
+        "/scripts/load.js"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "true",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index1-cache0-plan",
+      "startedAt": "2026-11-08T19:00:15.682Z",
+      "finishedAt": "2026-11-08T19:00:17.129Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "scripts/optimize.mjs",
+        "optimized"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index1-cache0-configure",
+      "startedAt": "2026-11-08T19:00:17.131Z",
+      "finishedAt": "2026-11-08T19:00:22.990Z",
+      "command": [
+        "docker",
+        "compose",
+        "up",
+        "--no-build",
+        "--force-recreate",
+        "-d",
+        "--wait",
+        "app"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "false",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index1-cache0-container",
+      "startedAt": "2026-11-08T19:00:22.991Z",
+      "finishedAt": "2026-11-08T19:00:23.607Z",
+      "command": [
+        "docker",
+        "compose",
+        "ps",
+        "-q",
+        "app"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index1-cache0-image",
+      "startedAt": "2026-11-08T19:00:23.613Z",
+      "finishedAt": "2026-11-08T19:00:23.863Z",
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{.Image}}",
+        "8b0da12489ab131d6578dca9477dc4b202bee91da8918b24845e538f42d6977b"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index1-cache0-index",
+      "startedAt": "2026-11-08T19:00:23.870Z",
+      "finishedAt": "2026-11-08T19:00:24.659Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "sh",
+        "-c",
+        "psql -X -tA -v ON_ERROR_STOP=1 -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c 'SELECT to_regclass('\\''orders.orders_status_created_id_idx'\\'') IS NOT NULL;'"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index1-cache0-k6",
+      "startedAt": "2026-11-08T19:00:24.960Z",
+      "finishedAt": "2026-11-08T19:01:03.436Z",
+      "command": [
+        "docker",
+        "compose",
+        "--profile",
+        "tools",
+        "run",
+        "--rm",
+        "-e",
+        "BENCHMARK_CASE=index1-cache0",
+        "-e",
+        "BENCHMARK_ROUND=2",
+        "k6",
+        "run",
+        "--log-format=json",
+        "--summary-export=/results/k6-summary.json",
+        "/scripts/load.js"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "false",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index0-cache0-plan",
+      "startedAt": "2026-11-08T19:01:04.467Z",
+      "finishedAt": "2026-11-08T19:01:05.573Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "scripts/optimize.mjs",
+        "baseline"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index0-cache0-configure",
+      "startedAt": "2026-11-08T19:01:05.575Z",
+      "finishedAt": "2026-11-08T19:01:11.687Z",
+      "command": [
+        "docker",
+        "compose",
+        "up",
+        "--no-build",
+        "--force-recreate",
+        "-d",
+        "--wait",
+        "app"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "false",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index0-cache0-container",
+      "startedAt": "2026-11-08T19:01:11.689Z",
+      "finishedAt": "2026-11-08T19:01:12.373Z",
+      "command": [
+        "docker",
+        "compose",
+        "ps",
+        "-q",
+        "app"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index0-cache0-image",
+      "startedAt": "2026-11-08T19:01:12.380Z",
+      "finishedAt": "2026-11-08T19:01:12.662Z",
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{.Image}}",
+        "0ffeedee399847b417cb41bfcd70c0ac341b27994431fe31bc6dad89c9802338"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index0-cache0-index",
+      "startedAt": "2026-11-08T19:01:12.670Z",
+      "finishedAt": "2026-11-08T19:01:13.436Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "sh",
+        "-c",
+        "psql -X -tA -v ON_ERROR_STOP=1 -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c 'SELECT to_regclass('\\''orders.orders_status_created_id_idx'\\'') IS NOT NULL;'"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "r2-index0-cache0-k6",
+      "startedAt": "2026-11-08T19:01:13.994Z",
+      "finishedAt": "2026-11-08T19:01:52.338Z",
+      "command": [
+        "docker",
+        "compose",
+        "--profile",
+        "tools",
+        "run",
+        "--rm",
+        "-e",
+        "BENCHMARK_CASE=index0-cache0",
+        "-e",
+        "BENCHMARK_ROUND=2",
+        "k6",
+        "run",
+        "--log-format=json",
+        "--summary-export=/results/k6-summary.json",
+        "/scripts/load.js"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "false",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "dataset-after",
+      "startedAt": "2026-11-08T19:01:53.403Z",
+      "finishedAt": "2026-11-08T19:01:54.328Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "sh",
+        "-c",
+        "psql -X -tA -v ON_ERROR_STOP=1 -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c 'SELECT json_build_object('\\''orders'\\'',count(*),'\\''syntheticOrders'\\'',count(*) FILTER(WHERE origin='\\''synthetic_seed'\\''),'\\''orderFingerprint'\\'',md5(string_agg(id::text||status||total_cents::text||created_at::text,'\\'','\\'' ORDER BY id)),'\\''products'\\'',(SELECT count(*) FROM catalog.products),'\\''productFingerprint'\\'',(SELECT md5(string_agg(id::text||sku||category||unit_price_cents::text,'\\'','\\'' ORDER BY id)) FROM catalog.products)) FROM orders.orders;'"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "restore-index",
+      "startedAt": "2026-11-08T19:01:54.335Z",
+      "finishedAt": "2026-11-08T19:01:55.694Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "scripts/optimize.mjs",
+        "optimized"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "restore-app",
+      "startedAt": "2026-11-08T19:01:55.696Z",
+      "finishedAt": "2026-11-08T19:02:01.851Z",
+      "command": [
+        "docker",
+        "compose",
+        "up",
+        "--no-build",
+        "--force-recreate",
+        "-d",
+        "--wait",
+        "app"
+      ],
+      "configuration": {
+        "APP_IMAGE": "fullcycle-a-marketplace-app:validated-76894841c87d",
+        "CATALOG_CACHE_ENABLED": "true",
+        "PAYMENT_PROCESSING_ENABLED": "true",
+        "APP_ENV": "development",
+        "LOG_LEVEL": "info"
+      },
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "restored-config",
+      "startedAt": "2026-11-08T19:02:01.853Z",
+      "finishedAt": "2026-11-08T19:02:02.791Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "node",
+        "-e",
+        "console.log(JSON.stringify({cache:process.env.CATALOG_CACHE_ENABLED,payments:process.env.PAYMENT_PROCESSING_ENABLED,appEnv:process.env.APP_ENV,logLevel:process.env.LOG_LEVEL}))"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    },
+    {
+      "name": "restored-index",
+      "startedAt": "2026-11-08T19:02:02.793Z",
+      "finishedAt": "2026-11-08T19:02:03.610Z",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "db",
+        "sh",
+        "-c",
+        "psql -X -tA -v ON_ERROR_STOP=1 -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\" -c 'SELECT to_regclass('\\''orders.orders_status_created_id_idx'\\'') IS NOT NULL;'"
+      ],
+      "configuration": {},
+      "exitCode": 0,
+      "status": "PASSOU"
+    }
+  ],
+  "runs": [
+    {
+      "round": 1,
+      "scenario": "index0-cache0",
+      "index": false,
+      "cache": false,
+      "startedAt": "2026-11-08T18:55:31.165Z",
+      "finishedAt": "2026-11-08T18:56:10.660Z",
+      "imageId": "sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b",
+      "warmup": [
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass"
+      ],
+      "orders": {
+        "p50": 49.203866000000005,
+        "p95": 95.9877365,
+        "p99": 125.56728142000007,
+        "max": 172.313173,
+        "avg": 54.2403466126126,
+        "count": 1554,
+        "countSource": "trend count"
+      },
+      "catalog": {
+        "p50": 2.7676464999999997,
+        "p95": 9.972032999999993,
+        "p99": 16.498248970000006,
+        "max": 35.98851,
+        "avg": 3.8506372683397716,
+        "count": 1554,
+        "countSource": "trend count"
+      },
+      "requests": 3108,
+      "throughput": 88.67018034252044,
+      "iterations": 1554,
+      "errors": 0,
+      "checks": 1,
+      "exitCode": 0,
+      "slowRequests": [],
+      "serverLogRequests": 3143,
+      "maxServerDurationMs": 170.529672,
+      "resourceSamples": 5,
+      "maxBlockedSessions": 0,
+      "status": "PASSOU"
+    },
+    {
+      "round": 1,
+      "scenario": "index1-cache0",
+      "index": true,
+      "cache": false,
+      "startedAt": "2026-11-08T18:56:20.340Z",
+      "finishedAt": "2026-11-08T18:56:59.641Z",
+      "imageId": "sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b",
+      "warmup": [
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass"
+      ],
+      "orders": {
+        "p50": 2.9093185,
+        "p95": 6.551715100000001,
+        "p99": 9.766087820000001,
+        "max": 47.364597,
+        "avg": 3.304078934591746,
+        "count": 2278,
+        "countSource": "trend count"
+      },
+      "catalog": {
+        "p50": 3.6380325,
+        "p95": 7.7378476,
+        "p99": 10.4023206,
+        "max": 20.106152,
+        "avg": 4.051918227392456,
+        "count": 2278,
+        "countSource": "trend count"
+      },
+      "requests": 4556,
+      "throughput": 130.0767322123699,
+      "iterations": 2278,
+      "errors": 0,
+      "checks": 1,
+      "exitCode": 0,
+      "slowRequests": [],
+      "serverLogRequests": 4591,
+      "maxServerDurationMs": 46.217306,
+      "resourceSamples": 5,
+      "maxBlockedSessions": 0,
+      "status": "PASSOU"
+    },
+    {
+      "round": 1,
+      "scenario": "index0-cache1",
+      "index": false,
+      "cache": true,
+      "startedAt": "2026-11-08T18:57:09.319Z",
+      "finishedAt": "2026-11-08T18:57:48.532Z",
+      "imageId": "sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b",
+      "warmup": [
+        "miss",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit"
+      ],
+      "orders": {
+        "p50": 42.834485,
+        "p95": 90.38374409999996,
+        "p99": 139.62254778000002,
+        "max": 294.419191,
+        "avg": 49.64439368162268,
+        "count": 1627,
+        "countSource": "trend count"
+      },
+      "catalog": {
+        "p50": 0.927384,
+        "p95": 4.367496499999995,
+        "p99": 10.63193156,
+        "max": 27.588522,
+        "avg": 1.4854118088506447,
+        "count": 1627,
+        "countSource": "trend count"
+      },
+      "requests": 3254,
+      "throughput": 92.98237064648052,
+      "iterations": 1627,
+      "errors": 0,
+      "checks": 1,
+      "exitCode": 0,
+      "slowRequests": [],
+      "serverLogRequests": 3288,
+      "maxServerDurationMs": 294.269089,
+      "resourceSamples": 5,
+      "maxBlockedSessions": 0,
+      "status": "PASSOU"
+    },
+    {
+      "round": 1,
+      "scenario": "index1-cache1",
+      "index": true,
+      "cache": true,
+      "startedAt": "2026-11-08T18:57:58.285Z",
+      "finishedAt": "2026-11-08T18:58:37.675Z",
+      "imageId": "sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b",
+      "warmup": [
+        "miss",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit"
+      ],
+      "orders": {
+        "p50": 2.794012,
+        "p95": 5.3260876999999995,
+        "p99": 8.819975610000009,
+        "max": 35.49155,
+        "avg": 3.0886066487179513,
+        "count": 2340,
+        "countSource": "trend count"
+      },
+      "catalog": {
+        "p50": 1.2608785,
+        "p95": 3.016714599999997,
+        "p99": 5.873174920000005,
+        "max": 9.144175,
+        "avg": 1.4977741200854722,
+        "count": 2340,
+        "countSource": "trend count"
+      },
+      "requests": 4680,
+      "throughput": 133.69433190018685,
+      "iterations": 2340,
+      "errors": 0,
+      "checks": 1,
+      "exitCode": 0,
+      "slowRequests": [],
+      "serverLogRequests": 4715,
+      "maxServerDurationMs": 33.665783999999995,
+      "resourceSamples": 5,
+      "maxBlockedSessions": 0,
+      "status": "PASSOU"
+    },
+    {
+      "round": 2,
+      "scenario": "index1-cache1",
+      "index": true,
+      "cache": true,
+      "startedAt": "2026-11-08T18:58:46.976Z",
+      "finishedAt": "2026-11-08T18:59:26.516Z",
+      "imageId": "sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b",
+      "warmup": [
+        "miss",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit"
+      ],
+      "orders": {
+        "p50": 2.950002,
+        "p95": 5.923968549999999,
+        "p99": 10.409310450000005,
+        "max": 47.804151,
+        "avg": 3.2883778293310515,
+        "count": 2332,
+        "countSource": "trend count"
+      },
+      "catalog": {
+        "p50": 1.3197265,
+        "p95": 3.3646721499999948,
+        "p99": 6.5018244800000025,
+        "max": 16.143624,
+        "avg": 1.5873231938250438,
+        "count": 2332,
+        "countSource": "trend count"
+      },
+      "requests": 4664,
+      "throughput": 133.13501034087642,
+      "iterations": 2332,
+      "errors": 0,
+      "checks": 1,
+      "exitCode": 0,
+      "slowRequests": [],
+      "serverLogRequests": 4699,
+      "maxServerDurationMs": 46.408356999999995,
+      "resourceSamples": 5,
+      "maxBlockedSessions": 0,
+      "status": "PASSOU"
+    },
+    {
+      "round": 2,
+      "scenario": "index0-cache1",
+      "index": false,
+      "cache": true,
+      "startedAt": "2026-11-08T18:59:36.258Z",
+      "finishedAt": "2026-11-08T19:00:15.679Z",
+      "imageId": "sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b",
+      "warmup": [
+        "miss",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit",
+        "hit"
+      ],
+      "orders": {
+        "p50": 46.5749255,
+        "p95": 98.30387300000001,
+        "p99": 142.61826879999995,
+        "max": 274.141945,
+        "avg": 52.45302982518803,
+        "count": 1596,
+        "countSource": "trend count"
+      },
+      "catalog": {
+        "p50": 0.983949,
+        "p95": 5.121400250000001,
+        "p99": 9.629393649999976,
+        "max": 23.0947,
+        "avg": 1.5659254705513779,
+        "count": 1596,
+        "countSource": "trend count"
+      },
+      "requests": 3192,
+      "throughput": 90.97814484717844,
+      "iterations": 1596,
+      "errors": 0,
+      "checks": 1,
+      "exitCode": 0,
+      "slowRequests": [],
+      "serverLogRequests": 3227,
+      "maxServerDurationMs": 266.1424,
+      "resourceSamples": 5,
+      "maxBlockedSessions": 0,
+      "status": "PASSOU"
+    },
+    {
+      "round": 2,
+      "scenario": "index1-cache0",
+      "index": true,
+      "cache": false,
+      "startedAt": "2026-11-08T19:00:24.960Z",
+      "finishedAt": "2026-11-08T19:01:04.464Z",
+      "imageId": "sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b",
+      "warmup": [
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass"
+      ],
+      "orders": {
+        "p50": 2.8139215,
+        "p95": 6.020460649999997,
+        "p99": 11.376602020000009,
+        "max": 45.371046,
+        "avg": 3.200682734443478,
+        "count": 2282,
+        "countSource": "trend count"
+      },
+      "catalog": {
+        "p50": 3.4988124999999997,
+        "p95": 7.882151099999995,
+        "p99": 12.951508780000003,
+        "max": 51.724008,
+        "avg": 3.9512726586327753,
+        "count": 2282,
+        "countSource": "trend count"
+      },
+      "requests": 4564,
+      "throughput": 130.13691871881485,
+      "iterations": 2282,
+      "errors": 0,
+      "checks": 1,
+      "exitCode": 0,
+      "slowRequests": [],
+      "serverLogRequests": 4599,
+      "maxServerDurationMs": 50.071289,
+      "resourceSamples": 5,
+      "maxBlockedSessions": 0,
+      "status": "PASSOU"
+    },
+    {
+      "round": 2,
+      "scenario": "index0-cache0",
+      "index": false,
+      "cache": false,
+      "startedAt": "2026-11-08T19:01:13.994Z",
+      "finishedAt": "2026-11-08T19:01:53.399Z",
+      "imageId": "sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b",
+      "warmup": [
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass",
+        "bypass"
+      ],
+      "orders": {
+        "p50": 46.239954499999996,
+        "p95": 95.64178704999999,
+        "p99": 142.30310659999995,
+        "max": 305.334626,
+        "avg": 51.90191584160303,
+        "count": 1572,
+        "countSource": "trend count"
+      },
+      "catalog": {
+        "p50": 2.689329,
+        "p95": 10.371386549999968,
+        "p99": 23.63353039999999,
+        "max": 101.355609,
+        "avg": 4.223914823155223,
+        "count": 1572,
+        "countSource": "trend count"
+      },
+      "requests": 3144,
+      "throughput": 89.82084869872438,
+      "iterations": 1572,
+      "errors": 0,
+      "checks": 1,
+      "exitCode": 0,
+      "slowRequests": [],
+      "serverLogRequests": 3179,
+      "maxServerDurationMs": 298.743988,
+      "resourceSamples": 5,
+      "maxBlockedSessions": 0,
+      "status": "PASSOU"
+    }
+  ],
+  "original": {
+    "cache": "true",
+    "payments": "true",
+    "appEnv": "development",
+    "logLevel": "info",
+    "indexEnabled": true,
+    "imageId": "sha256:76894841c87dddc94c87f7d379d5e8532b60e8871ffbc64f4c601b204f150a6b",
+    "imageReference": "fullcycle-a-marketplace-app:validated-76894841c87d"
+  },
+  "datasetBefore": {
+    "orders": 100001,
+    "syntheticOrders": 100000,
+    "orderFingerprint": "a9259c341d06a7260f624941d19f2bc7",
+    "products": 5001,
+    "productFingerprint": "be85c5d93e9ee39b53903b8b3598a0b8"
+  },
+  "datasetAfter": {
+    "orders": 100001,
+    "syntheticOrders": 100000,
+    "orderFingerprint": "a9259c341d06a7260f624941d19f2bc7",
+    "products": 5001,
+    "productFingerprint": "be85c5d93e9ee39b53903b8b3598a0b8"
+  },
+  "status": "PASSOU",
+  "restoration": {
+    "status": "PASSOU",
+    "config": {
+      "cache": "true",
+      "payments": "true",
+      "appEnv": "development",
+      "logLevel": "info"
+    },
+    "indexEnabled": true
+  },
+  "finishedAt": "2026-11-08T19:02:03.616Z"
+}

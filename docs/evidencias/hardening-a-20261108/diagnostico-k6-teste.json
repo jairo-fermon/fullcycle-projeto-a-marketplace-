@@ -1,0 +1,15 @@
+{
+  "collectedAt": "2026-11-08T19:04:01.697Z",
+  "status": "PASSOU",
+  "kind": "Verificacao isolada com respostas sinteticas em vm; nenhuma chamada HTTP, sem medicao de desempenho.",
+  "checks": [
+    "header string e array",
+    "log apenas acima de 500 ms",
+    "sem corpo/autorizacao no log",
+    "metricas recebem valores de duracao",
+    "tres estagios mantidos e p99 exportado"
+  ],
+  "warningCount": 2,
+  "latenciesAreSynthetic": true,
+  "sourceFile": "/C:/Users/ELIELETRO/Desktop/ChatGPT/fullcycle-projeto-a-marketplace/scripts/k6-load.js"
+}

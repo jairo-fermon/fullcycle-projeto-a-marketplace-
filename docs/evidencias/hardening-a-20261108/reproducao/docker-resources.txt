@@ -1,0 +1,6 @@
+startedAt=2026-11-08T18:49:36.365Z
+command=["docker","info","--format","CPUs={{.NCPU}} MemoryBytes={{.MemTotal}} OS={{.OperatingSystem}}"]
+configuration={}
+CPUs=8 MemoryBytes=8185405440 OS=Docker Desktop
+
+exitCode=0

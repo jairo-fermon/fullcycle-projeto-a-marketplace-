@@ -28,6 +28,14 @@ Foram executados HTTP e SQL reais, testes de crash após efeito, recuperação i
 
 O aluno ainda precisa revisar ADR/fronteiras, explicar entrega pelo menos uma vez, preço sem cache, p95, trace e limitações do deploy local. Não há declaração de ensaio ou aprendizado concluído. Aprovação do A e autorização de auditoria/apresentações devem ser registradas separadamente.
 
+## Hardening A autorizado em 08/11/2026
+
+Após concluir e aprovar o hardening do B, o aluno enviou `APROVO O HARDENING DO B; INICIAR O A`. Escopo atual somente A, preservando B, sem publicação presumida. A IA propôs melhorar reprodutibilidade e coleta do benchmark, sem alterar regras de negócio: p99/máximo/amostras, logs lentos com IDs, matriz de índice/cache em ambiente isolado e restauração obrigatória. O pico histórico permanece sem causa comprovada. Medições reais, tentativas, limitações e controles são registrados no relatório específico. Aprendizado, ensaio e Moodle continuam sem comprovação.
+
 ## Gate de auditoria confirmado
 
 O aluno aprovou literalmente o B e o A, encerrando os gates de implementação, e autorizou auditoria/apresentações. A pré-auditoria repetiu o ciclo em checkout limpo, registrou as novas medições e corrigiu textos históricos de estado. Os resultados não constituem avaliação independente. Ensaio, aprendizado, tempo real de fala e Moodle não estão comprovados. A assistência continua declarada.
+
+## Resultado local do hardening A
+
+Reprodução GitHub ca2ade9 isolada, seed100mil repetida, fluxo/trace real, ambientes/flag/config rollback, qualidade candidata58 testes e matriz4configurações×2rodadas em ordem inversa executados. Scripts medidos com SHA-256 no matrix.json. Negócio/testes/dependências/infra preservados. Sem causa comprovada para pico antigo; não atribuído a GC/CPU/cache/worker. Coberturas de banco test inicializado e novo preservadas. Tempos sintéticos do teste de log não são medição HTTP. B intacto. Nova publicação/CI A requer autorização específica; fechamento global exige novo gate literal. Sem nota oficial, ensaio concluído ou Moodle enviado.

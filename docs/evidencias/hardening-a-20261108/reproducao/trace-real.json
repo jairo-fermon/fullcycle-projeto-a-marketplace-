@@ -1,0 +1,595 @@
+{
+  "data": [
+    {
+      "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+      "spans": [
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "f378893152490f30",
+          "flags": 1,
+          "operationName": "postgres.payments.get",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+              "spanID": "529624af395c6a62"
+            }
+          ],
+          "startTime": 1794163826384000,
+          "duration": 2543,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "db.system.name",
+              "type": "string",
+              "value": "postgresql"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "01262f40e3df4d61",
+          "flags": 1,
+          "operationName": "postgres.orders.get",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+              "spanID": "529624af395c6a62"
+            }
+          ],
+          "startTime": 1794163826387000,
+          "duration": 1729,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "db.system.name",
+              "type": "string",
+              "value": "postgresql"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "958c5eee206acaac",
+          "flags": 1,
+          "operationName": "postgres.orders.get_items",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+              "spanID": "529624af395c6a62"
+            }
+          ],
+          "startTime": 1794163826389000,
+          "duration": 1563,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "db.system.name",
+              "type": "string",
+              "value": "postgresql"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "ad2f16313b04476c",
+          "flags": 1,
+          "operationName": "postgres.payments.enqueue",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+              "spanID": "529624af395c6a62"
+            }
+          ],
+          "startTime": 1794163826392000,
+          "duration": 1082,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "db.system.name",
+              "type": "string",
+              "value": "postgresql"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "f00306ccb93f82e4",
+          "flags": 1,
+          "operationName": "postgres.payments.enqueue_job",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+              "spanID": "529624af395c6a62"
+            }
+          ],
+          "startTime": 1794163826393000,
+          "duration": 1036,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "db.system.name",
+              "type": "string",
+              "value": "postgresql"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "529624af395c6a62",
+          "flags": 1,
+          "operationName": "payments.submit",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+              "spanID": "97272ac52f5a8208"
+            }
+          ],
+          "startTime": 1794163826384000,
+          "duration": 12232,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "internal"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "97272ac52f5a8208",
+          "flags": 1,
+          "operationName": "HTTP POST /payments",
+          "references": [],
+          "startTime": 1794163826384000,
+          "duration": 12491,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "server"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "970dd17b20145f75",
+          "flags": 1,
+          "operationName": "postgres.payments.receipt_lookup",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+              "spanID": "2745b2740ddfd767"
+            }
+          ],
+          "startTime": 1794163826449000,
+          "duration": 877,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "db.system.name",
+              "type": "string",
+              "value": "postgresql"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "0a7b3a63dab77b17",
+          "flags": 1,
+          "operationName": "postgres.payments.get",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+              "spanID": "2745b2740ddfd767"
+            }
+          ],
+          "startTime": 1794163826450000,
+          "duration": 16963,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "db.system.name",
+              "type": "string",
+              "value": "postgresql"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "7319ae48b6436e90",
+          "flags": 1,
+          "operationName": "postgres.orders.mark_paid",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+              "spanID": "da68e9a48d6cef15"
+            }
+          ],
+          "startTime": 1794163826468000,
+          "duration": 3479,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "db.system.name",
+              "type": "string",
+              "value": "postgresql"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "da68e9a48d6cef15",
+          "flags": 1,
+          "operationName": "orders.mark_paid",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+              "spanID": "2745b2740ddfd767"
+            }
+          ],
+          "startTime": 1794163826467000,
+          "duration": 3632,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "internal"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "cb2e0a1c936c21dc",
+          "flags": 1,
+          "operationName": "postgres.payments.receipt",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+              "spanID": "2745b2740ddfd767"
+            }
+          ],
+          "startTime": 1794163826471000,
+          "duration": 1173,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "db.system.name",
+              "type": "string",
+              "value": "postgresql"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "c93d6122a35865f2",
+          "flags": 1,
+          "operationName": "postgres.payments.complete",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+              "spanID": "2745b2740ddfd767"
+            }
+          ],
+          "startTime": 1794163826472000,
+          "duration": 628,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "db.system.name",
+              "type": "string",
+              "value": "postgresql"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "fcbc212debb7f368",
+          "flags": 1,
+          "operationName": "postgres.payments.complete_job",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+              "spanID": "2745b2740ddfd767"
+            }
+          ],
+          "startTime": 1794163826473000,
+          "duration": 448,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "db.system.name",
+              "type": "string",
+              "value": "postgresql"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        },
+        {
+          "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+          "spanID": "2745b2740ddfd767",
+          "flags": 1,
+          "operationName": "payments.process_job",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "a2624434ffaa10e55fb75a045ab0fff5",
+              "spanID": "529624af395c6a62"
+            }
+          ],
+          "startTime": 1794163826449000,
+          "duration": 24885,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "fullcycle-marketplace"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "internal"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": null
+        }
+      ],
+      "processes": {
+        "p1": {
+          "serviceName": "fullcycle-marketplace",
+          "tags": [
+            {
+              "key": "deployment.environment.name",
+              "type": "string",
+              "value": "development"
+            },
+            {
+              "key": "host.arch",
+              "type": "string",
+              "value": "amd64"
+            },
+            {
+              "key": "host.name",
+              "type": "string",
+              "value": "e7e595192cb5"
+            },
+            {
+              "key": "os.type",
+              "type": "string",
+              "value": "linux"
+            },
+            {
+              "key": "os.version",
+              "type": "string",
+              "value": "6.6.87.2-microsoft-standard-WSL2"
+            },
+            {
+              "key": "process.command",
+              "type": "string",
+              "value": "/app/scripts/start.mjs"
+            },
+            {
+              "key": "process.command_args",
+              "type": "string",
+              "value": "[\"/usr/local/bin/node\",\"--import\",\"./scripts/instrumentation.mjs\",\"/app/scripts/start.mjs\"]"
+            },
+            {
+              "key": "process.executable.name",
+              "type": "string",
+              "value": "node"
+            },
+            {
+              "key": "process.executable.path",
+              "type": "string",
+              "value": "/usr/local/bin/node"
+            },
+            {
+              "key": "process.owner",
+              "type": "string",
+              "value": "node"
+            },
+            {
+              "key": "process.pid",
+              "type": "int64",
+              "value": 8
+            },
+            {
+              "key": "process.runtime.description",
+              "type": "string",
+              "value": "Node.js"
+            },
+            {
+              "key": "process.runtime.name",
+              "type": "string",
+              "value": "nodejs"
+            },
+            {
+              "key": "process.runtime.version",
+              "type": "string",
+              "value": "24.22.2"
+            },
+            {
+              "key": "service.instance.id",
+              "type": "string",
+              "value": "c3cbc8ed-0e16-436a-a958-1650f9aaaaff"
+            }
+          ]
+        }
+      },
+      "warnings": null
+    }
+  ],
+  "total": 0,
+  "limit": 0,
+  "offset": 0,
+  "errors": null
+}

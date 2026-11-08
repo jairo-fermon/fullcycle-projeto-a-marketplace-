@@ -1,0 +1,176 @@
+{"name":"r2-index1-cache1-k6","startedAt":"2026-11-08T18:58:46.976Z","finishedAt":"2026-11-08T18:59:25.476Z","command":["docker","compose","--profile","tools","run","--rm","-e","BENCHMARK_CASE=index1-cache1","-e","BENCHMARK_ROUND=2","k6","run","--log-format=json","--summary-export=/results/k6-summary.json","/scripts/load.js"],"configuration":{"APP_IMAGE":"fullcycle-a-marketplace-app:validated-76894841c87d","CATALOG_CACHE_ENABLED":"true","PAYMENT_PROCESSING_ENABLED":"true","APP_ENV":"development","LOG_LEVEL":"info"},"exitCode":0,"status":"PASSOU"}
+
+         /\      Grafana   /‾‾/
+    /\  /  \     |\  __   /  /
+   /  \/    \    | |/ /  /   ‾‾\
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/
+
+     execution: local
+        script: /scripts/load.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 15 max VUs, 1m5s max duration (incl. graceful stop):
+              * default: Up to 15 looping VUs for 35s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m01.0s), 01/15 VUs, 9 complete and 0 interrupted iterations
+default   [   3% ] 01/15 VUs  01.0s/35.0s
+
+running (0m02.0s), 01/15 VUs, 18 complete and 0 interrupted iterations
+default   [   6% ] 01/15 VUs  02.0s/35.0s
+
+running (0m03.0s), 02/15 VUs, 31 complete and 0 interrupted iterations
+default   [   9% ] 02/15 VUs  03.0s/35.0s
+
+running (0m04.0s), 02/15 VUs, 50 complete and 0 interrupted iterations
+default   [  11% ] 02/15 VUs  04.0s/35.0s
+
+running (0m05.0s), 02/15 VUs, 69 complete and 0 interrupted iterations
+default   [  14% ] 02/15 VUs  05.0s/35.0s
+
+running (0m06.0s), 03/15 VUs, 97 complete and 0 interrupted iterations
+default   [  17% ] 03/15 VUs  06.0s/35.0s
+
+running (0m07.0s), 03/15 VUs, 125 complete and 0 interrupted iterations
+default   [  20% ] 03/15 VUs  07.0s/35.0s
+
+running (0m08.0s), 04/15 VUs, 157 complete and 0 interrupted iterations
+default   [  23% ] 04/15 VUs  08.0s/35.0s
+
+running (0m09.0s), 04/15 VUs, 194 complete and 0 interrupted iterations
+default   [  26% ] 04/15 VUs  09.0s/35.0s
+
+running (0m10.0s), 04/15 VUs, 232 complete and 0 interrupted iterations
+default   [  29% ] 04/15 VUs  10.0s/35.0s
+
+running (0m11.0s), 05/15 VUs, 279 complete and 0 interrupted iterations
+default   [  31% ] 05/15 VUs  11.0s/35.0s
+
+running (0m12.0s), 06/15 VUs, 330 complete and 0 interrupted iterations
+default   [  34% ] 06/15 VUs  12.0s/35.0s
+
+running (0m13.0s), 06/15 VUs, 388 complete and 0 interrupted iterations
+default   [  37% ] 06/15 VUs  13.0s/35.0s
+
+running (0m14.0s), 07/15 VUs, 451 complete and 0 interrupted iterations
+default   [  40% ] 07/15 VUs  14.0s/35.0s
+
+running (0m15.0s), 08/15 VUs, 520 complete and 0 interrupted iterations
+default   [  43% ] 08/15 VUs  15.0s/35.0s
+
+running (0m16.0s), 08/15 VUs, 598 complete and 0 interrupted iterations
+default   [  46% ] 08/15 VUs  16.0s/35.0s
+
+running (0m17.0s), 09/15 VUs, 681 complete and 0 interrupted iterations
+default   [  49% ] 09/15 VUs  17.0s/35.0s
+
+running (0m18.0s), 10/15 VUs, 769 complete and 0 interrupted iterations
+default   [  51% ] 10/15 VUs  18.0s/35.0s
+
+running (0m19.0s), 10/15 VUs, 863 complete and 0 interrupted iterations
+default   [  54% ] 10/15 VUs  19.0s/35.0s
+
+running (0m20.0s), 11/15 VUs, 965 complete and 0 interrupted iterations
+default   [  57% ] 11/15 VUs  20.0s/35.0s
+
+running (0m21.0s), 12/15 VUs, 1075 complete and 0 interrupted iterations
+default   [  60% ] 12/15 VUs  21.0s/35.0s
+
+running (0m22.0s), 12/15 VUs, 1185 complete and 0 interrupted iterations
+default   [  63% ] 12/15 VUs  22.0s/35.0s
+
+running (0m23.0s), 13/15 VUs, 1306 complete and 0 interrupted iterations
+default   [  66% ] 13/15 VUs  23.0s/35.0s
+
+running (0m24.0s), 14/15 VUs, 1432 complete and 0 interrupted iterations
+default   [  69% ] 14/15 VUs  24.0s/35.0s
+
+running (0m25.0s), 14/15 VUs, 1566 complete and 0 interrupted iterations
+default   [  71% ] 14/15 VUs  25.0s/35.0s
+
+running (0m26.0s), 14/15 VUs, 1701 complete and 0 interrupted iterations
+default   [  74% ] 14/15 VUs  26.0s/35.0s
+
+running (0m27.0s), 13/15 VUs, 1826 complete and 0 interrupted iterations
+default   [  77% ] 13/15 VUs  27.0s/35.0s
+
+running (0m28.0s), 11/15 VUs, 1941 complete and 0 interrupted iterations
+default   [  80% ] 11/15 VUs  28.0s/35.0s
+
+running (0m29.0s), 10/15 VUs, 2038 complete and 0 interrupted iterations
+default   [  83% ] 10/15 VUs  29.0s/35.0s
+
+running (0m30.0s), 08/15 VUs, 2121 complete and 0 interrupted iterations
+default   [  86% ] 08/15 VUs  30.0s/35.0s
+
+running (0m31.0s), 07/15 VUs, 2190 complete and 0 interrupted iterations
+default   [  89% ] 07/15 VUs  31.0s/35.0s
+
+running (0m32.0s), 05/15 VUs, 2249 complete and 0 interrupted iterations
+default   [  91% ] 05/15 VUs  32.0s/35.0s
+
+running (0m33.0s), 04/15 VUs, 2289 complete and 0 interrupted iterations
+default   [  94% ] 04/15 VUs  33.0s/35.0s
+
+running (0m34.0s), 02/15 VUs, 2318 complete and 0 interrupted iterations
+default   [  97% ] 02/15 VUs  34.0s/35.0s
+
+running (0m35.0s), 01/15 VUs, 2331 complete and 0 interrupted iterations
+default   [ 100% ] 01/15 VUs  35.0s/35.0s
+
+
+  █ THRESHOLDS
+
+    catalog_list_duration
+    ✓ 'p(95)<500' p(95)=3.36ms
+
+    checks
+    ✓ 'rate==1' rate=100.00%
+
+    http_req_failed
+    ✓ 'rate==0' rate=0.00%
+
+    orders_list_duration
+    ✓ 'p(95)<500' p(95)=5.92ms
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......: 4664    133.13501/s
+    checks_succeeded...: 100.00% 4664 out of 4664
+    checks_failed......: 0.00%   0 out of 4664
+
+    ✓ lista de pedidos válida
+    ✓ catálogo válido
+
+    CUSTOM
+    catalog_list_duration..........: avg=1.58ms  min=425.2µs  med=1.31ms   max=16.14ms  p(90)=2.55ms   p(95)=3.36ms   p(99)=6.5ms    count=2332
+    orders_list_duration...........: avg=3.28ms  min=1.1ms    med=2.95ms   max=47.8ms   p(90)=4.8ms    p(95)=5.92ms   p(99)=10.4ms   count=2332
+
+    HTTP
+    http_req_duration..............: avg=2.43ms  min=425.2µs  med=2.06ms   max=47.8ms   p(90)=4.13ms   p(95)=5.06ms   p(99)=8.45ms   count=4664
+      { expected_response:true }...: avg=2.43ms  min=425.2µs  med=2.06ms   max=47.8ms   p(90)=4.13ms   p(95)=5.06ms   p(99)=8.45ms   count=4664
+    http_req_failed................: 0.00%  0 out of 4664
+    http_reqs......................: 4664   133.13501/s
+
+    EXECUTION
+    iteration_duration.............: avg=106.4ms min=102.09ms med=105.92ms max=151.37ms p(90)=108.96ms p(95)=110.95ms p(99)=116.74ms count=2332
+    iterations.....................: 2332   66.567505/s
+    vus............................: 1      min=1         max=14
+    vus_max........................: 15     min=15        max=15
+
+    NETWORK
+    data_received..................: 16 MB  465 kB/s
+    data_sent......................: 492 kB 14 kB/s
+
+
+
+
+running (0m35.0s), 00/15 VUs, 2332 complete and 0 interrupted iterations
+default ✓ [ 100% ] 00/15 VUs  35s
+ Container fullcycle-a-hardening-20261108-jaeger-1  Running
+ Container fullcycle-a-hardening-20261108-db-1  Running
+ Container fullcycle-a-hardening-20261108-app-1  Running
+ Container fullcycle-a-hardening-20261108-db-1  Waiting
+ Container fullcycle-a-hardening-20261108-db-1  Healthy

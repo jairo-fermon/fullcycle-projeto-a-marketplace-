@@ -1,0 +1,546 @@
+{
+  "createdAt": "2026-11-08T19:14:02.951790+00:00",
+  "normalization": "UTF-8 sem BOM, LF, whitespace final removido; dados/valores preservados. Originais e logs integrais permanecem ignorados em tmp.",
+  "files": [
+    {
+      "source": "tmp\\hardening-20261108\\clone.json",
+      "file": "clone.json",
+      "originalSha256": "df108c5a2ac42be09e8e0bfd7fb84b2072098e2decad85fe9504f392def0bf43",
+      "publishedSha256": "05509fde1266b4bfca673d729074027b9784b4cd28910aa1674de436e4867d3a"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\pico-historico.json",
+      "file": "pico-historico.json",
+      "originalSha256": "203f78f12ebdea7f1597c2af35293afbaabb51ca4deba8848d9a808babffdffa",
+      "publishedSha256": "ea59425ec398a2abcd96d7621a9323f2865d207e0425c4c3169e64e912127b6b"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\guard.json",
+      "file": "guard.json",
+      "originalSha256": "c08d3e9a1da8b205bb66c8e4742118ffe3d745a4d696ed7d973eba24173c7c6e",
+      "publishedSha256": "c4f1bd7d5420fb39d15bc3544eb0c9ff35b25b41dee43523cbdbc4bb0769fda9"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\k6-inspect.txt",
+      "file": "k6-inspect.txt",
+      "originalSha256": "03221f06bd92ca028fc59ac9da8061b78aba5e1fd3935a1daf9609cf06112739",
+      "publishedSha256": "7382f47ca6b9ac93f6d847265fc56e2739f8a2c101118a1a3fa0d13675fcfc14"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\k6-inspect-falha-sem-env.txt",
+      "file": "k6-inspect-falha-sem-env.txt",
+      "originalSha256": "b32914293819bd493573ecf31aa1369fe6d742ac5593d0341b83d8d2a2bbed3e",
+      "publishedSha256": "5dd55206902f9626187fbbcfc81e86fab29dd82ffa619e0aff23e68be2cdd048"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\diagnostico-k6-teste.json",
+      "file": "diagnostico-k6-teste.json",
+      "originalSha256": "5c3b451451988d2bb3b5fff649e05174f1ef12e444746d338649582b56b8c4a3",
+      "publishedSha256": "ce7ab3ce303ae402f7786bbd900d54d848f0615c5d7cd5debea3c44795913033"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\readme-powershell.json",
+      "file": "readme-powershell.json",
+      "originalSha256": "e1033e0a5245fb06039e1c17929a523a1ed3237c819d5b7d2fb985e7c37b7a70",
+      "publishedSha256": "9575703933aa0d94d7a122baaccdebc873876b3476ea85471cc053bdbf3a8dbc"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\persistencia-encerramento.json",
+      "file": "persistencia-encerramento.json",
+      "originalSha256": "8ffaca74ab0b94693ee4acd8800ba13fc1b1ceb3df6a4bdc473e721f18d99382",
+      "publishedSha256": "e8b5b9c7f1ca06441d42297e3e44da0306aba2bcbb294ad61e49ea7ba09a5fd3"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\qualidade-candidata.txt",
+      "file": "qualidade-candidata.txt",
+      "originalSha256": "b2f15a30d7f05d9627ae91f57edb062fd9ffe00e3ea7018421425735c616ef32",
+      "publishedSha256": "9110800f35589e5beb4dbe03f810f07ae0b84297a712c1b1bece30f878d46ade"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\qualidade-candidata-fresh.txt",
+      "file": "qualidade-candidata-fresh.txt",
+      "originalSha256": "abcb9a6a4f56843317b58c5db0e0ced25125499f89f57b7e226d6fecc4f903cc",
+      "publishedSha256": "ce54918f485638bf5cfc56f1c031e75288fe265f08c4087847534c6971d65962"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\coverage-candidata.json",
+      "file": "coverage-candidata.json",
+      "originalSha256": "571e5228821380e8263392b5adff1604980e86edd22470c73750fc3dad8713b4",
+      "publishedSha256": "571e5228821380e8263392b5adff1604980e86edd22470c73750fc3dad8713b4"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\coverage-candidata-banco-reutilizado.json",
+      "file": "coverage-candidata-banco-reutilizado.json",
+      "originalSha256": "556bdfa735758cb2b413c5af7081b5c1fb79448eb94c94a0e464f893bcc4361e",
+      "publishedSha256": "556bdfa735758cb2b413c5af7081b5c1fb79448eb94c94a0e464f893bcc4361e"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\verificar-diagnostico-k6.mjs",
+      "file": "verificar-diagnostico-k6.mjs",
+      "originalSha256": "6e03114e84f6c308d461441400d2e3f0682d889f0c4cbc3acb1e7d3154460521",
+      "publishedSha256": "6e03114e84f6c308d461441400d2e3f0682d889f0c4cbc3acb1e7d3154460521"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\verificar-readme.ps1",
+      "file": "verificar-readme.ps1",
+      "originalSha256": "ae918caf4eca6ad68c5c6468bea594589562c4917f49c4d6aa241d5a7f59221c",
+      "publishedSha256": "ae918caf4eca6ad68c5c6468bea594589562c4917f49c4d6aa241d5a7f59221c"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\encerrar-reproducao.py",
+      "file": "encerrar-reproducao.py",
+      "originalSha256": "fc37d002d52fb1e24fef85553af526a9c9541de364f6611c8d8c6b53b7fc3d46",
+      "publishedSha256": "fc37d002d52fb1e24fef85553af526a9c9541de364f6611c8d8c6b53b7fc3d46"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\validacao-local.json",
+      "file": "reproducao/validacao-local.json",
+      "originalSha256": "d8b10756f7de846da337d6daaeb634b214407d4ac4bb3d9d368cce2eb43f3b5e",
+      "publishedSha256": "b02d14cef5f785728f65999bfe0326ad5644e411170759a2f360e40a5fa7ccdd"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\compose-config.txt",
+      "file": "reproducao/compose-config.txt",
+      "originalSha256": "b832e195a5fca9be53901e5a241389d61afc921fe852d6580ea557274b4c7c65",
+      "publishedSha256": "b832e195a5fca9be53901e5a241389d61afc921fe852d6580ea557274b4c7c65"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\subida.txt",
+      "file": "reproducao/subida.txt",
+      "originalSha256": "e6f9c8e628495ce1bf0d0e7b157fcef59e8dc220dedb807b52cac4b784b51820",
+      "publishedSha256": "e6f9c8e628495ce1bf0d0e7b157fcef59e8dc220dedb807b52cac4b784b51820"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\compose-status.txt",
+      "file": "reproducao/compose-status.txt",
+      "originalSha256": "9d73e8321fecddfde1a5a7cdb6a4c4310f976fc3e36e18a0b5bd86330d1ba617",
+      "publishedSha256": "9d73e8321fecddfde1a5a7cdb6a4c4310f976fc3e36e18a0b5bd86330d1ba617"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\qualidade.txt",
+      "file": "reproducao/qualidade.txt",
+      "originalSha256": "1307466ebe9168422d3f2842e42f45cb80b4c53474f8418057df4418dde834c3",
+      "publishedSha256": "fdd29776d39290a6a62d18a9d862a5dba5e3ce078d12c3efb10073107657f3a5"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\coverage-summary.json",
+      "file": "reproducao/coverage-summary.json",
+      "originalSha256": "571e5228821380e8263392b5adff1604980e86edd22470c73750fc3dad8713b4",
+      "publishedSha256": "571e5228821380e8263392b5adff1604980e86edd22470c73750fc3dad8713b4"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\env-init.txt",
+      "file": "reproducao/env-init.txt",
+      "originalSha256": "ebd8130dc542af2d0d5ad2303476ed352caa2d4ef8c0f86697211fd8b966a43e",
+      "publishedSha256": "ebd8130dc542af2d0d5ad2303476ed352caa2d4ef8c0f86697211fd8b966a43e"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\demonstracao.txt",
+      "file": "reproducao/demonstracao.txt",
+      "originalSha256": "3ff80bfcf9d49be54ceade5abe698ce9d6b8dc22ea6e6af4ae588b69fb4cd793",
+      "publishedSha256": "3ff80bfcf9d49be54ceade5abe698ce9d6b8dc22ea6e6af4ae588b69fb4cd793"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\seed-primeira.txt",
+      "file": "reproducao/seed-primeira.txt",
+      "originalSha256": "a751c669401e0bd3f7e3f277b615277d3a5f8a40e01c94b133a138039ba5d5d4",
+      "publishedSha256": "a751c669401e0bd3f7e3f277b615277d3a5f8a40e01c94b133a138039ba5d5d4"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\seed-repetida.txt",
+      "file": "reproducao/seed-repetida.txt",
+      "originalSha256": "2fbf1d982eb2504d7c8097ee145b7cea945b0955c8592852d0298ebc19e22266",
+      "publishedSha256": "2fbf1d982eb2504d7c8097ee145b7cea945b0955c8592852d0298ebc19e22266"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\seed-sql.txt",
+      "file": "reproducao/seed-sql.txt",
+      "originalSha256": "53048b0c15fdeb3caf6b8acedc7a6d4336bd41abddc8829ed8f4b0ee20cb769f",
+      "publishedSha256": "213cda6f9c2fb301ce5607cbf6e6b7e9bf72e0753a5fddeeee78dd6cb4b6cb56"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\imagem-id.txt",
+      "file": "reproducao/imagem-id.txt",
+      "originalSha256": "09b8c7d38099604457ab7220725ab8f1e8a4ad91e15a523b8f4e1b37b764720a",
+      "publishedSha256": "09b8c7d38099604457ab7220725ab8f1e8a4ad91e15a523b8f4e1b37b764720a"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\imagem-preservada.txt",
+      "file": "reproducao/imagem-preservada.txt",
+      "originalSha256": "e52a22f96c957ab5b2236f6878c307e082a9d2e6fb79c226fb2644ab958a840d",
+      "publishedSha256": "e52a22f96c957ab5b2236f6878c307e082a9d2e6fb79c226fb2644ab958a840d"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\promocao-production.txt",
+      "file": "reproducao/promocao-production.txt",
+      "originalSha256": "ee3d11e0b645fbf28b3be6034a70f73598b59b0a7d195d2d4ccf7471e9b4d7a7",
+      "publishedSha256": "ee3d11e0b645fbf28b3be6034a70f73598b59b0a7d195d2d4ccf7471e9b4d7a7"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\config-production.txt",
+      "file": "reproducao/config-production.txt",
+      "originalSha256": "29caa5434782dbe4f81cb53531f3a5df1b9f3314c2ed0bd869578f192e725bb2",
+      "publishedSha256": "29caa5434782dbe4f81cb53531f3a5df1b9f3314c2ed0bd869578f192e725bb2"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\rollback-development.txt",
+      "file": "reproducao/rollback-development.txt",
+      "originalSha256": "ff2b68f85186d4f0ef91a0bf85c9c704b7c1db2014a03d9ccd8a28e6c29ab014",
+      "publishedSha256": "ff2b68f85186d4f0ef91a0bf85c9c704b7c1db2014a03d9ccd8a28e6c29ab014"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\config-development.txt",
+      "file": "reproducao/config-development.txt",
+      "originalSha256": "6b5cb3e54c9614a0f40e1349eb9411323c982cb73f6a5a4bcd0e9bd9658dbaba",
+      "publishedSha256": "6b5cb3e54c9614a0f40e1349eb9411323c982cb73f6a5a4bcd0e9bd9658dbaba"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\config-baseline.txt",
+      "file": "reproducao/config-baseline.txt",
+      "originalSha256": "f35eaebcd8e70e9fd9eb75deb6ce7ef9ffcac6f72b713cc13b3cf338d6aaff4b",
+      "publishedSha256": "f35eaebcd8e70e9fd9eb75deb6ce7ef9ffcac6f72b713cc13b3cf338d6aaff4b"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\config-optimized.txt",
+      "file": "reproducao/config-optimized.txt",
+      "originalSha256": "31eb95be756c42c6bfefcedd9a14f156d0751c25af31d307c60d7e4069659571",
+      "publishedSha256": "31eb95be756c42c6bfefcedd9a14f156d0751c25af31d307c60d7e4069659571"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\k6-baseline.json",
+      "file": "reproducao/k6-baseline.json",
+      "originalSha256": "9a3390c37d0bc2dbc7bb221ea97f95fe63242eb6110e5d38de095fa2bb7a04d9",
+      "publishedSha256": "a238c2a6fd51cf3ba75641da1c7c24b6e1411e6bad99c06d311064fc358348b0"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\k6-baseline.txt",
+      "file": "reproducao/k6-baseline.txt",
+      "originalSha256": "6036051a24c4f18f699559ae4d36b61a3c72504d56ed84c22d6861f68cbacccf",
+      "publishedSha256": "f69fc8c29c7267ecf886643c790662e2d962d4cd47547902c17edb45381fbca0"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\k6-optimized.json",
+      "file": "reproducao/k6-optimized.json",
+      "originalSha256": "e40fde728152c8d23200501b6073bc2f61da4b33fb8a1de0ce7562abbf11e001",
+      "publishedSha256": "ebda56798b459fd68e9b12e9816deb2fda9cd027c7b08d9ed2104f4d84673232"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\k6-optimized.txt",
+      "file": "reproducao/k6-optimized.txt",
+      "originalSha256": "bda285a88124c432cdc5a2642b8a9663a88cbd3f4b7182ecf5b0224e360de2bf",
+      "publishedSha256": "bc33268f6e3adb8d2cf69fb428101735fd917a5a2deb4fd74cf7f1cc5238386f"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\metrics-baseline.prom",
+      "file": "reproducao/metrics-baseline.prom",
+      "originalSha256": "63c55bcaae537724736b8e10baea5305151c5f5587a0dea6f0fadcaf71921662",
+      "publishedSha256": "63c55bcaae537724736b8e10baea5305151c5f5587a0dea6f0fadcaf71921662"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\metrics-optimized.prom",
+      "file": "reproducao/metrics-optimized.prom",
+      "originalSha256": "cd38795c6119c506afb63e8139bf55f4e77123f4218fefd1262fc124d5019630",
+      "publishedSha256": "cd38795c6119c506afb63e8139bf55f4e77123f4218fefd1262fc124d5019630"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\plano-baseline.txt",
+      "file": "reproducao/plano-baseline.txt",
+      "originalSha256": "4e57b3a48cd937c26550932b1bbf463f3e38479533f4943935307b85cbed51d3",
+      "publishedSha256": "4e57b3a48cd937c26550932b1bbf463f3e38479533f4943935307b85cbed51d3"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\plano-optimized.txt",
+      "file": "reproducao/plano-optimized.txt",
+      "originalSha256": "9976cb539d32420883334d43b234560e33613523fbb59b195c56840e6c0ad87e",
+      "publishedSha256": "9976cb539d32420883334d43b234560e33613523fbb59b195c56840e6c0ad87e"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\trace-real.json",
+      "file": "reproducao/trace-real.json",
+      "originalSha256": "da6629fbb134bd22d02be9b4b1966622c4540c1f26e84de7d6ce14095c278be5",
+      "publishedSha256": "9f1840e8df8935d5e146e765bcbeee602367c521633a96ac083c0670b8dfa4d9"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\docker-resources.txt",
+      "file": "reproducao/docker-resources.txt",
+      "originalSha256": "0c5b9c4297c1dbe5996f4b250cb1ffbab78e223a99625d25087f97512fb2f58d",
+      "publishedSha256": "0c5b9c4297c1dbe5996f4b250cb1ffbab78e223a99625d25087f97512fb2f58d"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\docker-version.txt",
+      "file": "reproducao/docker-version.txt",
+      "originalSha256": "1c30142a7ed84b039337a90786f5a396ae0a3ea30612b84bf59b4284a5df9f5b",
+      "publishedSha256": "1c30142a7ed84b039337a90786f5a396ae0a3ea30612b84bf59b4284a5df9f5b"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\compose-version.txt",
+      "file": "reproducao/compose-version.txt",
+      "originalSha256": "ccc28fe8819b8036b8ea9df2e6e47a177b5f99eef4f84d241f04377e9606972e",
+      "publishedSha256": "ccc28fe8819b8036b8ea9df2e6e47a177b5f99eef4f84d241f04377e9606972e"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\k6-version.txt",
+      "file": "reproducao/k6-version.txt",
+      "originalSha256": "9b115c170641112b16dc5ca9c187e750561dfa92b358eec55959433da081ab6f",
+      "publishedSha256": "9b115c170641112b16dc5ca9c187e750561dfa92b358eec55959433da081ab6f"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\node-container.txt",
+      "file": "reproducao/node-container.txt",
+      "originalSha256": "926db3e51460795e6b3bc39124697e6a2dbc3c0347d30763c8773112408fca33",
+      "publishedSha256": "926db3e51460795e6b3bc39124697e6a2dbc3c0347d30763c8773112408fca33"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\docs\\evidencias\\postgres-container.txt",
+      "file": "reproducao/postgres-container.txt",
+      "originalSha256": "1b68216007e2499d4f5b2f28931d513f1eb208fd1d1ba7d65414647cf49a04b9",
+      "publishedSha256": "1b68216007e2499d4f5b2f28931d513f1eb208fd1d1ba7d65414647cf49a04b9"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\matrix.json",
+      "file": "matriz/matrix.json",
+      "originalSha256": "4647255edddce73a399223d7e8377aed082e6027579b6a13caa568a8312f8d1b",
+      "publishedSha256": "d8719d416d166710f01741185ec789303f58a1eb9a173b89b22389af09a6ae26"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index0-cache0-k6.json",
+      "file": "matriz/r1-index0-cache0-k6.json",
+      "originalSha256": "91a18e3f9c34540fa9ba53c7ae9c379fc300f6501f4b7f95c5c7de18de45ea1c",
+      "publishedSha256": "70ab67361117b708793c38b3ea821d607bb7bebb5a397f5d0b48dc50cb27f0e3"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index0-cache0-k6.txt",
+      "file": "matriz/r1-index0-cache0-k6.txt",
+      "originalSha256": "b68a68bdc3cd7075ab4fa38d281eb08e89587a31688d34c9a2e1a2b1e1ba170e",
+      "publishedSha256": "537d53413a66b3d399147481dae799ab58bc1ec5c7176e032f71c60c194f4d2a"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index0-cache0-plan.txt",
+      "file": "matriz/r1-index0-cache0-plan.txt",
+      "originalSha256": "4d66bc7ff092ff77125cde00b999a21a0ecb46be384e7198c9a61977a1ec0865",
+      "publishedSha256": "4d66bc7ff092ff77125cde00b999a21a0ecb46be384e7198c9a61977a1ec0865"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index0-cache0-metrics.prom",
+      "file": "matriz/r1-index0-cache0-metrics.prom",
+      "originalSha256": "f3aad4570826f7282a7d8a558fbed84daf47a04b0e1321c8f87a823ba2dc454b",
+      "publishedSha256": "f3aad4570826f7282a7d8a558fbed84daf47a04b0e1321c8f87a823ba2dc454b"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index0-cache0-resources.ndjson",
+      "file": "matriz/r1-index0-cache0-resources.ndjson",
+      "originalSha256": "d53b8f181d578cc26449e37cfea9e21a105f25907cbba0ce5b450a52415d8853",
+      "publishedSha256": "d53b8f181d578cc26449e37cfea9e21a105f25907cbba0ce5b450a52415d8853"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index1-cache0-k6.json",
+      "file": "matriz/r1-index1-cache0-k6.json",
+      "originalSha256": "52ab9585f56754e4c732395a6337669d329d7cb6c8e1dd4dea50c377131e74a6",
+      "publishedSha256": "2b56c61f7ac83714df802bbbec18027599d8d3077ae4a1e9907738120456f8a1"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index1-cache0-k6.txt",
+      "file": "matriz/r1-index1-cache0-k6.txt",
+      "originalSha256": "7b86157594b28da90c2b509e812ae10356d20ec052ffa9dc6b52dc8e1c8fcc53",
+      "publishedSha256": "d0a32e2977990b0b010bf092d49b190fffe415b8cb213a885f3ccad99207a6d4"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index1-cache0-plan.txt",
+      "file": "matriz/r1-index1-cache0-plan.txt",
+      "originalSha256": "7cc502af949fa4b7d57b2e68269856b77d01ff8dc7a0c1f96242085365796c71",
+      "publishedSha256": "7cc502af949fa4b7d57b2e68269856b77d01ff8dc7a0c1f96242085365796c71"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index1-cache0-metrics.prom",
+      "file": "matriz/r1-index1-cache0-metrics.prom",
+      "originalSha256": "c7d6c8d2af4cc8998e5c2166d680f9555d459e2d808381f430c08a940fe4699c",
+      "publishedSha256": "c7d6c8d2af4cc8998e5c2166d680f9555d459e2d808381f430c08a940fe4699c"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index1-cache0-resources.ndjson",
+      "file": "matriz/r1-index1-cache0-resources.ndjson",
+      "originalSha256": "95e861a4d326e92bf70175680f09f9bf26d3f1e146f198cf2feac9801618e609",
+      "publishedSha256": "95e861a4d326e92bf70175680f09f9bf26d3f1e146f198cf2feac9801618e609"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index0-cache1-k6.json",
+      "file": "matriz/r1-index0-cache1-k6.json",
+      "originalSha256": "d915ac9a6391057b37211cbf3bb205ae1d5628a9bfffd0373a9336e5a240fed9",
+      "publishedSha256": "5394521c1ae8a50323e3ccd9906bf7458d63b733016777643b29f20f7e1d9452"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index0-cache1-k6.txt",
+      "file": "matriz/r1-index0-cache1-k6.txt",
+      "originalSha256": "9a6b89bdd7c4b160cff6b9c3091787379db9d7625b0a6fcf688f791cd3f55ac0",
+      "publishedSha256": "2958240e2e22201f7c35eeeb6f5ffc6339d176c59f70cbcc48f94f3ea03e19b4"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index0-cache1-plan.txt",
+      "file": "matriz/r1-index0-cache1-plan.txt",
+      "originalSha256": "8b5e31eb49481262a77fda71217ae2b457a5c86e751808187ea71cca0dd5ada4",
+      "publishedSha256": "8b5e31eb49481262a77fda71217ae2b457a5c86e751808187ea71cca0dd5ada4"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index0-cache1-metrics.prom",
+      "file": "matriz/r1-index0-cache1-metrics.prom",
+      "originalSha256": "13cb6146dcb934c0455e6b77ab7f5fc9fe07d4486394aba18fdf9eaeef0da511",
+      "publishedSha256": "13cb6146dcb934c0455e6b77ab7f5fc9fe07d4486394aba18fdf9eaeef0da511"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index0-cache1-resources.ndjson",
+      "file": "matriz/r1-index0-cache1-resources.ndjson",
+      "originalSha256": "908ed888efbf310aa06495d8539eb7ca3f982c045b95d83f5cf689ac9cef5657",
+      "publishedSha256": "908ed888efbf310aa06495d8539eb7ca3f982c045b95d83f5cf689ac9cef5657"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index1-cache1-k6.json",
+      "file": "matriz/r1-index1-cache1-k6.json",
+      "originalSha256": "e1c04ee70187f2a838599bbec40b06a96d7cf98da8eeb066af291b1a3d5ee4e9",
+      "publishedSha256": "4e573df8da01b436f359f7339a372b53d0bd5b58d651ce73ec54222a84c7c219"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index1-cache1-k6.txt",
+      "file": "matriz/r1-index1-cache1-k6.txt",
+      "originalSha256": "8d52c24108a74ed5aa31e75026d05490314dbaf907914dcdf79885a136740744",
+      "publishedSha256": "a8273aad1ba07844faf31aa2274d04de2cbf41b3a4041f3c7a74a8df50d7ba79"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index1-cache1-plan.txt",
+      "file": "matriz/r1-index1-cache1-plan.txt",
+      "originalSha256": "12ffff28d45c393f3248c2620ab5e6f539880e585982de167b70c5eef8e8fe7a",
+      "publishedSha256": "12ffff28d45c393f3248c2620ab5e6f539880e585982de167b70c5eef8e8fe7a"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index1-cache1-metrics.prom",
+      "file": "matriz/r1-index1-cache1-metrics.prom",
+      "originalSha256": "275094b47ff6aa3ad2017735878dabf780614d48a554825b7053fc3f103f5876",
+      "publishedSha256": "275094b47ff6aa3ad2017735878dabf780614d48a554825b7053fc3f103f5876"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r1-index1-cache1-resources.ndjson",
+      "file": "matriz/r1-index1-cache1-resources.ndjson",
+      "originalSha256": "65dfad31043282d5dcf2e8c46ebc97651534b3cf615d15890e5db6eb4109644d",
+      "publishedSha256": "65dfad31043282d5dcf2e8c46ebc97651534b3cf615d15890e5db6eb4109644d"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index1-cache1-k6.json",
+      "file": "matriz/r2-index1-cache1-k6.json",
+      "originalSha256": "75c1914d465af2f4059c0623403a2bb8c766e6b371672b56e569e2617c76bba3",
+      "publishedSha256": "4a604cee8ab5cb9246765b6acca44ccc004559fc249f80407950825846cc8c8a"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index1-cache1-k6.txt",
+      "file": "matriz/r2-index1-cache1-k6.txt",
+      "originalSha256": "3a9e08c8cce36b0d5a46e3cba8b155e7051ac59a29fadaca29868d5e4f1abe58",
+      "publishedSha256": "9ae983234930b6e799f8b98f94d1b5d40713d6dbbabcb4201fa276091c9585c7"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index1-cache1-plan.txt",
+      "file": "matriz/r2-index1-cache1-plan.txt",
+      "originalSha256": "ea3272cc03ed33261b528f7b8e34877ffd2f5f96cb80c857c9ca85d97ce26d6d",
+      "publishedSha256": "ea3272cc03ed33261b528f7b8e34877ffd2f5f96cb80c857c9ca85d97ce26d6d"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index1-cache1-metrics.prom",
+      "file": "matriz/r2-index1-cache1-metrics.prom",
+      "originalSha256": "8602fb11fe8296cca48c323cccfd1c0da0b716a0d1e805c19cb49e6a95c1ff3f",
+      "publishedSha256": "8602fb11fe8296cca48c323cccfd1c0da0b716a0d1e805c19cb49e6a95c1ff3f"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index1-cache1-resources.ndjson",
+      "file": "matriz/r2-index1-cache1-resources.ndjson",
+      "originalSha256": "665dcc909a7ac71b9fa9129db9bfddcc0e4179dc27e622cb2d5132ed88e97a30",
+      "publishedSha256": "665dcc909a7ac71b9fa9129db9bfddcc0e4179dc27e622cb2d5132ed88e97a30"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index0-cache1-k6.json",
+      "file": "matriz/r2-index0-cache1-k6.json",
+      "originalSha256": "9bac7495a25726f9d61690cac46ae2bbf7ab7426878dc754e38376924a5e58ce",
+      "publishedSha256": "e18f8170dee18a1197e778ae197c49e3f89dc91f376dd77dc2505ee558a7bfa1"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index0-cache1-k6.txt",
+      "file": "matriz/r2-index0-cache1-k6.txt",
+      "originalSha256": "b0ea5523c3b31a489c61d1157e68f069bfd7a30662f282283f6c8446227a8ff5",
+      "publishedSha256": "59c1670e32fab27aa544ee8941f9b0a838cfb77b64e81af3a06309daf6ec9d92"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index0-cache1-plan.txt",
+      "file": "matriz/r2-index0-cache1-plan.txt",
+      "originalSha256": "991b8de5200832e36b78101c0a0d63c6b6915b4be6b975749ea7420f0ed40e93",
+      "publishedSha256": "991b8de5200832e36b78101c0a0d63c6b6915b4be6b975749ea7420f0ed40e93"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index0-cache1-metrics.prom",
+      "file": "matriz/r2-index0-cache1-metrics.prom",
+      "originalSha256": "10e65a42ccd2cad56335572099e8d4e00ec9749404869c269fede4e0f9703f83",
+      "publishedSha256": "10e65a42ccd2cad56335572099e8d4e00ec9749404869c269fede4e0f9703f83"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index0-cache1-resources.ndjson",
+      "file": "matriz/r2-index0-cache1-resources.ndjson",
+      "originalSha256": "59cdca19ef669b62e2129d434f76c942b77f64cf4b3c5f6f764569926a8a0449",
+      "publishedSha256": "59cdca19ef669b62e2129d434f76c942b77f64cf4b3c5f6f764569926a8a0449"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index1-cache0-k6.json",
+      "file": "matriz/r2-index1-cache0-k6.json",
+      "originalSha256": "7b505119106bb32c95b5296793cda7a5b0cf00281b8664473631d9c6dcff9644",
+      "publishedSha256": "4bcd9aff4542cc859a43ed4beeca3df5dc5be5afe9bc10e2f0839e9c330f1e3b"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index1-cache0-k6.txt",
+      "file": "matriz/r2-index1-cache0-k6.txt",
+      "originalSha256": "a98b0be94081767cfb13c3c45fedda1550a4dc9e239624032527dddf9d99db6a",
+      "publishedSha256": "670a558f46dba8e06fb5814e68efe9dc892fc6c0ef5d073665a1b3082950f6dd"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index1-cache0-plan.txt",
+      "file": "matriz/r2-index1-cache0-plan.txt",
+      "originalSha256": "d7fdec22f9392f0d37233842ad181f2c9f69e19c04de5b33b6d5f84c1a26e3d6",
+      "publishedSha256": "d7fdec22f9392f0d37233842ad181f2c9f69e19c04de5b33b6d5f84c1a26e3d6"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index1-cache0-metrics.prom",
+      "file": "matriz/r2-index1-cache0-metrics.prom",
+      "originalSha256": "65c6147af880988689dff4fc9e97c550aff838caa3c6007a11dce7f163cde47d",
+      "publishedSha256": "65c6147af880988689dff4fc9e97c550aff838caa3c6007a11dce7f163cde47d"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index1-cache0-resources.ndjson",
+      "file": "matriz/r2-index1-cache0-resources.ndjson",
+      "originalSha256": "773e8551b81e5cb2e5d3c16a17ae7379e9d31a4b2f547b1539fa8b0be5ecc1e1",
+      "publishedSha256": "773e8551b81e5cb2e5d3c16a17ae7379e9d31a4b2f547b1539fa8b0be5ecc1e1"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index0-cache0-k6.json",
+      "file": "matriz/r2-index0-cache0-k6.json",
+      "originalSha256": "cd5e2e86da8384d57ebfd5ee4c5347cedb20ab1ee06a93de8246b468a6e29bf3",
+      "publishedSha256": "7334ba390f6a9d4208214f38ad8194351ddf65f27e4210ffb8f0c1645fd26c15"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index0-cache0-k6.txt",
+      "file": "matriz/r2-index0-cache0-k6.txt",
+      "originalSha256": "a98803e5a8433f92f5b5ae030149b9215e07967dbbf255f4ea121536954e2ef1",
+      "publishedSha256": "ed0a822df91db793458b6c2794ed472011f4069ba975948f34e4d2089d6e6d3f"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index0-cache0-plan.txt",
+      "file": "matriz/r2-index0-cache0-plan.txt",
+      "originalSha256": "8f5e3fc73d0bf7f9b10d00bc61643024c872eb9a20de5ddf3c4cf1dfae978026",
+      "publishedSha256": "8f5e3fc73d0bf7f9b10d00bc61643024c872eb9a20de5ddf3c4cf1dfae978026"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index0-cache0-metrics.prom",
+      "file": "matriz/r2-index0-cache0-metrics.prom",
+      "originalSha256": "6973c21a70dbcac8ed482976194572bb791718465f38bc22f853fb39e10f886a",
+      "publishedSha256": "6973c21a70dbcac8ed482976194572bb791718465f38bc22f853fb39e10f886a"
+    },
+    {
+      "source": "tmp\\hardening-20261108\\fullcycle-projeto-a-marketplace-\\tmp\\benchmark-matrix\\r2-index0-cache0-resources.ndjson",
+      "file": "matriz/r2-index0-cache0-resources.ndjson",
+      "originalSha256": "f48b3de12e3212f8c430f048b6ac30f7aa999542ed79294328baf50f8e280b71",
+      "publishedSha256": "f48b3de12e3212f8c430f048b6ac30f7aa999542ed79294328baf50f8e280b71"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+# HELP http_requests_total Rate: contador HTTP; calcular taxa em janela.
+# TYPE http_requests_total counter
+http_requests_total{method="GET",route="/health",status="200"} 13
+http_requests_total{method="GET",route="/orders",status="200"} 1582
+http_requests_total{method="GET",route="/catalog/products",status="200"} 1582
+
+# HELP http_errors_total Errors: respostas HTTP >=400.
+# TYPE http_errors_total counter
+
+# HELP http_request_duration_seconds Duration: histograma de duração HTTP.
+# TYPE http_request_duration_seconds histogram
+http_request_duration_seconds_bucket{le="0.005",method="GET",route="/health",status="200"} 12
+http_request_duration_seconds_bucket{le="0.01",method="GET",route="/health",status="200"} 12
+http_request_duration_seconds_bucket{le="0.025",method="GET",route="/health",status="200"} 13
+http_request_duration_seconds_bucket{le="0.05",method="GET",route="/health",status="200"} 13
+http_request_duration_seconds_bucket{le="0.1",method="GET",route="/health",status="200"} 13
+http_request_duration_seconds_bucket{le="0.25",method="GET",route="/health",status="200"} 13
+http_request_duration_seconds_bucket{le="0.5",method="GET",route="/health",status="200"} 13
+http_request_duration_seconds_bucket{le="1",method="GET",route="/health",status="200"} 13
+http_request_duration_seconds_bucket{le="2",method="GET",route="/health",status="200"} 13
+http_request_duration_seconds_bucket{le="5",method="GET",route="/health",status="200"} 13
+http_request_duration_seconds_bucket{le="+Inf",method="GET",route="/health",status="200"} 13
+http_request_duration_seconds_sum{method="GET",route="/health",status="200"} 0.03299778
+http_request_duration_seconds_count{method="GET",route="/health",status="200"} 13
+http_request_duration_seconds_bucket{le="0.005",method="GET",route="/orders",status="200"} 0
+http_request_duration_seconds_bucket{le="0.01",method="GET",route="/orders",status="200"} 0
+http_request_duration_seconds_bucket{le="0.025",method="GET",route="/orders",status="200"} 117
+http_request_duration_seconds_bucket{le="0.05",method="GET",route="/orders",status="200"} 924
+http_request_duration_seconds_bucket{le="0.1",method="GET",route="/orders",status="200"} 1520
+http_request_duration_seconds_bucket{le="0.25",method="GET",route="/orders",status="200"} 1579
+http_request_duration_seconds_bucket{le="0.5",method="GET",route="/orders",status="200"} 1582
+http_request_duration_seconds_bucket{le="1",method="GET",route="/orders",status="200"} 1582
+http_request_duration_seconds_bucket{le="2",method="GET",route="/orders",status="200"} 1582
+http_request_duration_seconds_bucket{le="5",method="GET",route="/orders",status="200"} 1582
+http_request_duration_seconds_bucket{le="+Inf",method="GET",route="/orders",status="200"} 1582
+http_request_duration_seconds_sum{method="GET",route="/orders",status="200"} 80.10464990000001
+http_request_duration_seconds_count{method="GET",route="/orders",status="200"} 1582
+http_request_duration_seconds_bucket{le="0.005",method="GET",route="/catalog/products",status="200"} 1382
+http_request_duration_seconds_bucket{le="0.01",method="GET",route="/catalog/products",status="200"} 1520
+http_request_duration_seconds_bucket{le="0.025",method="GET",route="/catalog/products",status="200"} 1574
+http_request_duration_seconds_bucket{le="0.05",method="GET",route="/catalog/products",status="200"} 1575
+http_request_duration_seconds_bucket{le="0.1",method="GET",route="/catalog/products",status="200"} 1582
+http_request_duration_seconds_bucket{le="0.25",method="GET",route="/catalog/products",status="200"} 1582
+http_request_duration_seconds_bucket{le="0.5",method="GET",route="/catalog/products",status="200"} 1582
+http_request_duration_seconds_bucket{le="1",method="GET",route="/catalog/products",status="200"} 1582
+http_request_duration_seconds_bucket{le="2",method="GET",route="/catalog/products",status="200"} 1582
+http_request_duration_seconds_bucket{le="5",method="GET",route="/catalog/products",status="200"} 1582
+http_request_duration_seconds_bucket{le="+Inf",method="GET",route="/catalog/products",status="200"} 1582
+http_request_duration_seconds_sum{method="GET",route="/catalog/products",status="200"} 5.219576434000006
+http_request_duration_seconds_count{method="GET",route="/catalog/products",status="200"} 1582
+
+# HELP catalog_cache_requests_total Decisões reais do cache.
+# TYPE catalog_cache_requests_total counter
+catalog_cache_requests_total{result="bypass"} 1582
+
+# HELP payment_job_results_total Resultado real de entrega da fila.
+# TYPE payment_job_results_total counter
