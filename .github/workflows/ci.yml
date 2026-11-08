@@ -1,0 +1,49 @@
+name: CI Projeto A
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:17.11-alpine
+        env:
+          POSTGRES_DB: marketplace_test
+          POSTGRES_USER: marketplace_ci
+          POSTGRES_PASSWORD: ${{ github.run_id }}-${{ github.run_attempt }}
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U marketplace_ci -d marketplace_test"
+          --health-interval 3s --health-timeout 3s --health-retries 20
+    env:
+      APP_ENV: test
+      OTEL_SDK_DISABLED: 'true'
+      PGHOST: 127.0.0.1
+      PGPORT: 5432
+      PGDATABASE: marketplace_test
+      PGUSER: marketplace_ci
+      PGPASSWORD: ${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.2
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm run openapi:lint
+      - run: npm run sca
+      - run: npm test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 7

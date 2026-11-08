@@ -1,0 +1,26 @@
+{
+  "name": "fullcycle-projeto-a-marketplace", "version": "1.0.0", "private": true, "type": "module",
+  "engines": { "node": ">=24.19.0 <25", "npm": ">=11 <12" },
+  "scripts": {
+    "build": "tsc", "start": "node --env-file-if-exists=.env --import ./scripts/instrumentation.mjs scripts/start.mjs",
+    "env:init": "node scripts/init-env.mjs",
+    "lint": "eslint . && node scripts/check-boundaries.mjs",
+    "boundaries": "node scripts/check-boundaries.mjs",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.tests.json",
+    "test": "vitest run --coverage", "test:unit": "vitest run tests/unit", "test:integration": "vitest run tests/integration tests/contract",
+    "openapi:lint": "redocly lint docs/openapi.yaml", "sca": "npm audit --audit-level=moderate",
+    "seed": "node --env-file-if-exists=.env scripts/seed.mjs", "demo": "node --env-file-if-exists=.env scripts/demo.mjs",
+    "validate:local": "node scripts/validate-local.mjs"
+  },
+  "dependencies": {
+    "fastify": "5.12.8", "pg": "8.23.1", "@prometheus-io/client": "0.16.1",
+    "@opentelemetry/api": "1.10.0", "@opentelemetry/sdk-node": "0.301.0",
+    "@opentelemetry/exporter-trace-otlp-http": "0.301.0", "@opentelemetry/resources": "3.1.0"
+  },
+  "overrides": { "minimatch": "11.0.5" },
+  "devDependencies": {
+    "@eslint/js": "10.0.1", "@redocly/cli": "2.76.0", "@types/node": "^24.0.0", "@types/pg": "^8.15.0",
+    "@vitest/coverage-v8": "5.1.0", "ajv": "^8.17.1", "ajv-formats": "^3.0.1",
+    "eslint": "10.14.0", "typescript": "5.9.3", "typescript-eslint": "8.72.1", "vitest": "5.1.0", "yaml": "^2.8.0"
+  }
+}

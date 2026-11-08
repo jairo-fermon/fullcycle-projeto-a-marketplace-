@@ -1,0 +1,89 @@
+name: fullcycle-a-marketplace
+services:
+  db:
+    image: postgres:17.11-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-marketplace}
+      POSTGRES_USER: ${POSTGRES_USER:-marketplace}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Execute npm run env:init}
+    volumes: [marketplace-data:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+  jaeger:
+    image: jaegertracing/jaeger:2.23.0
+    ports: ['127.0.0.1:${JAEGER_PORT:-16687}:16686']
+    restart: unless-stopped
+  app:
+    image: ${APP_IMAGE:-fullcycle-a-marketplace-app:local}
+    build:
+      context: .
+      target: runtime
+    environment:
+      PGHOST: db
+      PGPORT: 5432
+      PGDATABASE: ${POSTGRES_DB:-marketplace}
+      PGUSER: ${POSTGRES_USER:-marketplace}
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Execute npm run env:init}
+      PORT: ${PORT:-3001}
+      HOST: 0.0.0.0
+      APP_ENV: ${APP_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      CATALOG_CACHE_ENABLED: ${CATALOG_CACHE_ENABLED:-true}
+      CACHE_TTL_MS: ${CACHE_TTL_MS:-5000}
+      PAYMENT_PROCESSING_ENABLED: ${PAYMENT_PROCESSING_ENABLED:-true}
+      WORKER_INTERVAL_MS: ${WORKER_INTERVAL_MS:-100}
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4318
+      OTEL_BSP_SCHEDULE_DELAY: 1000
+    ports: ['127.0.0.1:${PORT:-3001}:${PORT:-3001}']
+    depends_on:
+      db: { condition: service_healthy }
+      jaeger: { condition: service_started }
+    healthcheck:
+      test: [CMD, node, -e, 'fetch("http://127.0.0.1:"+process.env.PORT+"/health").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))']
+      interval: 3s
+      timeout: 3s
+      retries: 30
+    init: true
+    restart: unless-stopped
+  test-db:
+    profiles: [test]
+    image: postgres:17.11-alpine
+    environment:
+      POSTGRES_DB: marketplace_test
+      POSTGRES_USER: ${POSTGRES_USER:-marketplace}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Execute npm run env:init}
+    tmpfs: [/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$$POSTGRES_USER" -d marketplace_test']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  tests:
+    profiles: [test]
+    build: { context: ., target: test }
+    environment:
+      PGHOST: test-db
+      PGPORT: 5432
+      PGDATABASE: marketplace_test
+      PGUSER: ${POSTGRES_USER:-marketplace}
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Execute npm run env:init}
+      APP_ENV: test
+      OTEL_SDK_DISABLED: 'true'
+    volumes: [./coverage:/app/coverage]
+    depends_on:
+      test-db: { condition: service_healthy }
+  k6:
+    profiles: [tools]
+    image: grafana/k6:1.3.0
+    environment:
+      BASE_URL: http://app:${PORT:-3001}
+    volumes: [./scripts/k6-load.js:/scripts/load.js:ro, ./docs/evidencias:/results]
+    command: [run, --summary-export=/results/k6-summary.json, /scripts/load.js]
+    depends_on:
+      app: { condition: service_healthy }
+volumes:
+  marketplace-data:
