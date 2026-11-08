@@ -1,6 +1,6 @@
 # Gate de aceite - Projeto A
 
-Data: 08/11/2026, America/Sao_Paulo. Revisão do fluxo, testes e validador: `3f55622`; ciclo completo **PASSOU**, de 12:45:14 a 12:49:08, com banco inicialmente vazio. Horários, comandos e resultados em `evidencias/validacao-local.json`. Cobertura medida: **98,06% linhas e 95,47% branches**. P95 de pedidos **172,85 -> 4,30 ms** e catálogo **18,41 -> 2,38 ms**, zero erros; métricas comprovam configurações distintas. Publicação/CI remoto ainda não executados; aprovação humana e envio ao Moodle pendentes.
+Data: 08/11/2026, America/Sao_Paulo. Revisão do fluxo, testes e validador: `3f55622`; ciclo completo **PASSOU**, de 12:45:14 a 12:49:08, com banco inicialmente vazio. Horários, comandos e resultados em `evidencias/validacao-local.json`. Cobertura medida: **98,06% linhas e 95,47% branches**. P95 de pedidos **172,85 -> 4,30 ms** e catálogo **18,41 -> 2,38 ms**, zero erros; métricas comprovam configurações distintas. Publicação expressamente autorizada e executada. [CI remoto PASSOU](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42497720872) no commit `b6ca03b`, árvore idêntica à candidata local `32fa2a1`. Aprovação humana do A e envio ao Moodle pendentes.
 
 M1 35, M2 20, M3 15, M4 30 são pesos dos módulos oficiais inteiros. Não há subpesos oficiais inventados nem nota garantida/estimada nesta etapa. Projeto B aprovado foi preservado em repositório/pasta distintos.
 
@@ -13,7 +13,7 @@ M1 35, M2 20, M3 15, M4 30 são pesos dos módulos oficiais inteiros. Não há s
 | M1 / 35: SOLID, design pattern e Database Pattern | OrderService/CatalogPort/OrderRepository; Strategy; repositories | Inspecionar código/ADR e rodar unitários/integração | qualidade.txt; ADR 0001 | PASSOU | Exemplos concretos, sem afirmar que cada classe prova todos os princípios. |
 | M2 / 20: unitários, integração e contrato | tests/unit, integration e contract | npm test em PostgreSQL isolado | qualidade.txt | PASSOU | 42 unitários, 14 integrações e 2 de contrato; falhas injetadas só em testes. |
 | M2 / 20: coverage declarado e bloqueante | vitest.config.ts inclui src inteiro | npm test --coverage incorporado ao script | coverage-summary.json | PASSOU | Mínimos 80% linhas/75% branches; bootstrap/scripts fora de src têm validação de execução própria. |
-| M2 / 20: CI verde com install/lint/test/coverage | .github/workflows/ci.yml | Sequência equivalente em contêiner; publicar e acompanhar execução remota | qualidade.txt; sem URL de CI remoto ainda | BLOQUEADO | Controles locais passaram; URL verde depende de publicação expressamente autorizada e execução GitHub. |
+| M2 / 20: CI verde com install/lint/test/coverage | .github/workflows/ci.yml | GitHub Actions em PostgreSQL isolado | [CI success](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42497720872), ci-github.json, ci-testes-resumo.txt | PASSOU | 58 testes, 98,06% linhas/95,47% branches; carga/seed/trace são verificações locais separadas. |
 | M3 / 15: SCA bloqueante | npm run sca, lockfile, workflow | npm audit --audit-level=moderate | qualidade.txt: zero vulnerabilidades | PASSOU | Consulta temporal do registry; vulnerabilidades futuras podem surgir. O controle também está no workflow. |
 | M3 / 15: dois ambientes e segredos externos | .env.example, config.ts, compose.production.yml | Promover production local e retornar development | config-production.txt, config-development.txt, validacao-local.json | PASSOU | Configurações locais reais; não alegar cloud/HA. .env não deve ser versionado. |
 | M3 / 15: logs estruturados e RED | platform/observability.ts, app.ts | HTTP real, logs e GET /metrics | logs-json-amostra.txt, metrics-baseline.prom, metrics-optimized.prom, qualidade.txt | PASSOU | Amostra identificada de log real; contadores reiniciam com processo; Prometheus externo não implantado. |
@@ -27,7 +27,8 @@ M1 35, M2 20, M3 15, M4 30 são pesos dos módulos oficiais inteiros. Não há s
 | M4 / 30: fila idempotente, retry e falha | payments/repository.ts, orders.markPaid | Concorrência, entrega duplicada, falha após efeito e limite de três entregas | qualidade.txt, demonstracao.txt, trace-real.json | PASSOU | Pelo menos uma vez com efeito idempotente; não transação distribuída/exatamente uma vez. |
 | M4 / 30: k6 três estágios, antes/depois e gargalo | scripts/k6-load.js, optimize.mjs, índice 002 | Mesmo conjunto/cenário; EXPLAIN ANALYZE e métricas reais | plano-*.txt, k6-*.json, metrics-*.prom | PASSOU | Comparação combina índice e cache; planos sustentam mecanismo, sem atribuição isolada ou extrapolação para produção. |
 | Entrega transversal: README, CONTRIBUTORS e IA | README.md, CONTRIBUTORS.md, docs/ia.md | Revisar contra execução/decisões do aluno | Documentos e Git real | PASSOU | Aprendizado e revisão humana não presumidos; sem PDFs definitivos nesta etapa. |
-| Entrega: repositório/CI e Moodle | Ação autorizada e execução remota | Publicar, obter URL verde e comprovante de envio | Repositório criado pelo aluno; sem CI/comprovante ainda | BLOQUEADO | Não há autorização de A publicada nem comprovação de submissão oficial. |
+| Entrega: repositório e CI | Publicação autorizada pelo aluno, árvore conferida | Conector GitHub, fetch e diff --exit-code | ci-github.json; [CI success](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42497720872) | PASSOU | Arquivos públicos revisados; .env e log integral excluídos. |
+| Entrega: Moodle | Submissão pelo aluno | Anexar/linkar entrega e obter comprovante | Sem comprovante de envio | BLOQUEADO | Publicação no GitHub não equivale a submissão oficial. |
 
 ## Correção de preparação do benchmark
 
@@ -37,7 +38,7 @@ O resultado canônico deve ter sourceCommit 3f55622 ou posterior e status PASSOU
 
 ## Próximos passos do gate
 
-1. Revisar documentação/evidências e autorizar expressamente publicação do A no repositório público informado. A autorização anterior de publicação era do B.
-2. Executar e verificar CI remoto, corrigindo eventual falha; só então atualizar esta matriz com URL success.
+1. Publicação do A autorizada literalmente pelo aluno e concluída; código e evidências estão no repositório público correto, com hífen final.
+2. CI remoto verificado como success no código validado; esta matriz registra URL e metadados. Alterações posteriores de documentação também disparam CI e seu resultado final será informado separadamente, sem referência circular neste arquivo.
 3. Conferir a revisão final identificada e preservar B. Não iniciar auditoria comparativa/PDFs antes da aprovação humana literal: `APROVO O PROJETO A; INICIAR AUDITORIA E APRESENTAÇÕES`.
 4. Apresentação do aluno em 13/11; Moodle, ensaio e avaliação independente continuam ações futuras sem comprovante.

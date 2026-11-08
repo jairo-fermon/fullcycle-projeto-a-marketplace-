@@ -48,7 +48,7 @@ Complemento: C4 de contexto mostra pessoa/sistema; contêiner mostra aplicação
 
 Se a execução ao vivo falhar, mostrar arquivos datados do ciclo real: demonstracao.txt, seed-sql.txt, qualidade.txt, trace-real.json, plano-baseline.txt, plano-optimized.txt e os resumos k6, explicando que são registros de 08/11. Mostrar health/logs para investigar a falha atual, sem apresentar arquivo como resposta nova da API.
 
-`npm run validate:local -- --clean` repete o gate com banco vazio, mas apaga dados locais somente do A e altera temporariamente índice/cache durante a medição. Não executar sem compreender esse efeito. CI remoto só pode ser mostrado como verde quando houver URL verificada; consultar a matriz de aceite atualizada.
+`npm run validate:local -- --clean` repete o gate com banco vazio, mas apaga dados locais somente do A e altera temporariamente índice/cache durante a medição. Não executar sem compreender esse efeito. [CI remoto verificado como success](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42497720872), 58 testes aprovados. Consultar também a matriz de aceite e o commit final informado na entrega; evidências locais de seed/carga/trace não são etapas desse workflow.
 
 ## Próximo gate
 

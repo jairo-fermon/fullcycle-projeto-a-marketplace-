@@ -47,6 +47,10 @@ Não houve host dedicado ou reserva exclusiva de CPU; navegador, Codex, serviço
 
 Cache tolera desatualização no TTL documentado (padrão 5 s desde inserção, mais consulta em voo), limita 100 chaves e invalida ao cadastrar produto. Preço para criar pedido sempre é consultado sem cache; não confundir desempenho de consulta com integridade de valores de compra.
 
+## CI e escopo da evidência
+
+[CI do código validado: success](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42497720872), 58 testes e cobertura 98,06% linhas/95,47% branches. O workflow verifica qualidade/SCA/testes com PostgreSQL; os números de k6, seed, trace e deploy deste relatório foram medidos no ciclo local identificado acima. Publicação não transforma medições locais em medições do runner GitHub.
+
 ## Reprodução
 
 ```powershell

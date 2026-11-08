@@ -1,0 +1,29 @@
+Resumo selecionado do log real; codigos ANSI e espacos finais removidos para legibilidade.
+Fonte: https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42497720872; job 128783566304; commit b6ca03bea68972ff17fc0408cb297de01376b71a
+Coleta: 2026-11-08T16:02:45.356Z; resultado success
+Este arquivo nao e o log integral. Cada linha selecionada preserva timestamp e texto.
+2026-11-08T16:01:35.2771428Z found 0 vulnerabilities
+2026-11-08T16:01:35.3395967Z ##[group]Run npm run lint
+2026-11-08T16:01:35.3396166Z npm run lint
+2026-11-08T16:01:35.4184330Z > fullcycle-projeto-a-marketplace@1.0.0 lint
+2026-11-08T16:01:35.4184779Z > eslint . && node scripts/check-boundaries.mjs
+2026-11-08T16:01:36.5740684Z PASSOU: fronteiras públicas, direção de dependências e SQL por módulo.
+2026-11-08T16:01:36.5940445Z ##[group]Run npm run typecheck
+2026-11-08T16:01:36.5940647Z npm run typecheck
+2026-11-08T16:01:39.1582271Z > fullcycle-projeto-a-marketplace@1.0.0 typecheck
+2026-11-08T16:01:39.1620906Z ##[group]Run npm run build
+2026-11-08T16:01:39.1621210Z npm run build
+2026-11-08T16:01:40.4672694Z ##[group]Run npm run openapi:lint
+2026-11-08T16:01:40.4672948Z npm run openapi:lint
+2026-11-08T16:01:40.5454328Z > fullcycle-projeto-a-marketplace@1.0.0 openapi:lint
+2026-11-08T16:01:40.5454758Z > redocly lint docs/openapi.yaml
+2026-11-08T16:01:40.6996176Z validating docs/openapi.yaml...
+2026-11-08T16:01:40.7423564Z docs/openapi.yaml: validated in 42ms
+2026-11-08T16:01:40.7424074Z You have 4 warnings.
+2026-11-08T16:01:41.0949664Z ##[group]Run npm run sca
+2026-11-08T16:01:41.0949856Z npm run sca
+2026-11-08T16:01:41.5343111Z found 0 vulnerabilities
+2026-11-08T16:01:44.8465773Z  ✓ tests/unit/boundaries.test.mjs (4 tests) 9ms
+2026-11-08T16:01:44.8886334Z  Test Files  8 passed (8)
+2026-11-08T16:01:44.8886951Z       Tests  58 passed (58)
+2026-11-08T16:01:44.8933163Z All files          |   97.95 |    95.47 |     100 |   98.06 |

@@ -6,7 +6,7 @@ Trabalho individual de Jairo Fermon. Projeto independente do B, com banco, volum
 
 ## Estado e leitura inicial
 
-Validação técnica local executada em 08/11/2026: [matriz de aceite](docs/ACEITE_A.md), [desempenho](docs/desempenho.md) e [demonstração](docs/DEMONSTRACAO.md). O aluno criou o [repositório público do A](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-), com hífen final no nome. Publicação e CI remoto ainda aguardam autorização/execução; não confundir pipeline escrito com execução verde.
+Validação técnica local executada em 08/11/2026: [matriz de aceite](docs/ACEITE_A.md), [desempenho](docs/desempenho.md) e [demonstração](docs/DEMONSTRACAO.md). O aluno criou o [repositório público do A](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-), com hífen final no nome. Publicação autorizada pelo aluno e executada. **[CI remoto PASSOU](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42497720872)**, revisão `b6ca03b`, com árvore igual à candidata local `32fa2a1`. Os 58 testes, lint/fronteiras, tipos, build, OpenAPI e SCA passaram no GitHub; seed/carga/trace/deploy têm evidências locais próprias. [Metadados e comandos de conferência](docs/evidencias/ci-github.json).
 
 ## Preparação e subida
 
@@ -94,7 +94,7 @@ Mínimos declarados: **80% linhas e 75% branches** em todo `src/`, fiscalizados 
 
 Alternativa local: `npm ci`, `npm run lint`, `npm run typecheck`, `npm run build`, `npm run test:unit`, `npm run openapi:lint`, `npm run sca`. Integração requer PGHOST/PGPORT/PGDATABASE/PGUSER/PGPASSWORD e APP_ENV=test externos. `npm start` também permite execução local configurada por essas variáveis; não imprimir credenciais em comandos/histórico.
 
-SCA usa `npm audit --audit-level=moderate` e falha em alerta moderado ou superior, incluindo desenvolvimento. O override minimatch 11.0.5 corrige vulnerabilidade transitiva das ferramentas de lint, revalidada com testes; não suprime alerta. CI instala, faz lint/fronteiras, tipos, build, OpenAPI, SCA e testes com banco real. Status verde só será declarado após execução GitHub efetiva.
+SCA usa `npm audit --audit-level=moderate` e falha em alerta moderado ou superior, incluindo desenvolvimento. O override minimatch 11.0.5 corrige vulnerabilidade transitiva das ferramentas de lint, revalidada com testes; não suprime alerta. CI instala, faz lint/fronteiras, tipos, build, OpenAPI, SCA e testes com banco real. [Execução GitHub verificada: success](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42497720872), com 58 testes e cobertura 98,06% linhas / 95,47% branches. Os quatro avisos de estilo OpenAPI permanecem documentados.
 
 ## Ambientes, feature flag e estratégia de deploy
 
