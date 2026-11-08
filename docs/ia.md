@@ -27,3 +27,7 @@ Foram executados HTTP e SQL reais, testes de crash após efeito, recuperação i
 ## Revisão humana pendente
 
 O aluno ainda precisa revisar ADR/fronteiras, explicar entrega pelo menos uma vez, preço sem cache, p95, trace e limitações do deploy local. Não há declaração de ensaio ou aprendizado concluído. Aprovação do A e autorização de auditoria/apresentações devem ser registradas separadamente.
+
+## Gate de auditoria confirmado
+
+O aluno aprovou literalmente o B e o A, encerrando os gates de implementação, e autorizou auditoria/apresentações. A pré-auditoria repetiu o ciclo em checkout limpo, registrou as novas medições e corrigiu textos históricos de estado. Os resultados não constituem avaliação independente. Ensaio, aprendizado, tempo real de fala e Moodle não estão comprovados. A assistência continua declarada.

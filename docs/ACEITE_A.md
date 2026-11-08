@@ -1,6 +1,6 @@
 # Gate de aceite - Projeto A
 
-Data: 08/11/2026, America/Sao_Paulo. Revisão do fluxo, testes e validador: `3f55622`; ciclo completo **PASSOU**, de 12:45:14 a 12:49:08, com banco inicialmente vazio. Horários, comandos e resultados em `evidencias/validacao-local.json`. Cobertura medida: **98,06% linhas e 95,47% branches**. P95 de pedidos **172,85 -> 4,30 ms** e catálogo **18,41 -> 2,38 ms**, zero erros; métricas comprovam configurações distintas. Publicação expressamente autorizada e executada. [CI remoto PASSOU](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42497720872) no commit `b6ca03b`, árvore idêntica à candidata local `32fa2a1`. Aprovação humana do A e envio ao Moodle pendentes.
+Data: 08/11/2026, America/Sao_Paulo. Revisão do fluxo, testes e validador: `3f55622`; ciclo completo **PASSOU**, de 12:45:14 a 12:49:08, com banco inicialmente vazio. Horários, comandos e resultados em `evidencias/validacao-local.json`. Cobertura medida: **98,06% linhas e 95,47% branches**. P95 de pedidos **172,85 -> 4,30 ms** e catálogo **18,41 -> 2,38 ms**, zero erros; métricas comprovam configurações distintas. Publicação expressamente autorizada e executada. [CI remoto PASSOU](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42497720872) no commit `b6ca03b`, árvore idêntica à candidata local `32fa2a1`. O aluno aprovou o A e autorizou auditoria/apresentações. [Repetição limpa e estado atual](FECHAMENTO_AUDITORIA.md). Ensaio e envio ao Moodle sem comprovante.
 
 M1 35, M2 20, M3 15, M4 30 são pesos dos módulos oficiais inteiros. Não há subpesos oficiais inventados nem nota garantida/estimada nesta etapa. Projeto B aprovado foi preservado em repositório/pasta distintos.
 
@@ -40,5 +40,5 @@ O resultado canônico deve ter sourceCommit 3f55622 ou posterior e status PASSOU
 
 1. Publicação do A autorizada literalmente pelo aluno e concluída; código e evidências estão no repositório público correto, com hífen final.
 2. CI remoto verificado como success no código validado; esta matriz registra URL e metadados. Alterações posteriores de documentação também disparam CI e seu resultado final será informado separadamente, sem referência circular neste arquivo.
-3. Conferir a revisão final identificada e preservar B. Não iniciar auditoria comparativa/PDFs antes da aprovação humana literal: `APROVO O PROJETO A; INICIAR AUDITORIA E APRESENTAÇÕES`.
+3. Conferir a revisão final identificada e preservar B. O gate literal `APROVO O PROJETO A; INICIAR AUDITORIA E APRESENTAÇÕES` foi cumprido pelo aluno. A pré-auditoria e os materiais ficam no pacote separado, mantendo as baselines aprovadas.
 4. Apresentação do aluno em 13/11; Moodle, ensaio e avaliação independente continuam ações futuras sem comprovante.

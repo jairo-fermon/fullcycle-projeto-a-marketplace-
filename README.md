@@ -149,4 +149,4 @@ O benchmark remove e restaura temporariamente o índice de leitura e recria o ap
 - Cache não é global entre réplicas; desenho usa uma instância. SLO de 35 s é evidência controlada, não contrato mensal ou capacidade máxima.
 - Linter OpenAPI pode emitir avisos de estilo por localhost, licença não definida e rotas técnicas sem 4xx. Regras recomendadas permanecem ativas; não inventar licença/deploy/resposta para silenciar aviso.
 
-[CONTRIBUTORS](CONTRIBUTORS.md), [uso de IA](docs/ia.md) e [roteiro técnico](docs/DEMONSTRACAO.md). Revisão humana do A e submissão ao Moodle ainda não ocorreram. Auditoria comparativa e PDFs definitivos aguardam o próximo gate literal do briefing.
+[CONTRIBUTORS](CONTRIBUTORS.md), [uso de IA](docs/ia.md) e [roteiro técnico](docs/DEMONSTRACAO.md). O aluno aprovou o A e autorizou auditoria/apresentações. [Fechamento da pré-auditoria e repetição limpa](docs/FECHAMENTO_AUDITORIA.md). O pacote final separado reúne os materiais de apoio. Ensaio e envio ao Moodle permanecem sem comprovante.

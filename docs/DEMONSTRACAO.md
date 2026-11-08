@@ -52,4 +52,4 @@ Se a execução ao vivo falhar, mostrar arquivos datados do ciclo real: demonstr
 
 ## Próximo gate
 
-Após revisão e aprovação do A: `APROVO O PROJETO A; INICIAR AUDITORIA E APRESENTAÇÕES`. Essa etapa futura inclui comparação, PDFs, perguntas de banca e ensaio; ainda não foi realizada.
+O aluno enviou `APROVO O PROJETO A; INICIAR AUDITORIA E APRESENTAÇÕES`. A pré-auditoria e os PDFs de apoio ficam no pacote final separado. Ensaio com o aluno, tempo real da fala e avaliação independente ainda não estão comprovados.

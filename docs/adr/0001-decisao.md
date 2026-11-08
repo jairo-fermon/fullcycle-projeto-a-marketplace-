@@ -1,6 +1,6 @@
 # ADR 0001 - Monólito modular com Repository, Strategy e fila PostgreSQL
 
-Data: 08/11/2026. Status: implementada e testada; revisão humana no gate A pendente.
+Data: 08/11/2026. Status: implementada e testada; gate humano aprovado; domínio oral ainda depende de ensaio.
 
 ## Contexto e exigência
 
