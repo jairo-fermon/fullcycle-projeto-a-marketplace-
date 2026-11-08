@@ -14,7 +14,7 @@ Ciclo canônico: **08/11/2026, 12:45:14-12:49:08 UTC-03:00**, código/validador 
 | plano-baseline.txt, plano-optimized.txt | EXPLAIN ANALYZE real sem/com índice; mostram gargalo/intervenção. |
 | config-baseline.txt, config-optimized.txt, k6-baseline.txt, k6-optimized.txt | Mesmo cenário/carga com configuração preservada inclusive ao iniciar k6. |
 | k6-baseline.json, k6-optimized.json | Resultados reais dos três estágios por cenário; k6-summary.json contém a última fase. |
-| metrics-baseline.prom, metrics-optimized.prom, logs-json.txt | RED e estado do cache: bypass no baseline, hit/miss no otimizado; JSON com correlação. |
+| metrics-baseline.prom, metrics-optimized.prom, logs-json-amostra.txt | RED/cache (bypass no baseline, hit/miss no otimizado) e amostra identificada de JSON real com correlação. Log integral fica local em logs-json.txt, ignorado para não versionar milhares de linhas redundantes. |
 | node-container.txt, postgres-container.txt, docker-version.txt, docker-resources.txt, compose-version.txt, k6-version.txt | Versões/recursos efetivos; não versões presumidas. |
 | c4-render.json | Comandos/versão Mermaid, dimensões/hashes dos dois PNGs e inspeção visual. |
 

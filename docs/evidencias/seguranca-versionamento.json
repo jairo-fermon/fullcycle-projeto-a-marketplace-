@@ -1,0 +1,19 @@
+{
+  "collectedAt": "2026-11-08T15:54:13.226227+00:00",
+  "commands": [
+    "git ls-files -z",
+    "git check-ignore --quiet .env",
+    "revisao de conteudo, fixtures, ativos e links"
+  ],
+  "filesReviewed": 113,
+  "binaryAssetsVisuallyReviewed": [
+    "docs/c4/conteiner.png",
+    "docs/c4/contexto.png"
+  ],
+  "envIgnored": true,
+  "realEnvTracked": false,
+  "credentialPatternFindings": [],
+  "brokenLocalMarkdownLinks": [],
+  "status": "PASSOU",
+  "scope": "Revisao dos arquivos versionados e padroes de credencial; nao garantia matematica de ausencia de segredo."
+}
