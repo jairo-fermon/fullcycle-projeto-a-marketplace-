@@ -39,3 +39,7 @@ O aluno aprovou literalmente o B e o A, encerrando os gates de implementação, 
 ## Resultado local do hardening A
 
 Reprodução GitHub ca2ade9 isolada, seed100mil repetida, fluxo/trace real, ambientes/flag/config rollback, qualidade candidata58 testes e matriz4configurações×2rodadas em ordem inversa executados. Scripts medidos com SHA-256 no matrix.json. Negócio/testes/dependências/infra preservados. Sem causa comprovada para pico antigo; não atribuído a GC/CPU/cache/worker. Coberturas de banco test inicializado e novo preservadas. Tempos sintéticos do teste de log não são medição HTTP. B intacto. Nova publicação/CI A requer autorização específica; fechamento global exige novo gate literal. Sem nota oficial, ensaio concluído ou Moodle enviado.
+
+## Publicação do hardening A autorizada
+
+O aluno respondeu “Autorizo publicar o hardening do A e executar o CI”. Candidata040d9d2 publicada4e59721 com árvore9946461adebf1dd1c46301cf68c91cff5acfe746 igual; CI42514607401 success,58 testes98,06%linhas95,47%branches. Este fechamento documental exige CI própria, conferida no certificado externo de SHA final. Não houve envio de .env/log integral, nem nova autorização para fechamento global/apresentações. Próximo gate: APROVO O HARDENING DO A; INICIAR FECHAMENTO E APRESENTAÇÕES.

@@ -20,7 +20,8 @@ Registros de execução real, exceto teste de log lento explicitamente sintétic
 | diagnostico-k6-teste.json / verificar-diagnostico-k6.mjs | VM sintética, headers string/array/log >500ms/sem payload; 600ms artificial não é benchmark |
 | manifesto.json | Origens e SHA-256 original/versionado; só UTF-8/BOM/LF/whitespace final normalizados |
 | revisao-candidata.json | Escopo/segredos/links antes do commit, não substitui CI |
+| ci-ajustes.json / ci-ajustes-resumo.txt | Publicação autorizada4e59721, árvore igual à candidata040d9d2, CI42514607401 success58 testes; fechamento documental requer CI própria |
 
 Scripts suplementares registram o procedimento; alguns caminhos pertencem a este computador. Professor deve seguir README/scripts oficiais da raiz. Logs integrais, `.env`, node_modules e coverage completo ficam ignorados em tmp. As evidências antigas da pasta-mãe continuam históricas. `reproducao/k6-baseline.json` e `reproducao/k6-optimized.json` são o par correto inicial; k6-summary genérico foi sobrescrito pela matriz e não foi copiado.
 
-Trace de pagamento coletado no ciclo inicial. Sem requisição >500ms na matriz, não há slow trace novo alegado. Nenhuma CI nova é apresentada antes de autorização/publicação. Não foram fabricados dados para preencher ausências.
+Trace de pagamento coletado no ciclo inicial. Sem requisição >500ms na matriz, não há slow trace novo alegado. A CI dos ajustes foi consultada após autorização/publicação; o certificado externo identifica SHA/CI do fechamento documental final. Não foram fabricados dados para preencher ausências.

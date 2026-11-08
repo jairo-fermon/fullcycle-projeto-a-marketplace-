@@ -6,7 +6,7 @@ Trabalho individual de Jairo Fermon. Projeto independente do B, com banco, volum
 
 ## Estado e leitura inicial
 
-Baseline pública conferida: [repositório do A](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-), com hífen final, commit `ca2ade99c6c9c6b6be541fad59ad5aee7b77b831` e [CI dessa revisão: success](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42499111933). Essa execução aprovou 58 testes, 98,06% linhas/95,47% branches, fronteiras, contrato, OpenAPI e SCA. O [relatório de hardening](RELATORIO_HARDENING_A.md) distingue a nova candidata local, as medições e a publicação/CI que ainda dependem de autorização específica.
+Hardening publicado no [repositório do A](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-), com hífen final: commit de ajustes `4e59721e2321b4308c8024c9064482ddb562f42f`, [CI dessa revisão: success](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42514607401). Foram aprovados 58 testes, 98,06% linhas/95,47% branches, fronteiras, contratos, OpenAPI e SCA. O [relatório](RELATORIO_HARDENING_A.md) preserva a baseline ca2ade9 e identifica reprodução e oito cargas locais reais. O fechamento documental passa por CI própria; conferir o SHA atual no [workflow de main](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/workflows/ci.yml?query=branch%3Amain) e no certificado externo entregue ao aluno.
 
 As [evidências anteriores](docs/ACEITE_A.md) e o [desempenho histórico](docs/desempenho.md) permanecem identificados. O máximo de 6.165,86 ms observado em uma repetição não é seu p95 e deve ser considerado junto dos demais indicadores. Não extrapolar medições locais curtas para produção. Ensaio e Moodle ainda não têm comprovante.
 
@@ -143,7 +143,7 @@ Mínimos declarados: **80% linhas e 75% branches** em todo `src/`, fiscalizados 
 
 Alternativa local: `npm ci`, `npm run lint`, `npm run typecheck`, `npm run build`, `npm run test:unit`, `npm run openapi:lint`, `npm run sca`. Integração requer PGHOST/PGPORT/PGDATABASE/PGUSER/PGPASSWORD e APP_ENV=test externos. `npm start` também permite execução local configurada por essas variáveis; não imprimir credenciais em comandos/histórico.
 
-SCA usa `npm audit --audit-level=moderate` e falha em alerta moderado ou superior, incluindo desenvolvimento. O override minimatch 11.0.5 corrige vulnerabilidade transitiva das ferramentas de lint, revalidada com testes; não suprime alerta. CI instala, faz lint/fronteiras, tipos, build, OpenAPI, SCA e testes com banco real. A execução da baseline identificada no início é histórica; a nova candidata precisa de publicação autorizada e CI do próprio SHA. Os quatro avisos de estilo OpenAPI permanecem documentados.
+SCA usa `npm audit --audit-level=moderate` e falha em alerta moderado ou superior, incluindo desenvolvimento. O override minimatch 11.0.5 corrige vulnerabilidade transitiva das ferramentas de lint, revalidada com testes; não suprime alerta. CI instala, faz lint/fronteiras, tipos, build, OpenAPI, SCA e testes com banco real. A CI dos ajustes está identificada no início; cada nova revisão exige CI do próprio SHA. Os quatro avisos de estilo OpenAPI permanecem documentados.
 
 ## Ambientes, feature flag e estratégia de deploy
 
@@ -214,4 +214,4 @@ O benchmark remove e restaura temporariamente o índice de leitura e recria o ap
 - Cache não é global entre réplicas; desenho usa uma instância. SLO de 35 s é evidência controlada, não contrato mensal ou capacidade máxima.
 - Linter OpenAPI pode emitir avisos de estilo por localhost, licença não definida e rotas técnicas sem 4xx. Regras recomendadas permanecem ativas; não inventar licença/deploy/resposta para silenciar aviso.
 
-[CONTRIBUTORS](CONTRIBUTORS.md), [uso de IA](docs/ia.md) e [roteiro técnico](docs/DEMONSTRACAO.md). O aluno aprovou a implementação original e autorizou a pré-auditoria. [Fechamento histórico e repetição limpa](docs/FECHAMENTO_AUDITORIA.md). O novo hardening tem gates próprios: aprovação/publicação do A e fechamento/apresentações ainda pendentes. Pacote e PDFs anteriores são históricos até atualização autorizada. Ensaio e envio ao Moodle permanecem sem comprovante.
+[CONTRIBUTORS](CONTRIBUTORS.md), [uso de IA](docs/ia.md) e [roteiro técnico](docs/DEMONSTRACAO.md). O aluno aprovou a implementação original e autorizou a pré-auditoria. [Fechamento histórico](docs/FECHAMENTO_AUDITORIA.md). O novo hardening foi publicado com autorização específica; sua aprovação e o início do fechamento/apresentações aguardam o gate próprio. Pacote e PDFs anteriores são históricos até atualização autorizada. Ensaio e envio ao Moodle permanecem sem comprovante.

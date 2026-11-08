@@ -1,0 +1,94 @@
+{
+  "collectedAt": "2026-11-08T19:22:30.648Z",
+  "status": "PASSOU",
+  "repository": "jairo-fermon/fullcycle-projeto-a-marketplace-",
+  "authorizedLocalCandidate": "040d9d24bb0f7810e4b0668af203ff4f46bb4e9f",
+  "publishedHardening": "4e59721e2321b4308c8024c9064482ddb562f42f",
+  "tree": "9946461adebf1dd1c46301cf68c91cff5acfe746",
+  "treesEqual": true,
+  "workflow": {
+    "id": 42514607401,
+    "url": "https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42514607401",
+    "headSha": "4e59721e2321b4308c8024c9064482ddb562f42f",
+    "status": "completed",
+    "conclusion": "success",
+    "createdAt": "2026-11-08T19:21:11Z",
+    "updatedAt": "2026-11-08T19:21:49Z"
+  },
+  "job": {
+    "id": 128834767891,
+    "conclusion": "success",
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Initialize containers",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm ci",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run lint",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run typecheck",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run build",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run openapi:lint",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run sca",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm test",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/upload-artifact@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Stop containers",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "tests": 58,
+  "coverage": {
+    "lines": 98.06,
+    "branches": 95.47
+  },
+  "scope": "CI do commit de ajustes; o fechamento documental posterior deve passar seu proprio CI. Carga/seed/trace foram locais."
+}
