@@ -71,6 +71,8 @@ Leitura Windows usada: `Get-WinEvent -FilterHashtable @{LogName='System';Provide
 
 A banca pode verificar o evento, os horários e as repetições. A defesa distingue p95 e máximo e usa o grau de certeza permitido pelos dados.
 
-## Estado desta candidata
+## Estado e publicação
 
-Complemento documental local, sem alteração funcional e sem manutenção de hardware. Código/testes/dependências/infra e thresholds preservados; CI pública anterior08ea873 permanece evidência apenas daquela revisão. Publicação deste complemento e CI do novo SHA serão solicitadas após revisão local. Os PDFs, pacote global, Moodle e aprovação do hardening A continuam no gate próprio.
+O aluno autorizou “Autorizo publicar o complemento e executar o CI”. Candidata local `66824b13853afabc43f6c1723ef738df499ec56d`, publicada em `8af3328852a6aa245726d0c06f086eee01e3b8f7`, árvore `627a0ee511ddf3246dfe8bca6cba9b4a14fd3c4f` idêntica. [CI do complemento: success](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42516930337):58 testes,98,06%linhas/95,47%branches, lint/fronteiras/tipos/build/OpenAPI/SCA. [Registro](evidencias/investigacao-pico-20261108/ci-investigacao.json). O fechamento documental exige CI própria, com SHA exato no certificado externo entregue ao aluno e no [workflow de main](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/workflows/ci.yml?query=branch%3Amain).
+
+Sem alteração funcional ou manutenção de hardware. Código/testes/dependências/infra e thresholds preservados; CI08ea873 é histórica. PDFs, pacote global, Moodle e aprovação do hardening A continuam no gate próprio: `APROVO O HARDENING DO A; INICIAR FECHAMENTO E APRESENTAÇÕES`.

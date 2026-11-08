@@ -15,6 +15,7 @@ Base pública inicial:08ea873. [Relatório completo](../../INVESTIGACAO_PICO.md)
 | repeticoes*/probe.mjs, k6-diagnostico.js.txt, repetir-diagnostico.py | Versões realmente executadas, com hashes no resumo; temporárias, não integram inicialização normal; caminhos locais no runner |
 | fontes-descartadas.json | Normalização/exclusão de logs de outro horário e limitações da coleta |
 | manifesto.json | SHA-256 e origem/normalização/seleção dos arquivos |
+| ci-investigacao.json / ci-investigacao-resumo.txt | Candidata66824b1/publicação8af3328 com árvore igual,CI42516930337 success; fechamento documental requer CI própria |
 
 Logs integrais cliente/aplicação e XML Windows bruto ficam locais, fora do Git, com hashes para verificação. Não foram publicados .env, senha, serial, nome do computador ou conteúdo livre dos logs de host. Não existe trace lento novo, pois nenhuma amostra nova passou de500ms. Não foi induzido reset ou executada manutenção de disco. Incidente de armazenamento comprovado; causalidade do pico provável, subcausa física/driver não determinada.
 

@@ -10,7 +10,7 @@ Hardening publicado no [repositório do A](https://github.com/jairo-fermon/fullc
 
 As [evidências anteriores](docs/ACEITE_A.md) e o [desempenho histórico](docs/desempenho.md) permanecem identificados. O máximo de 6.165,86 ms observado em uma repetição não é seu p95 e deve ser considerado junto dos demais indicadores. Não extrapolar medições locais curtas para produção. Ensaio e Moodle ainda não têm comprovante.
 
-[Investigação complementar do pico](docs/INVESTIGACAO_PICO.md): evento Windows de reset NVMe confirmado dentro de uma pausa de 5,67 s nas conclusões HTTP; incidente de I/O do ambiente é a causa provável, sem vínculo individual comprovado com a amostra antiga. Cinco repetições diagnósticas adicionais somaram 23.474 requisições sem erros e sem novo reset. Este complemento documental ainda é candidato local, aguardando publicação/CI próprias.
+[Investigação complementar do pico](docs/INVESTIGACAO_PICO.md): evento Windows de reset NVMe confirmado dentro de uma pausa de 5,67 s nas conclusões HTTP; incidente de I/O do ambiente é a causa provável, sem vínculo individual comprovado com a amostra antiga. Cinco repetições diagnósticas adicionais somaram 23.474 requisições sem erros e sem novo reset. Complemento publicado em `8af3328852a6aa245726d0c06f086eee01e3b8f7`, [CI success](https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42516930337). A revisão documental de fechamento exige CI própria, conferida no workflow de main e no certificado externo.
 
 ## Preparação e subida
 

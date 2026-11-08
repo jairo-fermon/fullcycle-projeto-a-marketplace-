@@ -1,0 +1,91 @@
+{
+  "collectedAt": "2026-11-08T19:50:06.162Z",
+  "status": "PASSOU",
+  "authorizedLocalCandidate": "66824b13853afabc43f6c1723ef738df499ec56d",
+  "publishedInvestigation": "8af3328852a6aa245726d0c06f086eee01e3b8f7",
+  "tree": "627a0ee511ddf3246dfe8bca6cba9b4a14fd3c4f",
+  "treesEqual": true,
+  "workflow": {
+    "id": 42516930337,
+    "url": "https://github.com/jairo-fermon/fullcycle-projeto-a-marketplace-/actions/runs/42516930337",
+    "headSha": "8af3328852a6aa245726d0c06f086eee01e3b8f7",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "job": {
+    "id": 128841884604,
+    "conclusion": "success",
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Initialize containers",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm ci",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run lint",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run typecheck",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run build",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run openapi:lint",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run sca",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm test",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/upload-artifact@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Stop containers",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "tests": 58,
+  "coverage": {
+    "lines": 98.06,
+    "branches": 95.47
+  },
+  "scope": "CI do complemento de investigacao; carga/Windows/GC/PG medidos localmente. Fechamento documental posterior deve passar CI propria."
+}

@@ -78,5 +78,6 @@
   "noHardwareSettingsChanged": true,
   "noIntentionalFaultOrDiskStress": true,
   "BPreserved": "6d6f58f664918e69c7c5964331f358d87d230708",
-  "publicationStatus": "Candidata local; novo complemento documental aguarda autorizacao/publicacao/CI propria."
+  "publicationStatus": "Publicado8af3328 com autorizacao, CI42516930337 success; fechamento documental exige CI propria e certificado externo do SHA final.",
+  "publicationUpdatedAt": "2026-11-08T19:50:52.701648+00:00"
 }
